@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متین وب | سایت شخصی من</title>
+  <title>متین وب | سایت حرفه‌ای</title>
 
   <style>
+    /* تنظیمات اولیه */
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     html {
@@ -22,125 +23,193 @@
       background: #f5f7fb;
       color: #172033;
       line-height: 1.9;
+      overflow-x: hidden;
     }
 
+    /* سربرگ */
     header {
-      background: white;
-      padding: 16px 7%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 15px 7%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 15px;
-      box-shadow: 0 2px 12px #0000000d;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      box-shadow: 0 3px 15px #0000000a;
     }
 
     .logo {
-      color: #5b5ce2;
+      color: #6255e7;
       font-size: 25px;
       font-weight: bold;
+      animation: logoEnter 0.8s ease both;
     }
 
     nav {
       display: flex;
-      gap: 20px;
       flex-wrap: wrap;
+      gap: 20px;
     }
 
     nav a {
-      color: #172033;
       text-decoration: none;
-      transition: color 0.2s;
+      color: #172033;
+      transition: color 0.3s;
     }
 
     nav a:hover {
-      color: #5b5ce2;
+      color: #6255e7;
     }
 
-    .hero {
-      text-align: center;
-      padding: 85px 20px;
-      background: linear-gradient(135deg, #e3e5ff, #f5f7fb, #dff8f4);
-    }
-
-    .hero h1 {
-      font-size: clamp(28px, 5vw, 44px);
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      color: #596174;
-      max-width: 580px;
-      margin: 0 auto 25px;
-    }
-
+    /* دکمه‌ها */
     .button {
       display: inline-block;
-      background: #5b5ce2;
+      padding: 11px 24px;
+      background: #6255e7;
       color: white;
-      padding: 11px 25px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       text-decoration: none;
-      cursor: pointer;
-      font-size: 16px;
       font-family: inherit;
-      transition: 0.2s;
+      font-size: 15px;
+      cursor: pointer;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
     }
 
     .button:hover {
-      background: #4142bd;
-      transform: translateY(-2px);
+      background: #493bc5;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px #6255e755;
     }
 
+    .button:active {
+      transform: scale(0.96);
+    }
+
+    /* بخش اصلی */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 90px 20px;
+      background: linear-gradient(
+        135deg,
+        #e6e5ff,
+        #f5f7fb,
+        #d9faf1
+      );
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: #8b83ff35;
+      top: -80px;
+      right: -70px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: #41d9b235;
+      bottom: -65px;
+      left: -40px;
+      animation: float 5s ease-in-out infinite reverse;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 45px);
+      margin-bottom: 18px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero p {
+      max-width: 570px;
+      margin: 0 auto 28px;
+      color: #596174;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero .button {
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    /* بخش مهارت‌ها */
     .services {
-      padding: 55px 7%;
+      padding: 65px 7%;
       text-align: center;
     }
 
-    .services h2,
-    .about h2 {
-      font-size: 28px;
-      margin-bottom: 25px;
+    .section-title {
+      font-size: 29px;
+      margin-bottom: 30px;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
 
     .card {
       background: white;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 5px 20px #00000008;
-      transition: transform 0.25s, box-shadow 0.25s;
+      border-radius: 18px;
+      padding: 28px 22px;
+      box-shadow: 0 5px 25px #00000008;
+      border: 1px solid #eceefa;
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 25px #00000012;
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 18px 35px #6255e71c;
+      border-color: #c6c0ff;
     }
 
     .emoji {
-      font-size: 38px;
+      font-size: 42px;
+      display: inline-block;
+      transition: transform 0.35s;
+    }
+
+    .card:hover .emoji {
+      transform: rotate(-10deg) scale(1.15);
     }
 
     .card h3 {
-      margin: 10px 0;
+      margin: 12px 0;
     }
 
     .card p {
       color: #596174;
     }
 
+    /* درباره من */
     .about {
-      text-align: center;
-      padding: 45px 20px;
       background: white;
+      text-align: center;
+      padding: 55px 20px;
     }
 
     .about p {
@@ -149,22 +218,73 @@
       color: #596174;
     }
 
+    /* تماس */
     .contact {
+      padding: 55px 20px;
       text-align: center;
-      padding: 45px 20px;
     }
 
     #message {
-      margin-top: 15px;
-      color: #4142bd;
+      margin-top: 18px;
+      color: #5144d4;
       font-weight: bold;
     }
 
+    /* پایین سایت */
     footer {
-      text-align: center;
       background: #172033;
       color: white;
-      padding: 22px;
+      text-align: center;
+      padding: 25px;
+    }
+
+    /* ظاهر شدن بخش‌ها هنگام اسکرول */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* انیمیشن‌های اصلی */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-22px);
+      }
+    }
+
+    @keyframes logoEnter {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     /* حالت شب */
@@ -180,17 +300,17 @@
       color: #f5f7fb;
     }
 
-    body.dark nav a,
-    body.dark .card p,
-    body.dark .about p {
-      color: #d2d8e5;
+    body.dark nav a {
+      color: #f5f7fb;
     }
 
     body.dark .hero {
-      background: linear-gradient(135deg, #202448, #101827);
+      background: linear-gradient(135deg, #25234a, #101827);
     }
 
-    body.dark .hero p {
+    body.dark .hero p,
+    body.dark .card p,
+    body.dark .about p {
       color: #d2d8e5;
     }
 
@@ -198,6 +318,11 @@
       color: #f5f7fb;
     }
 
+    body.dark .card {
+      border-color: #344157;
+    }
+
+    /* نمایش در موبایل */
     @media (max-width: 650px) {
       header {
         flex-direction: column;
@@ -212,8 +337,27 @@
         grid-template-columns: 1fr;
       }
 
+      .hero {
+        padding: 65px 18px;
+      }
+
       .services {
-        padding: 40px 6%;
+        padding: 45px 6%;
+      }
+    }
+
+    /* احترام به تنظیمات کاهش حرکت دستگاه */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -221,7 +365,6 @@
 
 <body>
 
-  <!-- سربرگ سایت -->
   <header>
     <div class="logo">متین وب 🚀</div>
 
@@ -232,76 +375,80 @@
       <a href="#contact">تماس</a>
     </nav>
 
-    <button class="button" id="themeButton" onclick="toggleTheme()">
+    <button class="button" id="themeButton"
+      onclick="toggleTheme()">
       🌙 حالت شب
     </button>
   </header>
 
-  <!-- بخش اصلی -->
   <main>
+    <!-- بخش معرفی -->
     <section class="hero" id="home">
-      <h1>به دنیای برنامه‌نویسی من خوش آمدی!</h1>
+      <div class="hero-content">
+        <h1>به دنیای متین وب خوش آمدی!</h1>
 
-      <p>
-        من متین هستم و در حال یادگیری طراحی سایت و برنامه‌نویسی هستم.
-        اینجا می‌توانم پروژه‌ها و مهارت‌هایم را نمایش بدهم.
-      </p>
+        <p>
+          اینجا ایده‌هایم را به سایت تبدیل می‌کنم.
+          با من دنیای طراحی سایت و برنامه‌نویسی را کشف کن.
+        </p>
 
-      <a href="#services" class="button">مشاهده مهارت‌ها</a>
+        <a href="#services" class="button">
+          شروع بازدید ✨
+        </a>
+      </div>
     </section>
 
-    <!-- کارت‌های مهارت -->
+    <!-- کارت‌ها -->
     <section class="services" id="services">
-      <h2>مهارت‌های من</h2>
+      <h2 class="section-title reveal">مهارت‌های من</h2>
 
       <div class="cards">
-        <article class="card">
+        <article class="card reveal">
           <div class="emoji">🌐</div>
           <h3>HTML</h3>
-          <p>ساختار صفحات سایت را با HTML می‌سازم.</p>
+          <p>ساختار صفحات سایت را طراحی می‌کنم.</p>
         </article>
 
-        <article class="card">
+        <article class="card reveal">
           <div class="emoji">🎨</div>
           <h3>CSS</h3>
-          <p>با CSS ظاهر سایت را طراحی می‌کنم.</p>
+          <p>با رنگ‌ها و انیمیشن‌ها به سایت زیبایی می‌دهم.</p>
         </article>
 
-        <article class="card">
+        <article class="card reveal">
           <div class="emoji">⚡</div>
           <h3>JavaScript</h3>
-          <p>با جاوااسکریپت امکانات تعاملی می‌سازم.</p>
+          <p>امکانات تعاملی و کاربردی ایجاد می‌کنم.</p>
         </article>
       </div>
     </section>
 
     <!-- درباره من -->
-    <section class="about" id="about">
-      <h2>درباره من</h2>
+    <section class="about reveal" id="about">
+      <h2 class="section-title">درباره من</h2>
 
       <p>
-        من در حال یادگیری برنامه‌نویسی هستم و هدفم این است
-        که بتوانم سایت‌های زیبا، کاربردی و سازگار با موبایل بسازم.
+        من متین هستم و در مسیر یادگیری برنامه‌نویسی قدم برمی‌دارم.
+        هر روز یک چیز جدید یاد می‌گیرم و پروژه‌های تازه می‌سازم.
       </p>
     </section>
 
     <!-- تماس نمایشی -->
-    <section class="contact" id="contact">
-      <h2>ارتباط با من</h2>
+    <section class="contact reveal" id="contact">
+      <h2 class="section-title">ارتباط با من</h2>
 
-      <p>برای دیدن پیام آزمایشی، روی دکمه زیر بزن.</p>
+      <p>برای دیدن یک پیام دوستانه روی دکمه بزن.</p>
 
       <br>
 
       <button class="button" onclick="showMessage()">
-        نمایش پیام
+        نمایش پیام 💌
       </button>
 
       <p id="message" aria-live="polite"></p>
     </section>
   </main>
 
-  <!-- پایین سایت -->
   <footer>
     <p>© ۲۰۲۶ متین وب | ساخته‌شده با ❤️</p>
   </footer>
@@ -324,6 +471,33 @@
     function showMessage() {
       document.getElementById("message").textContent =
         "سلام! ممنون که از سایت من دیدن کردی 😊";
+    }
+
+    // انیمیشن ظاهر شدن هنگام اسکرول
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15
+        }
+      );
+
+      revealItems.forEach(function(item) {
+        observer.observe(item);
+      });
+    } else {
+      revealItems.forEach(function(item) {
+        item.classList.add("show");
+      });
     }
   </script>
 
