@@ -1,0 +1,168 @@
+<p>
+      هدف من این است که سایت‌های زیبا و کاربردی بسازم.
+    </p>
+
+    <a href="https://www.w3schools.com/"
+       target="_blank"
+       rel="noopener noreferrer">
+      <button>آموزش برنامه‌نویسی</button>
+    </a>
+
+    <hr>
+
+    <h3>🎨 تغییر رنگ پس‌زمینه</h3>
+
+    <p>روی دکمه بزن تا رنگ سایت تغییر کند.</p>
+
+    <button onclick="changeColor()">
+      تغییر رنگ 🌈
+    </button>
+
+    <p id="colorText">رنگ فعلی: آبی روشن</p>
+  </section>
+
+  <!-- مهارت‌ها -->
+  <section class="card" id="skills">
+    <h2>💻 مهارت‌های من</h2>
+
+    <p>موضوعاتی که دارم یاد می‌گیرم:</p>
+
+    <div class="skills">
+
+      <div class="skill">
+        <h3>HTML 🧱</h3>
+        <p>ساختار سایت</p>
+        <div class="bar">
+          <div class="progress html-progress"></div>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>CSS 🎨</h3>
+        <p>ظاهر و رنگ‌بندی</p>
+        <div class="bar">
+          <div class="progress css-progress"></div>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>JavaScript ⚡</h3>
+        <p>فعال کردن دکمه‌ها</p>
+        <div class="bar">
+          <div class="progress js-progress"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p>
+      درصدها فقط نمایشی هستند و سطح واقعی مهارت را نشان نمی‌دهند.
+    </p>
+  </section>
+
+  <!-- تماس با من -->
+  <section class="card" id="contact">
+    <h2>📩 تماس با من</h2>
+
+    <p>اسمت را بنویس تا به تو سلام کنم!</p>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="اسم تو چیست؟">
+
+    <button onclick="greet()">
+      سلام کن 👋
+    </button>
+
+    <p id="greeting"></p>
+
+    <hr>
+
+    <h3>✉️ پیام آزمایشی</h3>
+
+    <textarea
+      id="message"
+      rows="4"
+      placeholder="پیامت را بنویس..."></textarea>
+
+    <button onclick="sendMessage()">
+      نمایش پیام
+    </button>
+
+    <p id="result"></p>
+  </section>
+
+  <!-- پایین سایت -->
+  <footer>
+    <p>ساخته شده با ❤️ توسط متین</p>
+    <p>هر روز یک قدم به برنامه‌نویس شدن نزدیک‌تر! 🚀</p>
+  </footer>
+
+  <script>
+    // رفتن به بخش درباره من
+    function goToAbout() {
+      document.getElementById("about").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    // تغییر رنگ با هر کلیک
+    let colorIndex = 0;
+
+    const colors = [
+      "lightgreen",
+      "yellow",
+      "lightblue",
+      "lightpink",
+      "lavender"
+    ];
+
+    const colorNames = [
+      "سبز روشن",
+      "زرد",
+      "آبی روشن",
+      "صورتی روشن",
+      "بنفش روشن"
+    ];
+
+    function changeColor() {
+      document.body.style.background =
+        colors[colorIndex];
+
+      document.getElementById("colorText").textContent =
+        "رنگ فعلی: " + colorNames[colorIndex];
+
+      colorIndex = (colorIndex + 1) % colors.length;
+    }
+
+    // سلام کردن با نام کاربر
+    function greet() {
+      let name = document.getElementById("name").value.trim();
+
+      if (name === "") {
+        document.getElementById("greeting").textContent =
+          "لطفاً اول اسمت را بنویس!";
+      } else {
+        document.getElementById("greeting").textContent =
+          "سلام " + name + "، خوش آمدی! 😊";
+      }
+    }
+
+    // نمایش پیام آزمایشی
+    function sendMessage() {
+      let message =
+        document.getElementById("message").value.trim();
+
+      if (message === "") {
+        document.getElementById("result").textContent =
+          "لطفاً پیامت را بنویس.";
+      } else {
+        document.getElementById("result").textContent =
+          "پیامت: " + message;
+      }
+    }
+  </script>
+
+</body>
+</html>
