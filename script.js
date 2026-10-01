@@ -225,3 +225,36 @@ if (topButton) {
     window.scrollTo({top: 0, behavior: "smooth"});
   });
 }
+
+/* انیمیشن ظاهر شدن بخش‌ها هنگام اسکرول */
+document.addEventListener("DOMContentLoaded", function () {
+  const elements = document.querySelectorAll(
+    "main section, main article, .card, .skill-card"
+  );
+
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach(function (element) {
+      element.classList.add("visible");
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12
+    }
+  );
+
+  elements.forEach(function (element) {
+    element.classList.add("reveal-on-scroll");
+    observer.observe(element);
+  });
+});
