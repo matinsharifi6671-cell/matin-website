@@ -4,102 +4,260 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سایت متین</title>
+  <meta name="theme-color" content="#2563eb">
+  <title>سایت متین | برنامه‌نویس آینده</title>
 
   <style>
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Tahoma, sans-serif;
-      text-align: center;
       margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
       background: #f1f5f9;
       color: #172033;
-      transition: 0.3s;
+      transition: background 0.3s, color 0.3s;
+      line-height: 1.8;
     }
 
     header {
-      background: #2563eb;
+      padding: 45px 16px;
+      text-align: center;
       color: white;
-      padding: 25px 15px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+    }
+
+    header h1 {
+      font-size: clamp(25px, 5vw, 38px);
+      margin: 0 0 10px;
     }
 
     nav {
-      padding: 15px;
-      background: #dbeafe;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      background: white;
+      box-shadow: 0 2px 10px #00000010;
+    }
+
+    button, input {
+      font: inherit;
     }
 
     button {
-      border: none;
-      border-radius: 8px;
-      padding: 11px 16px;
-      margin: 5px;
-      cursor: pointer;
       background: #2563eb;
       color: white;
-      font-size: 15px;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
     }
 
     button:hover {
-      opacity: 0.85;
+      opacity: 0.88;
+    }
+
+    button:active {
+      transform: scale(0.97);
     }
 
     input {
-      padding: 12px;
-      border: 1px solid #94a3b8;
-      border-radius: 8px;
-      font-size: 16px;
-      max-width: 90%;
+      width: 100%;
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: white;
+      color: #172033;
+    }
+
+    main {
+      width: min(900px, 94%);
+      margin: 22px auto;
     }
 
     section {
+      padding: 22px;
+      margin-bottom: 20px;
+      border-radius: 16px;
       background: white;
-      color: #172033;
-      margin: 20px auto;
-      padding: 22px 15px;
-      border-radius: 14px;
-      width: 90%;
-      max-width: 650px;
+      box-shadow: 0 4px 16px #00000008;
+      scroll-margin-top: 100px;
     }
 
-    #menu {
-      display: none;
-      background: #dbeafe;
-      padding: 12px;
+    h2 {
+      margin-top: 0;
+      color: #2563eb;
     }
 
-    #menu a {
-      display: block;
-      padding: 10px;
-      color: #1d4ed8;
-      text-decoration: none;
+    .muted {
+      color: #64748b;
     }
 
-    .dark {
-      background: #111827;
-      color: white;
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
     }
 
-    .dark section {
-      background: #1f2937;
-      color: white;
+    .row input {
+      flex: 1;
     }
 
-    .dark nav,
-    .dark #menu {
-      background: #374151;
+    .row button {
+      flex-shrink: 0;
     }
 
-    .dark #menu a {
-      color: #bfdbfe;
+    .counter {
+      font-size: 34px;
+      font-weight: bold;
+      text-align: center;
+      margin: 5px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .project {
+      padding: 15px;
+      border-radius: 12px;
+      background: #eff6ff;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .task-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+      overflow-wrap: anywhere;
+    }
+
+    .task-list li span {
+      flex: 1;
+    }
+
+    .task-list li.done span {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .delete-btn {
+      background: #dc2626;
+      padding: 6px 10px;
+    }
+
+    .secondary {
+      background: #475569;
+    }
+
+    .quote {
+      font-size: 18px;
+      min-height: 55px;
     }
 
     footer {
-      padding: 25px;
-      background: #1e293b;
+      text-align: center;
+      padding: 28px 15px;
+      background: #172033;
       color: white;
+    }
+
+    #topButton {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 5;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      font-size: 22px;
+    }
+
+    .dark {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .dark nav,
+    .dark section {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+
+    .dark nav a {
+      color: #bfdbfe;
+    }
+
+    .dark h2 {
+      color: #93c5fd;
+    }
+
+    .dark .project {
+      background: #334155;
+    }
+
+    .dark input {
+      background: #0f172a;
+      color: white;
+      border-color: #475569;
+    }
+
+    .dark .task-list li {
+      border-color: #475569;
+    }
+
+    .dark .muted {
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 32px 12px;
+      }
+
+      section {
+        padding: 16px;
+      }
+
+      nav button {
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+
+      .row {
+        flex-wrap: wrap;
+      }
+
+      .row input {
+        flex-basis: 100%;
+      }
     }
   </style>
 </head>
@@ -107,81 +265,148 @@
 <body>
 
   <header id="home">
-    <h1>سلام! به سایت متین خوش آمدی 👋</h1>
-    <p>من دارم طراحی سایت یاد می‌گیرم.</p>
+    <h1>سلام! من متین هستم 👋</h1>
+    <p>به سایت شخصی من خوش آمدی.</p>
+    <p>اینجا دارم برنامه‌نویسی را یاد می‌گیرم! 💻</p>
   </header>
 
   <nav>
     <button onclick="toggleMenu()">☰ منو</button>
     <button onclick="changeMode()">🌙 شب / روز</button>
-    <button onclick="changeColor()">🎨 تغییر رنگ</button>
+    <button onclick="changeColor()">🎨 رنگ</button>
 
-    <div id="menu">
-      <a href="#home">صفحه اصلی</a>
+    <div id="menu" hidden>
       <a href="#about">درباره من</a>
+      <a href="#projects">پروژه‌ها</a>
       <a href="#tools">ابزارها</a>
-      <a href="#contact">تماس</a>
+      <a href="#tasks">فهرست کارها</a>
+      <a href="#contact">پیام</a>
     </div>
   </nav>
 
-  <section id="about">
-    <h2>درباره من 👨‍💻</h2>
-    <p>سلام! من متین هستم و برنامه‌نویسی یاد می‌گیرم.</p>
+  <main>
 
-    <input id="name" type="text" placeholder="اسمت را بنویس">
-    <br>
-    <button onclick="greet()">سلام کن</button>
+    <section id="about">
+      <h2>🙋 درباره من</h2>
+      <p>من متین هستم و دوست دارم سایت‌های جذاب بسازم.</p>
 
-    <p id="greeting"></p>
-  </section>
+      <div class="row">
+        <input id="name" placeholder="اسمت را بنویس">
+        <button onclick="greet()">سلام کن</button>
+      </div>
 
-  <section id="tools">
-    <h2>ابزارهای سایت 🛠️</h2>
+      <p id="greeting" aria-live="polite"></p>
+    </section>
 
-    <h3>۱. شمارنده</h3>
-    <p>عدد: <strong id="number">0</strong></p>
-    <button onclick="addNumber()">➕ افزایش</button>
-    <button onclick="resetNumber()">🔄 صفر کردن</button>
+    <section>
+      <h2>🕒 ساعت و تاریخ</h2>
+      <p id="clock" class="center">در حال دریافت ساعت...</p>
+    </section>
 
-    <hr>
+    <section id="projects">
+      <h2>🚀 پروژه‌های من</h2>
 
-    <h3>۲. لایک و آن‌لایک ❤️</h3>
-    <p>تعداد لایک: <strong id="likes">0</strong></p>
-    <button onclick="like()">❤️ لایک</button>
-    <button onclick="dislike()">👎 آن‌لایک</button>
+      <div class="project-grid">
+        <div class="project">
+          <h3>🎨 تغییر رنگ</h3>
+          <p>تغییر ظاهر سایت با JavaScript.</p>
+        </div>
 
-    <hr>
+        <div class="project">
+          <h3>❤️ شمارنده لایک</h3>
+          <p>افزایش و کاهش تعداد لایک‌ها.</p>
+        </div>
 
-    <h3>۳. نمایش پیام 💬</h3>
-    <button onclick="showMessage()">نمایش پیام</button>
-    <p id="message"></p>
-  </section>
+        <div class="project">
+          <h3>✅ فهرست کارها</h3>
+          <p>ثبت کارهای روزانه و علامت زدن آن‌ها.</p>
+        </div>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>تماس با من 📩</h2>
-    <p>برای تمرین، یک پیام بنویس:</p>
+    <section id="tools">
+      <h2>🔢 شمارنده</h2>
+      <p class="muted center">روی افزایش بزن تا عدد بیشتر شود.</p>
+      <p id="number" class="counter">0</p>
 
-    <input id="userMessage" type="text" placeholder="پیامت را بنویس">
-    <br>
-    <button onclick="sendMessage()">نمایش پیام</button>
+      <div class="center">
+        <button onclick="addNumber()">➕ افزایش</button>
+        <button class="secondary" onclick="resetNumber()">🔄 صفر کردن</button>
+      </div>
+    </section>
 
-    <p id="sentMessage"></p>
-  </section>
+    <section>
+      <h2>❤️ لایک سایت</h2>
+      <p class="center">تعداد لایک: <strong id="likes">0</strong></p>
+
+      <div class="center">
+        <button onclick="like()">❤️ لایک</button>
+        <button class="secondary" onclick="dislike()">👎 آن‌لایک</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>✨ جمله انگیزشی</h2>
+      <p id="quote" class="quote center">
+        برای یادگیری، از قدم‌های کوچک شروع کن!
+      </p>
+
+      <div class="center">
+        <button onclick="newQuote()">جمله جدید 🔄</button>
+      </div>
+    </section>
+
+    <section id="tasks">
+      <h2>✅ فهرست کارهای من</h2>
+      <p class="muted">کارهایت را اضافه کن و پس از انجام، علامت بزن.</p>
+
+      <div class="row">
+        <input id="taskInput" maxlength="100"
+               placeholder="مثلاً تمرین JavaScript">
+        <button onclick="addTask()">افزودن</button>
+      </div>
+
+      <ul id="taskList" class="task-list"></ul>
+      <p id="taskStatus" aria-live="polite">هنوز کاری اضافه نکرده‌ای.</p>
+    </section>
+
+    <section>
+      <h2>💬 نمایش پیام</h2>
+      <div class="center">
+        <button onclick="showMessage()">نمایش پیام خوشامدگویی</button>
+      </div>
+      <p id="message" class="center" aria-live="polite"></p>
+    </section>
+
+    <section id="contact">
+      <h2>📩 پیام آزمایشی</h2>
+      <p class="muted">پیامت را بنویس تا در همین صفحه نمایش داده شود.</p>
+
+      <input id="userMessage" maxlength="300"
+             placeholder="پیامت را بنویس">
+
+      <div class="center" style="margin-top: 12px">
+        <button onclick="sendMessage()">نمایش پیام</button>
+      </div>
+
+      <p id="sentMessage" aria-live="polite"></p>
+    </section>
+
+  </main>
+
+  <button id="topButton" onclick="goTop()"
+          aria-label="بازگشت به بالای صفحه">↑</button>
 
   <footer>
     <p>ساخته شده با ❤️ توسط متین</p>
+    <p>در حال یادگیری HTML، CSS و JavaScript</p>
   </footer>
 
   <script>
-    // منوی بازشونده
+    // باز و بسته کردن منو
     function toggleMenu() {
-      let menu = document.getElementById("menu");
-
-      if (menu.style.display === "block") {
-        menu.style.display = "none";
-      } else {
-        menu.style.display = "block";
-      }
+      const menu = document.getElementById("menu");
+      menu.hidden = !menu.hidden;
     }
 
     // حالت شب و روز
@@ -190,7 +415,13 @@
     }
 
     // تغییر رنگ پس‌زمینه
-    let colors = ["#f1f5f9", "#dbeafe", "#dcfce7", "#fce7f3"];
+    const colors = [
+      "#f1f5f9",
+      "#dbeafe",
+      "#dcfce7",
+      "#fce7f3"
+    ];
+
     let colorIndex = 0;
 
     function changeColor() {
@@ -198,16 +429,15 @@
       document.body.style.backgroundColor = colors[colorIndex];
     }
 
-    // خوشامدگویی با اسم
+    // خوشامدگویی
     function greet() {
-      let name = document.getElementById("name").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const greeting = document.getElementById("greeting");
 
       if (name === "") {
-        document.getElementById("greeting").textContent =
-          "اول اسمت را بنویس!";
+        greeting.textContent = "اول اسمت را بنویس!";
       } else {
-        document.getElementById("greeting").textContent =
-          "سلام " + name + "! خوش آمدی 🎉";
+        greeting.textContent = "سلام " + name + "! خوش آمدی 🎉";
       }
     }
 
@@ -215,7 +445,7 @@
     let count = 0;
 
     function addNumber() {
-      count = count + 1;
+      count++;
       document.getElementById("number").textContent = count;
     }
 
@@ -228,36 +458,139 @@
     let likes = 0;
 
     function like() {
-      likes = likes + 1;
+      likes++;
       document.getElementById("likes").textContent = likes;
     }
 
     function dislike() {
       if (likes > 0) {
-        likes = likes - 1;
+        likes--;
       }
 
       document.getElementById("likes").textContent = likes;
     }
 
-    // نمایش پیام
+    // ساعت و تاریخ
+    function updateClock() {
+      const now = new Date();
+
+      const time = now.toLocaleTimeString("fa-IR");
+      const date = now.toLocaleDateString("fa-IR");
+
+      document.getElementById("clock").textContent =
+        date + " | " + time;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // جمله‌های انگیزشی
+    const quotes = [
+      "برای یادگیری، از قدم‌های کوچک شروع کن! 🌱",
+      "هر اشتباه، فرصتی برای یادگیری است! 💡",
+      "با تمرین، مهارتت بیشتر می‌شود! 🚀",
+      "امروز یک چیز جدید یاد بگیر! 📚",
+      "ادامه بده؛ کم‌کم پیشرفت می‌کنی! 💪"
+    ];
+
+    let lastQuote = -1;
+
+    function newQuote() {
+      let index;
+
+      do {
+        index = Math.floor(Math.random() * quotes.length);
+      } while (quotes.length > 1 && index === lastQuote);
+
+      lastQuote = index;
+
+      document.getElementById("quote").textContent =
+        quotes[index];
+    }
+
+    // افزودن و مدیریت کارها
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const text = input.value.trim();
+
+      if (text === "") {
+        document.getElementById("taskStatus").textContent =
+          "اول یک کار بنویس!";
+        return;
+      }
+
+      const li = document.createElement("li");
+      const label = document.createElement("span");
+      const doneButton = document.createElement("button");
+      const deleteButton = document.createElement("button");
+
+      label.textContent = text;
+
+      doneButton.textContent = "✓ انجام شد";
+      doneButton.className = "secondary";
+      doneButton.setAttribute("aria-label", "تغییر وضعیت کار");
+
+      doneButton.onclick = function () {
+        li.classList.toggle("done");
+
+        doneButton.textContent =
+          li.classList.contains("done")
+            ? "↩ انجام نشده"
+            : "✓ انجام شد";
+
+        updateTaskStatus();
+      };
+
+      deleteButton.textContent = "حذف";
+      deleteButton.className = "delete-btn";
+
+      deleteButton.onclick = function () {
+        li.remove();
+        updateTaskStatus();
+      };
+
+      li.append(label, doneButton, deleteButton);
+
+      document.getElementById("taskList").appendChild(li);
+
+      input.value = "";
+      input.focus();
+
+      updateTaskStatus();
+    }
+
+    function updateTaskStatus() {
+      const items = document.querySelectorAll("#taskList li");
+      const completed = document.querySelectorAll("#taskList li.done");
+
+      document.getElementById("taskStatus").textContent =
+        "تعداد کارها: " + items.length +
+        " | انجام‌شده: " + completed.length;
+    }
+
+    // پیام خوشامدگویی
     function showMessage() {
       document.getElementById("message").textContent =
         "به سایت متین خوش آمدی! 🌟";
     }
 
-    // پیام دلخواه بازدیدکننده
+    // نمایش پیام آزمایشی
     function sendMessage() {
-      let message =
+      const text =
         document.getElementById("userMessage").value.trim();
 
-      if (message === "") {
-        document.getElementById("sentMessage").textContent =
-          "لطفاً اول پیامت را بنویس.";
-      } else {
-        document.getElementById("sentMessage").textContent =
-          "پیام تو: " + message;
-      }
+      document.getElementById("sentMessage").textContent =
+        text === ""
+          ? "لطفاً اول پیامت را بنویس."
+          : "پیام تو: " + text;
+    }
+
+    // بازگشت به بالای صفحه
+    function goTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
   </script>
 
