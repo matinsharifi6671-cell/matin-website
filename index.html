@@ -2,20 +2,23 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>متین وب | صفحه اصلی</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#635bff">
+  <title>متین وب | صفحه اصلی</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <a class="logo" href="index.html">🚀 متین وب</a>
+
   <nav>
     <a href="index.html">خانه</a>
     <a href="about.html">درباره من</a>
     <a href="contact.html">تماس با من</a>
   </nav>
+
   <button id="themeButton" type="button">🌙 حالت شب</button>
 </header>
 
@@ -34,11 +37,13 @@
         <h3>HTML</h3>
         <p>ساختار صفحات وب</p>
       </article>
+
       <article class="card">
         <div class="emoji">🎨</div>
         <h3>CSS</h3>
         <p>طراحی و زیباسازی سایت</p>
       </article>
+
       <article class="card">
         <div class="emoji">⚡</div>
         <h3>JavaScript</h3>
@@ -60,9 +65,9 @@
     <div class="card center">
       <div class="big-number" id="counter">0</div>
       <div class="button-row">
-        <button id="increase">➕ افزایش</button>
-        <button id="decrease">➖ کاهش</button>
-        <button id="reset">🔄 صفر کردن</button>
+        <button id="increase" type="button">➕ افزایش</button>
+        <button id="decrease" type="button">➖ کاهش</button>
+        <button id="reset" type="button">🔄 صفر کردن</button>
       </div>
     </div>
   </section>
@@ -72,9 +77,9 @@
     <div class="card center">
       <div class="big-number" id="votes">👍 0 | 👎 0</div>
       <div class="button-row">
-        <button id="like">👍 لایک</button>
-        <button id="dislike">👎 دیسلایک</button>
-        <button id="resetVotes">پاک کردن رأی‌ها</button>
+        <button id="like" type="button">👍 لایک</button>
+        <button id="dislike" type="button">👎 دیسلایک</button>
+        <button id="resetVotes" type="button">پاک کردن رأی‌ها</button>
       </div>
       <p id="voteMessage" aria-live="polite"></p>
     </div>
@@ -85,7 +90,8 @@
     <div class="card">
       <form id="todoForm" class="todo-form">
         <input id="todoInput" type="text"
-          placeholder="مثلاً یادگیری CSS" maxlength="120" required>
+          placeholder="مثلاً یادگیری CSS"
+          maxlength="120" required>
         <button type="submit">افزودن</button>
       </form>
       <ul id="todoList" class="todo-list"></ul>
@@ -97,10 +103,10 @@
     <h2>🎨 تغییر رنگ</h2>
     <div class="card center">
       <div class="button-row">
-        <button data-color="default">بنفش</button>
-        <button data-color="blue">آبی</button>
-        <button data-color="pink">صورتی</button>
-        <button data-color="green">سبز</button>
+        <button type="button" data-color="default">بنفش</button>
+        <button type="button" data-color="blue">آبی</button>
+        <button type="button" data-color="pink">صورتی</button>
+        <button type="button" data-color="green">سبز</button>
       </div>
     </div>
   </section>
@@ -109,14 +115,14 @@
     <h2>💡 جمله انگیزشی</h2>
     <div class="card center">
       <p id="quote">هر روز یک قدم به هدفت نزدیک‌تر شو.</p>
-      <button id="newQuote">جمله جدید ✨</button>
+      <button id="newQuote" type="button">جمله جدید ✨</button>
     </div>
   </section>
 
   <section class="container">
     <h2>💌 پیام مخصوص تو</h2>
     <div class="card center">
-      <button id="showMessage">نمایش پیام</button>
+      <button id="showMessage" type="button">نمایش پیام</button>
       <p id="message" aria-live="polite"></p>
     </div>
   </section>
@@ -128,47 +134,61 @@
   <a href="contact.html">تماس با من</a>
 </footer>
 
-<button id="topButton" aria-label="بازگشت به بالا">↑</button>
-<script src="script.js"></script>
-</body>
+<button id="topButton" type="button" aria-label="بازگشت به بالا">↑</button>
+
 <!-- چت‌بات متین -->
 <div id="chatbot">
-  <button id="chat-toggle" type="button" aria-label="باز کردن چت‌بات">
+  <button id="chat-toggle" type="button"
+    aria-label="باز کردن چت‌بات"
+    aria-expanded="false">
     💬
   </button>
 
-  <section id="chat-window" aria-label="گفتگو با دستیار" hidden>
+  <section id="chat-window"
+    aria-label="گفتگو با دستیار"
+    hidden>
+
     <div class="chat-header">
       <div>
         <strong>🤖 دستیار متین</strong>
         <div class="chat-status">آماده گفتگو با تو!</div>
       </div>
-      <button id="chat-close" type="button" aria-label="بستن چت">✕</button>
+
+      <button id="chat-close" type="button"
+        aria-label="بستن چت">✕</button>
     </div>
 
     <div id="chat-messages" aria-live="polite">
       <div class="bot-message">
-        سلام! 👋 من دستیار سایت متین هستم. چه کمکی از دستم برمیاد؟
+        سلام! 👋 من دستیار سایت متین هستم.
+        چه کمکی از دستم برمیاد؟
       </div>
     </div>
 
     <div class="chat-suggestions">
-      <button type="button" data-question="درباره سایت بگو">درباره سایت</button>
-      <button type="button" data-question="چه کارهایی بلدی؟">راهنما</button>
+      <button type="button" data-question="درباره سایت بگو">
+        درباره سایت
+      </button>
+      <button type="button" data-question="چه کارهایی بلدی؟">
+        راهنما
+      </button>
     </div>
 
     <form id="chat-form">
-      <input
-        id="chat-input"
-        type="text"
+      <input id="chat-input" type="text"
         placeholder="پیامت رو بنویس..."
         aria-label="پیام شما"
         maxlength="500"
         autocomplete="off"
-        required
-      >
+        required>
+
       <button type="submit" aria-label="ارسال پیام">➤</button>
     </form>
   </section>
 </div>
 
+<!-- فایل جاوااسکریپت فقط یک بار بارگذاری شود -->
+<script src="script.js"></script>
+
+</body>
+</html>
