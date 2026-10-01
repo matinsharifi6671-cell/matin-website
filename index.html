@@ -2,307 +2,190 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سایت شخصی متین</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وب‌سایت متین</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      line-height: 1.9;
-    }
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Tahoma, Arial, sans-serif;
+  background: #101827;
+  color: white;
+  transition: background 0.4s;
+  line-height: 1.9;
+}
 
-    header {
-      background: #111827;
-      padding: 18px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid #334155;
-    }
+header {
+  text-align: center;
+  padding: 35px 15px;
+  background: linear-gradient(135deg, #6d28d9, #2563eb);
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
 
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
+h1 {
+  font-size: 30px;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      transition: color .3s;
-    }
+.card {
+  background: rgba(255,255,255,0.08);
+  padding: 22px;
+  border-radius: 16px;
+  margin: 18px auto;
+  max-width: 700px;
+}
 
-    nav a:hover {
-      color: #38bdf8;
-    }
+button {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 6px 0;
+}
 
-    .hero {
-      text-align: center;
-      padding: 75px 20px;
-      background: linear-gradient(135deg, #4338ca, #0ea5e9);
-    }
+button:hover {
+  background: #5b21b6;
+}
 
-    .hero h1 {
-      font-size: 38px;
-      margin: 0;
-    }
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #777;
+  border-radius: 8px;
+  font-size: 16px;
+}
 
-    .hero p {
-      font-size: 18px;
-    }
+.skill {
+  background: #333e50;
+  height: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
-    .card {
-      max-width: 850px;
-      margin: 28px auto;
-      padding: 25px;
-      width: calc(100% - 32px);
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 18px;
-      box-shadow: 0 8px 25px #0002;
-    }
+.progress {
+  height: 100%;
+  background: #a78bfa;
+  border-radius: 10px;
+}
 
-    h2 {
-      color: #38bdf8;
-    }
+a {
+  color: #c4b5fd;
+}
 
-    .skills {
-      display: grid;
-      gap: 18px;
-    }
-
-    .bar {
-      height: 12px;
-      background: #334155;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress {
-      height: 100%;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-      border-radius: 20px;
-      animation: grow 1.5s ease;
-    }
-
-    @keyframes grow {
-      from { width: 0; }
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
-    }
-
-    .project {
-      background: #0f172a;
-      padding: 18px;
-      border-radius: 14px;
-      border: 1px solid #334155;
-      transition: transform .3s;
-    }
-
-    .project:hover {
-      transform: translateY(-5px);
-    }
-
-    button, .link-button {
-      display: inline-block;
-      background: #0284c7;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 15px;
-      text-decoration: none;
-      margin-top: 8px;
-      transition: background .3s;
-    }
-
-    button:hover, .link-button:hover {
-      background: #0369a1;
-    }
-
-    input, textarea {
-      display: block;
-      width: 100%;
-      padding: 13px;
-      margin: 12px 0;
-      border-radius: 10px;
-      border: 1px solid #475569;
-      background: #0f172a;
-      color: white;
-      font-family: inherit;
-      font-size: 15px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #111827;
-      color: #cbd5e1;
-      margin-top: 35px;
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 29px; }
-      .card { padding: 18px; }
-    }
-  </style>
+footer {
+  text-align: center;
+  padding: 20px;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <nav>
-      <a href="#home">خانه</a>
-      <a href="#about">درباره من</a>
-      <a href="#skills">مهارت‌ها</a>
-      <a href="#projects">نمونه‌کارها</a>
-      <a href="#contact">تماس</a>
-    </nav>
-  </header>
+<header id="home">
+  <h1>سلام! من متین هستم 👋</h1>
+  <p>به وب‌سایت شخصی من خوش آمدی.</p>
+  <button onclick="changeColor()">🎨 تغییر رنگ پس‌زمینه</button>
+</header>
 
-  <section class="hero" id="home">
-    <h1>سلام! من متین هستم 👋</h1>
-    <p>به سایت شخصی من خوش اومدی!</p>
-    <p>من در حال یادگیری طراحی سایت و برنامه‌نویسی هستم.</p>
-    <button onclick="greet()">سلام به من!</button>
-    <p id="greeting"></p>
-  </section>
+<section class="card" id="about">
+  <h2>👨‍💻 درباره من</h2>
+  <p>من متین هستم و دارم برنامه‌نویسی و طراحی سایت یاد می‌گیرم.</p>
+</section>
 
-  <section class="card" id="about">
-    <h2>🙋 درباره من</h2>
-    <p>
-      من متین هستم و به دنیای برنامه‌نویسی علاقه دارم.
-      این سایت رو برای تمرین و نمایش پروژه‌های خودم ساختم.
-    </p>
-    <a class="link-button"
-       href="https://www.w3schools.com/"
-       target="_blank" rel="noopener noreferrer">
-      آموزش برنامه‌نویسی
-    </a>
-  </section>
+<section class="card" id="skills">
+  <h2>💻 مهارت‌های من</h2>
 
-  <section class="card" id="skills">
-    <h2>💻 مهارت‌های من</h2>
-    <div class="skills">
+  <p>HTML</p>
+  <div class="skill">
+    <div class="progress" style="width: 80%"></div>
+  </div>
 
-      <div>
-        <h3>HTML 🧱</h3>
-        <p>ساختار صفحات وب</p>
-        <div class="bar">
-          <div class="progress" style="width:70%"></div>
-        </div>
-      </div>
+  <p>CSS</p>
+  <div class="skill">
+    <div class="progress" style="width: 60%"></div>
+  </div>
 
-      <div>
-        <h3>CSS 🎨</h3>
-        <p>رنگ‌آمیزی و طراحی سایت</p>
-        <div class="bar">
-          <div class="progress" style="width:55%"></div>
-        </div>
-      </div>
+  <p>JavaScript</p>
+  <div class="skill">
+    <div class="progress" style="width: 30%"></div>
+  </div>
+</section>
 
-      <div>
-        <h3>JavaScript ⚡</h3>
-        <p>اضافه کردن قابلیت‌های تعاملی</p>
-        <div class="bar">
-          <div class="progress" style="width:35%"></div>
-        </div>
-      </div>
+<section class="card" id="greeting">
+  <h2>👋 خوشامدگویی با اسم تو</h2>
+  <p>اسمت رو وارد کن تا بهت سلام کنم!</p>
 
-    </div>
-    <p>این درصدها نمایشی هستند و سطح واقعی مهارت را اندازه نمی‌گیرند.</p>
-  </section>
+  <input id="nameInput" type="text" placeholder="اسم تو چیه؟">
 
-  <section class="card" id="projects">
-    <h2>🚀 نمونه‌کارهای من</h2>
+  <button onclick="greet()">سلام کن 👋</button>
 
-    <div class="project-grid">
-      <div class="project">
-        <h3>🌐 سایت شخصی</h3>
-        <p>اولین سایت من با HTML و CSS</p>
-        <a class="link-button"
-           href="https://matinsharifi6671-cell.github.io/matin-website/">
-          مشاهده سایت
-        </a>
-      </div>
+  <p id="greetingResult" aria-live="polite"></p>
+</section>
 
-      <div class="project">
-        <h3>🎨 تغییر رنگ</h3>
-        <p>با زدن دکمه زیر رنگ پس‌زمینه تغییر می‌کند.</p>
-        <button onclick="changeColor()">تغییر رنگ 🌈</button>
-      </div>
+<section class="card" id="contact">
+  <h2>📩 تماس با من</h2>
+  <p>یک پیام آزمایشی بنویس:</p>
 
-      <div class="project">
-        <h3>👋 خوشامدگویی</h3>
-        <p>یک تمرین ساده برای یادگیری JavaScript</p>
-        <button onclick="greet()">امتحان کن!</button>
-      </div>
-    </div>
-  </section>
+  <textarea id="messageInput" rows="4"
+    placeholder="پیامت رو بنویس..."></textarea>
 
-  <section class="card" id="contact">
-    <h2>📩 تماس با من</h2>
-    <p>اسمت رو وارد کن و یک پیام آزمایشی بنویس.</p>
+  <button onclick="showMessage()">نمایش پیام</button>
+  <p id="messageResult" aria-live="polite"></p>
+</section>
 
-    <form onsubmit="sendMessage(event)">
-      <input id="name" type="text"
-             placeholder="اسمت چیه؟" required>
+<footer>
+  ساخته شده با ❤️ توسط متین
+</footer>
 
-      <textarea id="message" rows="4"
-                placeholder="پیامت رو بنویس..." required></textarea>
+<script>
+function changeColor() {
+  const colors = [
+    "#101827",
+    "#12352b",
+    "#352044",
+    "#3b2525",
+    "#18344a"
+  ];
 
-      <button type="submit">نمایش پیام</button>
-    </form>
+  const currentColor = document.body.style.backgroundColor;
+  const index = colors.indexOf(currentColor);
+  const nextIndex = (index + 1) % colors.length;
 
-    <p id="result" aria-live="polite"></p>
-    <p>توجه: این فرم فقط پیام را در همین صفحه نمایش می‌دهد و ارسال واقعی انجام نمی‌دهد.</p>
-  </section>
+  document.body.style.backgroundColor = colors[nextIndex];
+}
 
-  <footer>
-    <p>ساخته شده با ❤️ توسط متین</p>
-    <p>© 2026 - سایت شخصی من</p>
-  </footer>
+function greet() {
+  const name = document.getElementById("nameInput").value.trim();
+  const result = document.getElementById("greetingResult");
 
-  <script>
-    function greet() {
-      document.getElementById("greeting").textContent =
-        "سلام! خوش اومدی به سایت من 😎";
-    }
+  if (name === "") {
+    result.textContent = "لطفاً اول اسمت رو وارد کن!";
+  } else {
+    result.textContent = "سلام " + name + " جان! خوش اومدی 🎉";
+  }
+}
 
-    function changeColor() {
-      const colors = ["#0f172a", "#172554", "#3f1d4b", "#123b36"];
-      const current = document.body.style.backgroundColor;
-      const index = colors.indexOf(current);
-      document.body.style.backgroundColor =
-        colors[(index + 1) % colors.length];
-    }
+function showMessage() {
+  const message = document.getElementById("messageInput").value.trim();
+  const result = document.getElementById("messageResult");
 
-    function sendMessage(event) {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const message = document.getElementById("message").value.trim();
-
-      document.getElementById("result").textContent =
-        "متشکرم " + name + "! پیام آزمایشی تو: " + message;
-    }
-  </script>
+  if (message === "") {
+    result.textContent = "اول یک پیام بنویس!";
+  } else {
+    result.textContent = "پیامت: " + message;
+  }
+}
+</script>
 
 </body>
 </html>
