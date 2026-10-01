@@ -2,504 +2,810 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متین وب | سایت حرفه‌ای</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متین وب | سایت حرفه‌ای</title>
 
-  <style>
-    /* تنظیمات اولیه */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      font-family: Tahoma, sans-serif;
-      background: #f5f7fb;
-      color: #172033;
-      line-height: 1.9;
-      overflow-x: hidden;
-    }
+body {
+  font-family: Tahoma, sans-serif;
+  background: #f3f5fb;
+  color: #20243a;
+  line-height: 1.9;
+  transition: background .3s, color .3s;
+}
 
-    /* سربرگ */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      padding: 15px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      box-shadow: 0 3px 15px #0000000a;
-    }
+button, input {
+  font-family: inherit;
+}
 
-    .logo {
-      color: #6255e7;
-      font-size: 25px;
-      font-weight: bold;
-      animation: logoEnter 0.8s ease both;
-    }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  padding: 14px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 3px 15px #0000000c;
+}
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #6255e7;
+}
 
-    nav a {
-      text-decoration: none;
-      color: #172033;
-      transition: color 0.3s;
-    }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
 
-    nav a:hover {
-      color: #6255e7;
-    }
+nav a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    /* دکمه‌ها */
-    .button {
-      display: inline-block;
-      padding: 11px 24px;
-      background: #6255e7;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      text-decoration: none;
-      font-family: inherit;
-      font-size: 15px;
-      cursor: pointer;
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
-    }
+nav a:hover {
+  color: #6255e7;
+}
 
-    .button:hover {
-      background: #493bc5;
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px #6255e755;
-    }
+button, .btn {
+  background: #6255e7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 17px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform .2s, background .2s;
+}
 
-    .button:active {
-      transform: scale(0.96);
-    }
+button:hover, .btn:hover {
+  background: #4638c5;
+  transform: translateY(-2px);
+}
 
-    /* بخش اصلی */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: 90px 20px;
-      background: linear-gradient(
-        135deg,
-        #e6e5ff,
-        #f5f7fb,
-        #d9faf1
-      );
-    }
+.hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 75px 20px;
+  background: linear-gradient(135deg, #e5e3ff, #f3f5fb, #d9fff2);
+}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: #8b83ff35;
-      top: -80px;
-      right: -70px;
-      animation: float 6s ease-in-out infinite;
-    }
+.hero h1 {
+  font-size: clamp(28px, 5vw, 44px);
+  margin-bottom: 15px;
+}
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: #41d9b235;
-      bottom: -65px;
-      left: -40px;
-      animation: float 5s ease-in-out infinite reverse;
-    }
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 22px;
+  color: #545c70;
+}
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
+.hero h1, .hero p, .hero .btn {
+  animation: enter .8s ease both;
+}
 
-    .hero h1 {
-      font-size: clamp(28px, 5vw, 45px);
-      margin-bottom: 18px;
-      animation: fadeUp 0.9s ease both;
-    }
+.hero p {
+  animation-delay: .15s;
+}
 
-    .hero p {
-      max-width: 570px;
-      margin: 0 auto 28px;
-      color: #596174;
-      animation: fadeUp 1s ease 0.2s both;
-    }
+.hero .btn {
+  animation-delay: .3s;
+}
 
-    .hero .button {
-      animation: fadeUp 1s ease 0.4s both;
-    }
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    /* بخش مهارت‌ها */
-    .services {
-      padding: 65px 7%;
-      text-align: center;
-    }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
-    .section-title {
-      font-size: 29px;
-      margin-bottom: 30px;
-    }
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 40px 18px;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
+.section-title {
+  text-align: center;
+  font-size: 27px;
+  margin-bottom: 24px;
+}
 
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 28px 22px;
-      box-shadow: 0 5px 25px #00000008;
-      border: 1px solid #eceefa;
-      transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
-    }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
 
-    .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 18px 35px #6255e71c;
-      border-color: #c6c0ff;
-    }
+.card {
+  background: white;
+  padding: 23px;
+  border-radius: 16px;
+  box-shadow: 0 5px 22px #00000008;
+  border: 1px solid #ececf6;
+  transition: transform .3s, box-shadow .3s;
+}
 
-    .emoji {
-      font-size: 42px;
-      display: inline-block;
-      transition: transform 0.35s;
-    }
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 13px 28px #6255e71c;
+}
 
-    .card:hover .emoji {
-      transform: rotate(-10deg) scale(1.15);
-    }
+.emoji {
+  font-size: 35px;
+  animation: float 3s ease-in-out infinite;
+}
 
-    .card h3 {
-      margin: 12px 0;
-    }
+.card h3 {
+  margin: 8px 0;
+}
 
-    .card p {
-      color: #596174;
-    }
+.muted {
+  color: #626a7c;
+  font-size: 14px;
+}
 
-    /* درباره من */
-    .about {
-      background: white;
-      text-align: center;
-      padding: 55px 20px;
-    }
+.center {
+  text-align: center;
+}
 
-    .about p {
-      max-width: 600px;
-      margin: auto;
-      color: #596174;
-    }
+.big-number {
+  font-size: 38px;
+  font-weight: bold;
+  color: #6255e7;
+  margin: 10px 0;
+}
 
-    /* تماس */
-    .contact {
-      padding: 55px 20px;
-      text-align: center;
-    }
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
 
-    #message {
-      margin-top: 18px;
-      color: #5144d4;
-      font-weight: bold;
-    }
+.clock {
+  font-size: 28px;
+  font-weight: bold;
+  color: #6255e7;
+}
 
-    /* پایین سایت */
-    footer {
-      background: #172033;
-      color: white;
-      text-align: center;
-      padding: 25px;
-    }
+#date {
+  margin-bottom: 15px;
+}
 
-    /* ظاهر شدن بخش‌ها هنگام اسکرول */
-    .reveal {
-      opacity: 0;
-      transform: translateY(35px);
-      transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
-    }
+input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #d9ddeb;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+  color: #20243a;
+}
 
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+input:focus {
+  border-color: #6255e7;
+}
 
-    /* انیمیشن‌های اصلی */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
+.todo-form {
+  display: flex;
+  gap: 8px;
+  margin: 15px 0;
+}
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.todo-list {
+  list-style: none;
+}
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
+.todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e8eaf1;
+}
 
-      50% {
-        transform: translateY(-22px);
-      }
-    }
+.todo-list li span {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
 
-    @keyframes logoEnter {
-      from {
-        opacity: 0;
-        transform: translateX(20px);
-      }
+.todo-list li.done span {
+  text-decoration: line-through;
+  opacity: .55;
+}
 
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
+.todo-list input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
 
-    /* حالت شب */
-    body.dark {
-      background: #101827;
-      color: #f5f7fb;
-    }
+.delete-btn {
+  background: #e34d62;
+  padding: 6px 10px;
+}
 
-    body.dark header,
-    body.dark .card,
-    body.dark .about {
-      background: #1d293b;
-      color: #f5f7fb;
-    }
+#message {
+  min-height: 30px;
+  margin-top: 12px;
+  color: #6255e7;
+  font-weight: bold;
+}
 
-    body.dark nav a {
-      color: #f5f7fb;
-    }
+.quote {
+  font-size: 18px;
+  margin: 12px 0;
+}
 
-    body.dark .hero {
-      background: linear-gradient(135deg, #25234a, #101827);
-    }
+footer {
+  background: #20243a;
+  color: white;
+  text-align: center;
+  padding: 24px;
+}
 
-    body.dark .hero p,
-    body.dark .card p,
-    body.dark .about p {
-      color: #d2d8e5;
-    }
+#topButton {
+  position: fixed;
+  bottom: 20px;
+  left: 18px;
+  z-index: 20;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  padding: 0;
+  display: none;
+}
 
-    body.dark .contact {
-      color: #f5f7fb;
-    }
+#topButton.visible {
+  display: block;
+  animation: enter .3s ease;
+}
 
-    body.dark .card {
-      border-color: #344157;
-    }
+/* حالت شب */
+body.dark {
+  background: #101827;
+  color: #f2f4fa;
+}
 
-    /* نمایش در موبایل */
-    @media (max-width: 650px) {
-      header {
-        flex-direction: column;
-      }
+body.dark header,
+body.dark .card {
+  background: #1d293b;
+  color: #f2f4fa;
+  border-color: #354156;
+}
 
-      nav {
-        justify-content: center;
-        gap: 12px;
-      }
+body.dark nav a {
+  color: #f2f4fa;
+}
 
-      .cards {
-        grid-template-columns: 1fr;
-      }
+body.dark .hero {
+  background: linear-gradient(135deg, #292448, #101827);
+}
 
-      .hero {
-        padding: 65px 18px;
-      }
+body.dark .hero p,
+body.dark .muted {
+  color: #c7cddd;
+}
 
-      .services {
-        padding: 45px 6%;
-      }
-    }
+body.dark input {
+  background: #101827;
+  color: white;
+  border-color: #46516a;
+}
 
-    /* احترام به تنظیمات کاهش حرکت دستگاه */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
+body.dark .todo-list li {
+  border-color: #354156;
+}
 
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
+/* رنگ‌های پس‌زمینه */
+body.bg-blue .hero {
+  background: linear-gradient(135deg, #c9e7ff, #eff8ff);
+}
+
+body.bg-pink .hero {
+  background: linear-gradient(135deg, #ffd9ec, #fff3f9);
+}
+
+body.bg-green .hero {
+  background: linear-gradient(135deg, #c9f7df, #effff6);
+}
+
+body.dark.bg-blue .hero {
+  background: linear-gradient(135deg, #193957, #101827);
+}
+
+body.dark.bg-pink .hero {
+  background: linear-gradient(135deg, #48263e, #101827);
+}
+
+body.dark.bg-green .hero {
+  background: linear-gradient(135deg, #174638, #101827);
+}
+
+/* انیمیشن بخش‌ها هنگام اسکرول */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 30px 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">متین وب 🚀</div>
+<header>
+  <div class="logo">🚀 متین وب</div>
 
-    <nav>
-      <a href="#home">خانه</a>
-      <a href="#services">مهارت‌ها</a>
-      <a href="#about">درباره من</a>
-      <a href="#contact">تماس</a>
-    </nav>
+  <nav id="menu">
+    <a href="#home">خانه</a>
+    <a href="#features">امکانات</a>
+    <a href="#tools">ابزارها</a>
+    <a href="#contact">تماس</a>
+  </nav>
 
-    <button class="button" id="themeButton"
-      onclick="toggleTheme()">
-      🌙 حالت شب
-    </button>
-  </header>
+  <button id="themeButton" onclick="toggleTheme()">
+    🌙 حالت شب
+  </button>
+</header>
 
-  <main>
-    <!-- بخش معرفی -->
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <h1>به دنیای متین وب خوش آمدی!</h1>
+<main>
+  <section class="hero" id="home">
+    <h1>به سایت متین خوش آمدی! 👋</h1>
+    <p>
+      این سایت را با HTML، CSS و JavaScript ساخته‌ام.
+      اینجا می‌توانم برنامه‌نویسی یاد بگیرم و پروژه بسازم.
+    </p>
+    <a class="btn" href="#features">شروع کن ✨</a>
+  </section>
 
-        <p>
-          اینجا ایده‌هایم را به سایت تبدیل می‌کنم.
-          با من دنیای طراحی سایت و برنامه‌نویسی را کشف کن.
-        </p>
+  <section class="container reveal" id="features">
+    <h2 class="section-title">امکانات سایت</h2>
 
-        <a href="#services" class="button">
-          شروع بازدید ✨
-        </a>
+    <div class="cards">
+      <article class="card">
+        <div class="emoji">🌐</div>
+        <h3>HTML</h3>
+        <p class="muted">ساختار صفحه‌های وب را می‌سازد.</p>
+      </article>
+
+      <article class="card">
+        <div class="emoji">🎨</div>
+        <h3>CSS</h3>
+        <p class="muted">رنگ‌ها، چیدمان و انیمیشن‌ها را می‌سازد.</p>
+      </article>
+
+      <article class="card">
+        <div class="emoji">⚡</div>
+        <h3>JavaScript</h3>
+        <p class="muted">امکانات تعاملی سایت را فعال می‌کند.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <h2 class="section-title">🕒 ساعت و تاریخ زنده</h2>
+    <div class="card center">
+      <div class="clock" id="clock">در حال بارگذاری...</div>
+      <p id="date" class="muted"></p>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <h2 class="section-title">🔢 شمارنده من</h2>
+    <div class="card center">
+      <p>تعداد کلیک‌ها</p>
+      <div class="big-number" id="counter">0</div>
+
+      <div class="button-row">
+        <button onclick="changeCounter(1)">➕ افزایش</button>
+        <button onclick="changeCounter(-1)">➖ کاهش</button>
+        <button onclick="resetCounter()">🔄 صفر کردن</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- کارت‌ها -->
-    <section class="services" id="services">
-      <h2 class="section-title reveal">مهارت‌های من</h2>
+  <section class="container reveal">
+    <h2 class="section-title">❤️ نظرت درباره سایت</h2>
+    <div class="card center">
+      <p>برای ثبت نظر آزمایشی یکی از دکمه‌ها را بزن.</p>
 
-      <div class="cards">
-        <article class="card reveal">
-          <div class="emoji">🌐</div>
-          <h3>HTML</h3>
-          <p>ساختار صفحات سایت را طراحی می‌کنم.</p>
-        </article>
+      <div class="big-number" id="votes">👍 0 | 👎 0</div>
 
-        <article class="card reveal">
-          <div class="emoji">🎨</div>
-          <h3>CSS</h3>
-          <p>با رنگ‌ها و انیمیشن‌ها به سایت زیبایی می‌دهم.</p>
-        </article>
-
-        <article class="card reveal">
-          <div class="emoji">⚡</div>
-          <h3>JavaScript</h3>
-          <p>امکانات تعاملی و کاربردی ایجاد می‌کنم.</p>
-        </article>
+      <div class="button-row">
+        <button onclick="vote('like')">👍 لایک</button>
+        <button onclick="vote('dislike')">👎 دیسلایک</button>
+        <button onclick="resetVotes()">پاک کردن رأی‌ها</button>
       </div>
-    </section>
 
-    <!-- درباره من -->
-    <section class="about reveal" id="about">
-      <h2 class="section-title">درباره من</h2>
+      <p class="muted" id="voteMessage"></p>
+    </div>
+  </section>
 
-      <p>
-        من متین هستم و در مسیر یادگیری برنامه‌نویسی قدم برمی‌دارم.
-        هر روز یک چیز جدید یاد می‌گیرم و پروژه‌های تازه می‌سازم.
+  <section class="container reveal">
+    <h2 class="section-title">📝 فهرست کارهای من</h2>
+
+    <div class="card">
+      <form class="todo-form" id="todoForm">
+        <input id="todoInput" type="text"
+          placeholder="مثلاً: یادگیری CSS"
+          maxlength="120" required>
+        <button type="submit">افزودن</button>
+      </form>
+
+      <ul class="todo-list" id="todoList"></ul>
+      <p class="muted" id="todoInfo"></p>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <h2 class="section-title">🎨 تغییر رنگ سایت</h2>
+
+    <div class="card center">
+      <p>رنگ مورد علاقه‌ات را انتخاب کن.</p>
+
+      <div class="button-row">
+        <button onclick="changeColor('default')">بنفش</button>
+        <button onclick="changeColor('blue')">آبی</button>
+        <button onclick="changeColor('pink')">صورتی</button>
+        <button onclick="changeColor('green')">سبز</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <h2 class="section-title">💡 جمله انگیزشی</h2>
+
+    <div class="card center">
+      <p class="quote" id="quote">
+        هر روز یک قدم به هدفت نزدیک‌تر شو.
       </p>
-    </section>
+      <button onclick="newQuote()">جمله جدید ✨</button>
+    </div>
+  </section>
 
-    <!-- تماس نمایشی -->
-    <section class="contact reveal" id="contact">
-      <h2 class="section-title">ارتباط با من</h2>
+  <section class="container reveal" id="contact">
+    <h2 class="section-title">💌 پیام سایت</h2>
 
-      <p>برای دیدن یک پیام دوستانه روی دکمه بزن.</p>
-
+    <div class="card center">
+      <p>روی دکمه بزن تا پیام نمایش داده شود.</p>
       <br>
-
-      <button class="button" onclick="showMessage()">
-        نمایش پیام 💌
-      </button>
-
+      <button onclick="showMessage()">نمایش پیام</button>
       <p id="message" aria-live="polite"></p>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer>
-    <p>© ۲۰۲۶ متین وب | ساخته‌شده با ❤️</p>
-  </footer>
+<footer>
+  <p>© ۲۰۲۶ متین وب | ساخته‌شده با ❤️</p>
+  <p>در حال یادگیری و ساختن آینده 🚀</p>
+</footer>
 
-  <script>
-    // تغییر حالت شب و روز
-    function toggleTheme() {
-      document.body.classList.toggle("dark");
+<button id="topButton" onclick="goTop()" aria-label="بازگشت به بالا">
+  ↑
+</button>
 
-      const button = document.getElementById("themeButton");
+<script>
+/* ذخیره‌سازی امن و ساده در مرورگر */
+function loadData(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+}
 
-      if (document.body.classList.contains("dark")) {
-        button.textContent = "☀️ حالت روز";
-      } else {
-        button.textContent = "🌙 حالت شب";
+function saveData(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.log("ذخیره‌سازی در این مرورگر در دسترس نیست.");
+  }
+}
+
+/* شمارنده */
+let counter = Math.max(
+  0, Number(loadData("matinCounter", 0)) || 0
+);
+
+function renderCounter() {
+  document.getElementById("counter").textContent = counter;
+}
+
+function changeCounter(amount) {
+  counter = Math.max(0, counter + amount);
+  saveData("matinCounter", counter);
+  renderCounter();
+}
+
+function resetCounter() {
+  counter = 0;
+  saveData("matinCounter", counter);
+  renderCounter();
+}
+
+renderCounter();
+
+/* لایک و دیسلایک */
+let votes = loadData("matinVotes", {like: 0, dislike: 0});
+
+votes = {
+  like: Math.max(0, Number(votes.like) || 0),
+  dislike: Math.max(0, Number(votes.dislike) || 0)
+};
+
+function renderVotes() {
+  document.getElementById("votes").textContent =
+    "👍 " + votes.like + " | 👎 " + votes.dislike;
+}
+
+function vote(type) {
+  if (type !== "like" && type !== "dislike") return;
+
+  votes[type]++;
+  saveData("matinVotes", votes);
+  renderVotes();
+
+  document.getElementById("voteMessage").textContent =
+    "رأی آزمایشی تو ثبت شد!";
+}
+
+function resetVotes() {
+  votes = {like: 0, dislike: 0};
+  saveData("matinVotes", votes);
+  renderVotes();
+  document.getElementById("voteMessage").textContent =
+    "شمارش رأی‌ها صفر شد.";
+}
+
+renderVotes();
+
+/* ساعت و تاریخ */
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("fa-IR");
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString("fa-IR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+/* فهرست کارها */
+let todos = loadData("matinTodos", []);
+
+if (!Array.isArray(todos)) todos = [];
+
+function renderTodos() {
+  const list = document.getElementById("todoList");
+  list.replaceChildren();
+
+  todos.forEach(function(todo, index) {
+    const item = document.createElement("li");
+    if (todo.done) item.classList.add("done");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = Boolean(todo.done);
+    checkbox.setAttribute("aria-label", "انجام شد");
+
+    checkbox.addEventListener("change", function() {
+      todos[index].done = checkbox.checked;
+      saveData("matinTodos", todos);
+      renderTodos();
+    });
+
+    const text = document.createElement("span");
+    text.textContent = todo.text;
+
+    const remove = document.createElement("button");
+    remove.textContent = "حذف";
+    remove.className = "delete-btn";
+    remove.addEventListener("click", function() {
+      todos.splice(index, 1);
+      saveData("matinTodos", todos);
+      renderTodos();
+    });
+
+    item.append(checkbox, text, remove);
+    list.appendChild(item);
+  });
+
+  const completed = todos.filter(function(todo) {
+    return todo.done;
+  }).length;
+
+  document.getElementById("todoInfo").textContent =
+    "تعداد کارها: " + todos.length +
+    " | انجام‌شده: " + completed;
+}
+
+document.getElementById("todoForm").addEventListener(
+  "submit", function(event) {
+    event.preventDefault();
+
+    const input = document.getElementById("todoInput");
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    todos.push({text: text, done: false});
+    saveData("matinTodos", todos);
+    input.value = "";
+    renderTodos();
+  }
+);
+
+renderTodos();
+
+/* حالت شب و روز */
+let dark = loadData("matinDark", false) === true;
+
+function renderTheme() {
+  document.body.classList.toggle("dark", dark);
+
+  document.getElementById("themeButton").textContent =
+    dark ? "☀️ حالت روز" : "🌙 حالت شب";
+}
+
+function toggleTheme() {
+  dark = !dark;
+  saveData("matinDark", dark);
+  renderTheme();
+}
+
+renderTheme();
+
+/* تغییر رنگ */
+let bgColor = loadData("matinColor", "default");
+
+function renderColor() {
+  document.body.classList.remove("bg-blue", "bg-pink", "bg-green");
+
+  if (["blue", "pink", "green"].includes(bgColor)) {
+    document.body.classList.add("bg-" + bgColor);
+  }
+}
+
+function changeColor(color) {
+  if (!["default", "blue", "pink", "green"].includes(color)) return;
+
+  bgColor = color;
+  saveData("matinColor", bgColor);
+  renderColor();
+}
+
+renderColor();
+
+/* پیام نمایشی */
+function showMessage() {
+  document.getElementById("message").textContent =
+    "سلام متین! ادامه بده؛ داری برنامه‌نویسی یاد می‌گیری! 🎉";
+}
+
+/* جمله‌های انگیزشی */
+const quotes = [
+  "هر روز یک قدم به هدفت نزدیک‌تر شو.",
+  "اشتباه کردن بخشی از یادگیری است.",
+  "با تمرین، کارهای سخت آسان‌تر می‌شوند.",
+  "یک پروژه کوچک، شروع یک مهارت بزرگ است.",
+  "صبور باش و به یادگیری ادامه بده."
+];
+
+function newQuote() {
+  const index = Math.floor(Math.random() * quotes.length);
+  document.getElementById("quote").textContent = quotes[index];
+}
+
+/* انیمیشن هنگام اسکرول */
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
       }
-    }
+    });
+  }, {threshold: 0.1});
 
-    // نمایش پیام
-    function showMessage() {
-      document.getElementById("message").textContent =
-        "سلام! ممنون که از سایت من دیدن کردی 😊";
-    }
+  revealItems.forEach(function(item) {
+    observer.observe(item);
+  });
+} else {
+  revealItems.forEach(function(item) {
+    item.classList.add("show");
+  });
+}
 
-    // انیمیشن ظاهر شدن هنگام اسکرول
-    const revealItems = document.querySelectorAll(".reveal");
+/* بازگشت به بالای صفحه */
+const topButton = document.getElementById("topButton");
 
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("show");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.15
-        }
-      );
+window.addEventListener("scroll", function() {
+  topButton.classList.toggle("visible", window.scrollY > 300);
+});
 
-      revealItems.forEach(function(item) {
-        observer.observe(item);
-      });
-    } else {
-      revealItems.forEach(function(item) {
-        item.classList.add("show");
-      });
-    }
-  </script>
+function goTop() {
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+</script>
 
 </body>
 </html>
