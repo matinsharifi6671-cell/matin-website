@@ -258,3 +258,129 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(element);
   });
 });
+
+/* ===== مغز چت‌بات متین ===== */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("chat-toggle");
+  const close = document.getElementById("chat-close");
+  const windowChat = document.getElementById("chat-window");
+  const form = document.getElementById("chat-form");
+  const input = document.getElementById("chat-input");
+  const messages = document.getElementById("chat-messages");
+
+  // اگر چت‌بات در این صفحه وجود ندارد، کاری انجام نده
+  if (
+    !toggle ||
+    !close ||
+    !windowChat ||
+    !form ||
+    !input ||
+    !messages
+  ) {
+    return;
+  }
+
+  function openChat() {
+    windowChat.hidden = false;
+    toggle.hidden = true;
+    input.focus();
+  }
+
+  function closeChat() {
+    windowChat.hidden = true;
+    toggle.hidden = false;
+    toggle.focus();
+  }
+
+  toggle.addEventListener("click", openChat);
+  close.addEventListener("click", closeChat);
+
+  // نمایش پیام بدون اجرای کدهای واردشده توسط کاربر
+  function addMessage(text, type) {
+    const message = document.createElement("div");
+    message.className =
+      type === "user" ? "user-message" : "bot-message";
+
+    message.textContent = text;
+    messages.appendChild(message);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function normalize(text) {
+    return text
+      .toLowerCase()
+      .replace(/[؟?!.,،؛:]/g, "")
+      .trim();
+  }
+
+  function getAnswer(message) {
+    const text = normalize(message);
+
+    if (/سلام|درود|صبح بخیر|عصر بخیر/.test(text)) {
+      return "سلام دوست من! 👋 به سایت متین خوش اومدی.";
+    }
+
+    if (/اسمت چیه|اسم تو چیه|تو کی هستی|کی هستی/.test(text)) {
+      return "من دستیار مجازی سایت متین هستم! 🤖";
+    }
+
+    if (/متین کیه|درباره سایت|درباره متین|این سایت/.test(text)) {
+      return "این سایت متعلق به متینه و برای یادگیری برنامه‌نویسی و معرفی پروژه‌ها ساخته شده. 💻";
+    }
+
+    if (/چه کارهایی بلدی|راهنما|کمک|چیکار میکنی/.test(text)) {
+      return "می‌تونم درباره سایت راهنمایی‌ات کنم. مثلاً بپرس سایت درباره چیه یا چطور از بخش‌ها استفاده کنی.";
+    }
+
+    if (/برنامه نویسی|برنامه‌نویسی|کدنویسی|جاوااسکریپت|javascript/.test(text)) {
+      return "برنامه‌نویسی یعنی با نوشتن کد به کامپیوتر دستور بدیم. 💻";
+    }
+
+    if (/ساعت چنده|ساعت/.test(text)) {
+      return "ساعت دستگاهت رو نگاه کن 🕒 می‌تونی ساعت سایت رو هم بررسی کنی.";
+    }
+
+    if (/ممنون|مرسی|متشکرم/.test(text)) {
+      return "خواهش می‌کنم! 😊 هر سؤال دیگه‌ای داشتی بپرس.";
+    }
+
+    if (/خداحافظ|فعلا|بای/.test(text)) {
+      return "فعلاً دوست من! 👋 هر وقت خواستی برگرد.";
+    }
+
+    if (/خوبی|حالت چطوره/.test(text)) {
+      return "ممنون که پرسیدی! 😊 من آماده‌ام بهت کمک کنم.";
+    }
+
+    return "هنوز جواب این سؤال رو بلد نیستم! 🤔 می‌تونی درباره سایت، متین یا برنامه‌نویسی سؤال کنی.";
+  }
+
+  function sendMessage(text) {
+    const message = text.trim();
+
+    if (!message) return;
+
+    addMessage(message, "user");
+    input.value = "";
+
+    // مکث کوتاه برای طبیعی‌تر شدن گفتگو
+    window.setTimeout(function () {
+      addMessage(getAnswer(message), "bot");
+    }, 350);
+  }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    sendMessage(input.value);
+  });
+
+  // دکمه‌های سؤال آماده
+  document.querySelectorAll("#chatbot [data-question]")
+    .forEach(function (button) {
+      button.addEventListener("click", function () {
+        openChat();
+        sendMessage(button.dataset.question);
+      });
+    });
+});
