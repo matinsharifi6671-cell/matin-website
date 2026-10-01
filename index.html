@@ -131,4 +131,45 @@
 <button id="topButton" aria-label="بازگشت به بالا">↑</button>
 <script src="script.js"></script>
 </body>
-</html>
+
+<!-- چت‌بات متین -->
+<div id="chatbot">
+  <button id="chat-toggle" type="button" aria-label="باز کردن چت‌بات">
+    💬
+  </button>
+
+  <section id="chat-window" aria-label="گفتگو با دستیار" hidden>
+    <div class="chat-header">
+      <div>
+        <strong>🤖 دستیار متین</strong>
+        <div class="chat-status">آماده گفتگو با تو!</div>
+      </div>
+      <button id="chat-close" type="button" aria-label="بستن چت">✕</button>
+    </div>
+
+    <div id="chat-messages" aria-live="polite">
+      <div class="bot-message">
+        سلام! 👋 من دستیار سایت متین هستم. چه کمکی از دستم برمیاد؟
+      </div>
+    </div>
+
+    <div class="chat-suggestions">
+      <button type="button" data-question="درباره سایت بگو">درباره سایت</button>
+      <button type="button" data-question="چه کارهایی بلدی؟">راهنما</button>
+    </div>
+
+    <form id="chat-form">
+      <input
+        id="chat-input"
+        type="text"
+        placeholder="پیامت رو بنویس..."
+        aria-label="پیام شما"
+        maxlength="500"
+        autocomplete="off"
+        required
+      >
+      <button type="submit" aria-label="ارسال پیام">➤</button>
+    </form>
+  </section>
+</div>
+
