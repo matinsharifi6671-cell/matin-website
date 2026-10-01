@@ -2,85 +2,56 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تماس با من | متین وب</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تماس با من | متین وب</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-  <div class="logo">🚀 متین وب</div>
-
+  <a class="logo" href="index.html">🚀 متین وب</a>
   <nav>
     <a href="index.html">خانه</a>
     <a href="about.html">درباره من</a>
-    <a class="active" href="contact.html">تماس با من</a>
+    <a href="contact.html">تماس با من</a>
   </nav>
+  <button id="themeButton" type="button">🌙 حالت شب</button>
 </header>
 
 <main>
   <section class="hero">
-    <h1>تماس با من 💌</h1>
-    <p>پیامت را در فرم زیر بنویس.</p>
+    <h1>📩 تماس با من</h1>
+    <p>از این فرم آزمایشی برای تمرین استفاده کن.</p>
   </section>
 
   <section class="container">
-    <div class="content-box">
-      <h2>فرم پیام</h2>
-
+    <div class="card">
       <form id="contactForm">
         <label for="name">نام</label>
-        <input
-          id="name"
-          type="text"
-          placeholder="نامت را بنویس"
-          maxlength="60"
-          required
-        >
+        <input id="name" name="name" maxlength="80"
+          placeholder="نامت را بنویس" required>
 
-        <label for="message">پیام</label>
-        <textarea
-          id="message"
-          placeholder="پیامت را بنویس"
-          maxlength="1000"
-          required
-        ></textarea>
+        <p><label for="email">ایمیل</label></p>
+        <input id="email" name="email" type="email"
+          placeholder="ایمیل آزمایشی" required>
 
-        <button class="button" type="submit">
-          نمایش پیام
-        </button>
+        <p><label for="userMessage">پیام</label></p>
+        <textarea id="userMessage" name="message" rows="5"
+          maxlength="1000" placeholder="پیامت را بنویس"
+          required></textarea>
+
+        <div class="button-row">
+          <button type="submit">نمایش پیام</button>
+        </div>
       </form>
-
-      <p id="result" aria-live="polite"></p>
+      <p id="formResult" aria-live="polite"></p>
+      <p class="muted">این فرم پیام را به اینترنت یا ایمیل ارسال نمی‌کند.</p>
     </div>
   </section>
 </main>
 
-<footer>
-  <p>© ۲۰۲۶ متین وب | ساخته‌شده با ❤️</p>
-</footer>
-
-<script>
-  document.getElementById("contactForm").addEventListener(
-    "submit",
-    function(event) {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const message = document.getElementById("message").value.trim();
-      const result = document.getElementById("result");
-
-      if (!name || !message) {
-        result.textContent = "لطفاً هر دو قسمت را پر کن.";
-        return;
-      }
-
-      result.textContent =
-        "ممنون " + name + "! پیام نمایشی تو آماده است. 😊";
-    }
-  );
-</script>
-
+<footer>© ۲۰۲۶ متین وب</footer>
+<script src="script.js"></script>
 </body>
 </html>
