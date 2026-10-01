@@ -570,3 +570,466 @@ footer {
     animation: none;
   }
 }
+
+/* =====================================
+   MATIN WEB - PREMIUM DESIGN UPGRADE
+   ===================================== */
+
+:root {
+  --primary: #755cff;
+  --secondary: #00cfff;
+  --accent-pink: #ec67ff;
+  --surface: #ffffff;
+  --bg: #f5f6ff;
+  --text: #171b35;
+  --muted: #68718c;
+  --border: rgba(117, 92, 255, 0.15);
+  --shadow: 0 15px 45px rgba(40, 35, 100, 0.09);
+}
+
+/* پس‌زمینه رنگی و نرم */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 5% 5%,
+      rgba(117, 92, 255, 0.13), transparent 32%),
+    radial-gradient(ellipse at 95% 35%,
+      rgba(0, 207, 255, 0.09), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* حالت شب */
+
+body.dark-mode,
+body.dark {
+  --surface: #14192c;
+  --bg: #0a0e1c;
+  --text: #f4f5ff;
+  --muted: #abb4ce;
+  --border: rgba(150, 135, 255, 0.19);
+  --shadow: 0 16px 45px rgba(0, 0, 0, 0.22);
+}
+
+/* هدر شیشه‌ای */
+
+header {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 6px 25px rgba(50, 40, 110, 0.06);
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  background: linear-gradient(120deg, #755cff, #00bfff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+nav a {
+  border-radius: 12px;
+  transition: 0.25s ease;
+}
+
+nav a:hover {
+  background: linear-gradient(
+    120deg,
+    rgba(117, 92, 255, 0.14),
+    rgba(0, 207, 255, 0.12)
+  );
+  transform: translateY(-3px);
+}
+
+/* صفحه خوش‌آمدگویی */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  padding: clamp(45px, 9vw, 100px) 24px;
+  margin: 30px 0;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 15% 20%,
+      rgba(0, 207, 255, 0.17), transparent 35%),
+    radial-gradient(circle at 85% 80%,
+      rgba(117, 92, 255, 0.2), transparent 38%),
+    var(--surface);
+  box-shadow: var(--shadow);
+  animation: matinHeroEnter 0.8s ease both;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 220px;
+  height: 220px;
+  top: -100px;
+  right: -65px;
+  border-radius: 50%;
+  background: rgba(117, 92, 255, 0.15);
+  filter: blur(35px);
+  animation: matinGlow 6s ease-in-out infinite alternate;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 190px;
+  height: 190px;
+  bottom: -100px;
+  left: -45px;
+  border-radius: 50%;
+  background: rgba(0, 207, 255, 0.15);
+  filter: blur(35px);
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5.5vw, 48px);
+  line-height: 1.6;
+  font-weight: 900;
+  background: linear-gradient(
+    110deg, #755cff, #00bfff, #ec67ff, #755cff
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: matinGradient 7s linear infinite;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: 15px auto 25px;
+  font-size: clamp(15px, 2.5vw, 18px);
+  line-height: 2;
+}
+
+/* دکمه اصلی */
+
+.btn {
+  display: inline-block;
+  padding: 13px 25px;
+  border-radius: 14px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(120deg, #755cff, #438cff);
+  box-shadow: 0 8px 25px rgba(117, 92, 255, 0.3);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn:hover {
+  color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 13px 32px rgba(117, 92, 255, 0.4);
+}
+
+/* عنوان بخش‌ها */
+
+.container {
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
+.container > h2 {
+  position: relative;
+  display: table;
+  padding-bottom: 10px;
+  margin-bottom: 22px;
+  font-size: clamp(21px, 4vw, 28px);
+}
+
+.container > h2::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+  height: 3px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #755cff, #00cfff);
+}
+
+/* کارت‌های مهارت */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cards .card {
+  text-align: center;
+  padding: 28px 18px;
+}
+
+.cards .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 15%;
+  left: 15%;
+  height: 3px;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(90deg, #755cff, #00cfff);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.cards .card:hover::before {
+  transform: scaleX(1);
+}
+
+.cards .card:hover {
+  transform: translateY(-9px);
+  border-color: rgba(117, 92, 255, 0.45);
+  box-shadow: 0 22px 45px rgba(80, 60, 180, 0.14);
+}
+
+.emoji {
+  display: inline-grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  margin: 5px auto 12px;
+  border-radius: 20px;
+  font-size: 34px;
+  background: linear-gradient(
+    135deg,
+    rgba(117, 92, 255, 0.15),
+    rgba(0, 207, 255, 0.15)
+  );
+  transition: transform 0.3s ease;
+}
+
+.card:hover .emoji {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.card h3 {
+  font-size: 21px;
+}
+
+/* دکمه‌های سایت */
+
+button,
+input[type="submit"] {
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #755cff, #478cff);
+  color: #fff;
+  font-family: inherit;
+  font-weight: bold;
+  box-shadow: 0 5px 16px rgba(117, 92, 255, 0.19);
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 9px 22px rgba(117, 92, 255, 0.3);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* بخش‌های داخلی */
+
+.container > .card {
+  padding: clamp(18px, 4vw, 28px);
+}
+
+.center {
+  text-align: center;
+}
+
+.big-number {
+  font-size: clamp(25px, 5vw, 38px);
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+/* ورودی‌ها */
+
+input,
+textarea,
+select {
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(117, 92, 255, 0.13);
+}
+
+/* فهرست کارها */
+
+.todo-list li {
+  padding: 10px 12px;
+  margin: 8px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+/* پایین سایت */
+
+footer {
+  margin-top: 60px;
+  padding: 35px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+footer p {
+  line-height: 2;
+}
+
+/* دکمه بازگشت به بالا */
+
+#topButton {
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  font-size: 22px;
+  box-shadow: 0 8px 24px rgba(117, 92, 255, 0.3);
+}
+
+/* چت‌بات هماهنگ با ظاهر جدید */
+
+#chat-toggle {
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #755cff, #00bfff);
+  box-shadow: 0 8px 30px rgba(117, 92, 255, 0.38);
+}
+
+#chat-window {
+  border: 1px solid var(--border);
+  box-shadow: 0 22px 70px rgba(20, 20, 65, 0.23);
+}
+
+.chat-header {
+  background: linear-gradient(120deg, #755cff, #278dff, #00bfff);
+}
+
+.bot-message {
+  border: 1px solid var(--border);
+}
+
+/* انیمیشن‌ها */
+
+@keyframes matinHeroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes matinGlow {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-20px, 18px) scale(1.15);
+  }
+}
+
+@keyframes matinGradient {
+  to {
+    background-position: 250% center;
+  }
+}
+
+/* موبایل و تبلت */
+
+@media (max-width: 700px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .hero {
+    padding: 42px 18px;
+    border-radius: 23px;
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 7vw, 36px);
+  }
+
+  .container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .cards .card {
+    padding: 22px 16px;
+  }
+
+  header {
+    gap: 8px;
+  }
+}
+
+/* کاهش حرکت برای کسانی که این گزینه را فعال کرده‌اند */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .hero h1,
+  .hero::before {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
