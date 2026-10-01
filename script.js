@@ -384,3 +384,23 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("chat-toggle");
+  const chat = document.getElementById("chat-window");
+  const close = document.getElementById("chat-close");
+
+  if (!toggle || !chat || !close) {
+    console.error("عناصر چت‌بات پیدا نشدند!");
+    return;
+  }
+
+  toggle.addEventListener("click", function () {
+    chat.hidden = false;
+    toggle.style.display = "none";
+  });
+
+  close.addEventListener("click", function () {
+    chat.hidden = true;
+    toggle.style.display = "block";
+  });
+});
