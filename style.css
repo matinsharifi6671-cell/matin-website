@@ -813,4 +813,14 @@ footer p {
     transition-duration: 0.01ms !important;
   }
 }
+body {
+  background: #e8eaff !important;
+}
 
+h1 {
+  color: #755cff !important;
+}
+
+.card {
+  border: 3px solid #755cff !important;
+}
