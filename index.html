@@ -348,3 +348,29 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دکمه لایک متین</title>
+</head>
+<body>
+
+  <h1>از سایت من حمایت کن!</h1>
+
+  <p>تعداد لایک: <span id="likes">0</span></p>
+
+  <button onclick="like()">❤️ لایک</button>
+
+  <script>
+    let count = 0;
+
+    function like() {
+      count = count + 1;
+      document.getElementById("likes").textContent = count;
+    }
+  </script>
+
+</body>
+</html>
