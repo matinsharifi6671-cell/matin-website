@@ -1,19 +1,22 @@
 
-/* ===== تنظیمات اصلی سایت ===== */
+/* =================================
+   MATIN WEB - COMPLETE CSS
+================================= */
+
 :root {
   --primary: #755cff;
+  --primary-dark: #5b43e8;
   --secondary: #00c2ff;
   --accent: #ff65a3;
   --bg: #f5f6ff;
   --surface: #ffffff;
-  --text: #20213a;
-  --muted: #70738a;
-  --border: #e7e5ff;
-  --shadow: 0 12px 35px rgba(83, 65, 180, 0.12);
+  --text: #252442;
+  --muted: #77778f;
+  --border: #e6e4fa;
+  --shadow: 0 12px 35px rgba(83, 65, 180, .12);
   --radius: 20px;
 }
 
-/* ===== تنظیمات عمومی ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,7 +25,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 100px;
 }
 
 body {
@@ -31,21 +34,16 @@ body {
   line-height: 1.9;
   color: var(--text);
   background:
-    radial-gradient(circle at top right, #e7e3ff, transparent 35%),
-    linear-gradient(135deg, #f8f9ff, #eef6ff);
+    radial-gradient(circle at top right, #e9e4ff, transparent 35%),
+    linear-gradient(135deg, #f8f9ff, #eff7ff);
   min-height: 100vh;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  transition: background .3s, color .3s;
 }
 
 a {
   color: var(--primary);
   text-decoration: none;
-  transition: 0.25s ease;
+  transition: .25s;
 }
 
 a:hover {
@@ -63,7 +61,8 @@ button {
   cursor: pointer;
 }
 
-/* ===== سربرگ سایت ===== */
+/* ===== HEADER ===== */
+
 header {
   position: sticky;
   top: 0;
@@ -73,10 +72,10 @@ header {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 15px;
-  padding: 16px 6%;
-  background: rgba(255, 255, 255, 0.92);
+  padding: 14px 5%;
+  background: rgba(255, 255, 255, .92);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 20px rgba(40, 35, 100, 0.06);
+  box-shadow: 0 5px 22px rgba(50, 40, 100, .06);
   backdrop-filter: blur(14px);
 }
 
@@ -84,6 +83,7 @@ header {
   color: var(--primary);
   font-size: 25px;
   font-weight: 900;
+  white-space: nowrap;
 }
 
 nav {
@@ -91,15 +91,15 @@ nav {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 nav a {
+  padding: 8px 13px;
   color: var(--text);
+  border-radius: 12px;
   font-size: 14px;
   font-weight: bold;
-  padding: 8px 13px;
-  border-radius: 12px;
 }
 
 nav a:hover {
@@ -108,32 +108,78 @@ nav a:hover {
   transform: translateY(-2px);
 }
 
-/* ===== بخش معرفی ===== */
+/* ===== BUTTONS ===== */
+
+button,
+.btn,
+input[type="submit"] {
+  display: inline-block;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 13px;
+  color: white;
+  background: linear-gradient(135deg, var(--primary), #9885ff);
+  box-shadow: 0 6px 16px rgba(117, 92, 255, .2);
+  font-weight: bold;
+  transition: transform .25s, box-shadow .25s;
+}
+
+button:hover,
+.btn:hover,
+input[type="submit"]:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(117, 92, 255, .3);
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+/* ===== HERO ===== */
+
 .hero {
   position: relative;
   overflow: hidden;
+  width: 90%;
+  max-width: 1300px;
   margin: 35px auto;
-  width: 88%;
-  padding: 75px 30px;
+  padding: 75px 25px;
   text-align: center;
   color: white;
   border-radius: 30px;
-  background: linear-gradient(135deg, #755cff, #4b8dff, #00c2ff);
-  box-shadow: 0 20px 50px rgba(117, 92, 255, 0.25);
+  background: linear-gradient(135deg, #755cff, #587bff, #00c2ff);
+  box-shadow: 0 20px 50px rgba(117, 92, 255, .25);
 }
 
 .hero h1 {
   color: white;
-  font-size: clamp(30px, 5vw, 48px);
-  line-height: 1.6;
-  margin-bottom: 18px;
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1.7;
+  margin-bottom: 16px;
 }
 
 .hero p {
-  max-width: 700px;
+  max-width: 750px;
   margin: 0 auto 25px;
+  color: #f5f5ff;
   font-size: 17px;
-  color: #f4f5ff;
+}
+
+.hero .btn {
+  color: var(--primary-dark);
+  background: white;
+}
+
+.hero .btn:hover {
+  color: var(--primary);
 }
 
 .hero::after {
@@ -141,33 +187,46 @@ nav a:hover {
   position: absolute;
   width: 180px;
   height: 180px;
-  border: 25px solid rgba(255, 255, 255, 0.12);
+  left: -65px;
+  bottom: -95px;
+  border: 25px solid rgba(255, 255, 255, .12);
   border-radius: 50%;
-  left: -50px;
-  bottom: -80px;
   pointer-events: none;
 }
 
-/* ===== عنوان‌ها ===== */
+/* ===== SECTIONS ===== */
+
+main {
+  width: 100%;
+}
+
+section.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 45px auto;
+  padding: 25px;
+  scroll-margin-top: 100px;
+}
+
 h1,
 h2,
 h3 {
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 h2 {
-  position: relative;
   width: fit-content;
   max-width: 100%;
-  margin: 35px auto 25px;
+  margin: 0 auto 25px;
   color: var(--primary);
-  font-size: clamp(23px, 4vw, 32px);
+  text-align: center;
+  font-size: clamp(23px, 4vw, 31px);
 }
 
 h2::after {
   content: "";
   display: block;
-  width: 55%;
+  width: 60%;
   height: 4px;
   margin: 5px auto 0;
   border-radius: 10px;
@@ -175,51 +234,21 @@ h2::after {
 }
 
 h3 {
+  margin-bottom: 8px;
   color: var(--primary);
-  margin-bottom: 10px;
+  font-size: 21px;
 }
 
-/* ===== دکمه‌ها ===== */
-.btn,
-button,
-input[type="submit"] {
-  display: inline-block;
-  border: none;
-  border-radius: 13px;
-  padding: 12px 23px;
-  color: white;
-  font-weight: bold;
-  background: linear-gradient(135deg, var(--primary), #947fff);
-  box-shadow: 0 7px 18px rgba(117, 92, 255, 0.2);
-  transition: transform 0.25s, box-shadow 0.25s;
+p {
+  overflow-wrap: anywhere;
 }
 
-.btn:hover,
-button:hover,
-input[type="submit"]:hover {
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(117, 92, 255, 0.3);
-}
+/* ===== CARDS ===== */
 
-/* ===== بخش‌های اصلی ===== */
-section {
-  width: 88%;
-  max-width: 1200px;
-  margin: 45px auto;
-  padding: 28px;
-  scroll-margin-top: 100px;
-}
-
-section > p {
-  color: var(--muted);
-}
-
-/* ===== کارت‌ها ===== */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
   margin-top: 25px;
 }
 
@@ -230,12 +259,13 @@ section > p {
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: var(--shadow);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
 }
 
 .card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 18px 40px rgba(83, 65, 180, 0.18);
+  transform: translateY(-6px);
+  border-color: #c7bcff;
+  box-shadow: 0 18px 40px rgba(83, 65, 180, .16);
 }
 
 .card p {
@@ -243,38 +273,72 @@ section > p {
 }
 
 .card img {
+  display: block;
   width: 100%;
-  border-radius: 14px;
+  height: auto;
   margin-bottom: 15px;
+  border-radius: 14px;
   object-fit: cover;
 }
 
-/* ===== فرم‌ها ===== */
+.emoji {
+  margin-bottom: 12px;
+  font-size: 43px;
+}
+
+.center {
+  text-align: center;
+}
+
+.big-number {
+  margin: 15px 0;
+  color: var(--primary);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ===== FORMS ===== */
+
 form {
-  display: grid;
-  gap: 15px;
-  max-width: 650px;
-  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 input,
 textarea,
 select {
   width: 100%;
+  min-width: 0;
   padding: 13px 15px;
-  border: 1px solid #dcd9f5;
+  border: 1px solid var(--border);
   border-radius: 12px;
-  color: var(--text);
-  background: white;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color .2s, box-shadow .2s;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(117, 92, 255, 0.12);
+  box-shadow: 0 0 0 4px rgba(117, 92, 255, .12);
 }
 
 textarea {
@@ -282,68 +346,251 @@ textarea {
   resize: vertical;
 }
 
-/* ===== فوتر ===== */
+/* ===== TODO LIST ===== */
+
+.todo-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.todo-form input {
+  flex: 1;
+}
+
+.todo-list {
+  list-style: none;
+  margin-top: 18px;
+}
+
+.todo-list li {
+  margin: 10px 0;
+  padding: 12px 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  overflow-wrap: anywhere;
+}
+
+/* ===== FOOTER ===== */
+
 footer {
   margin-top: 60px;
-  padding: 35px 6%;
+  padding: 35px 20px;
   text-align: center;
   color: white;
   background: linear-gradient(135deg, #292447, #51428d);
 }
 
-footer a {
-  color: #b8eaff;
-}
-
 footer p {
-  margin: 5px 0;
+  margin-bottom: 8px;
 }
 
-/* ===== چت‌بات ===== */
-.chatbot {
+footer a {
+  color: #bdeeff;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* ===== BACK TO TOP ===== */
+
+#topButton {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 150;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 25px;
+}
+
+/* ===== CHATBOT ===== */
+
+#chatbot {
   position: fixed;
   right: 20px;
   bottom: 20px;
   z-index: 200;
-  max-width: calc(100vw - 40px);
 }
 
-.chatbot button {
-  border-radius: 50px;
+#chat-toggle {
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 26px;
 }
 
-/* ===== انیمیشن ===== */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
+#chat-window {
+  position: absolute;
+  right: 0;
+  bottom: 72px;
+  display: flex;
+  flex-direction: column;
+  width: min(350px, calc(100vw - 32px));
+  height: 440px;
+  max-height: 70vh;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+#chat-window[hidden] {
+  display: none;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  color: white;
+  background: var(--primary);
+}
+
+.chat-header strong {
+  color: white;
+}
+
+.chat-header button {
+  padding: 5px 10px;
+}
+
+.chat-status {
+  font-size: 12px;
+  opacity: .85;
+}
+
+#chat-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.bot-message,
+.user-message {
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 13px;
+  overflow-wrap: anywhere;
+}
+
+.bot-message {
+  color: var(--text);
+  background: var(--bg);
+  text-align: right;
+}
+
+.user-message {
+  color: white;
+  background: var(--primary);
+  text-align: right;
+}
+
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 8px;
+}
+
+.chat-suggestions button {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+#chat-form {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  padding: 8px;
+}
+
+#chat-form input {
+  flex: 1;
+  padding: 9px;
+}
+
+#chat-form button {
+  padding: 8px 13px;
+}
+
+/* ===== DARK MODE ===== */
+
+body.dark {
+  --bg: #171729;
+  --surface: #23233b;
+  --text: #f3f2ff;
+  --muted: #c0bfd5;
+  --border: #393855;
+  --shadow: 0 12px 35px rgba(0, 0, 0, .25);
+
+  background: #171729;
+  color: var(--text);
+}
+
+body.dark header {
+  background: rgba(35, 35, 59, .96);
+}
+
+body.dark nav a {
+  color: var(--text);
+}
+
+body.dark .card,
+body.dark #chat-window {
+  background: var(--surface);
+  color: var(--text);
+}
+
+body.dark .todo-list li,
+body.dark .bot-message {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 850px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-.hero,
-.card,
-section {
-  animation: fadeUp 0.6s ease both;
-}
-
-/* ===== نمایش در موبایل ===== */
-@media (max-width: 700px) {
   header {
     justify-content: center;
-    padding: 13px 4%;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 12px 4%;
+    gap: 10px;
   }
 
   .logo {
     width: 100%;
     text-align: center;
+    font-size: 23px;
   }
 
   nav {
-    gap: 5px;
+    gap: 4px;
   }
 
   nav a {
@@ -351,9 +598,13 @@ section {
     font-size: 12px;
   }
 
+  header > button {
+    font-size: 13px;
+  }
+
   .hero {
-    width: 92%;
-    padding: 45px 20px;
+    width: 94%;
+    padding: 45px 18px;
     border-radius: 22px;
   }
 
@@ -361,33 +612,54 @@ section {
     font-size: 15px;
   }
 
-  section {
-    width: 94%;
-    padding: 18px 10px;
+  section.container {
+    width: 96%;
+    padding: 14px 5px;
     margin: 30px auto;
   }
 
   .cards {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 15px;
   }
 
   .card {
-    padding: 20px;
+    padding: 19px;
   }
 
-  h2 {
-    margin-top: 25px;
+  .button-row {
+    gap: 8px;
+  }
+
+  .button-row button {
+    flex: 1 1 120px;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  #chatbot {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  #topButton {
+    left: 12px;
+    bottom: 12px;
   }
 }
 
-/* ===== کاهش انیمیشن برای راحتی کاربران ===== */
+/* ===== ACCESSIBILITY ===== */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation: none !important;
     scroll-behavior: auto !important;
+    animation: none !important;
     transition: none !important;
   }
 }
