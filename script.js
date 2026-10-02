@@ -1,56 +1,44 @@
-// =========================================
-// 🚀 MATIN WEB — COMPLETE JAVASCRIPT
-// =========================================
+document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  // =======================================
-  // 1. حالت شب / روز
-  // =======================================
+  // =========================================
+  // 🌙 1. حالت شب / روز
+  // =========================================
 
   const themeButton = document.getElementById("themeButton");
 
-  function updateThemeButton() {
-    if (!themeButton) return;
-
-    if (document.body.classList.contains("dark")) {
-      themeButton.textContent = "☀️ حالت روز";
-      themeButton.setAttribute("aria-label", "تغییر به حالت روز");
-    } else {
-      themeButton.textContent = "🌙 حالت شب";
-      themeButton.setAttribute("aria-label", "تغییر به حالت شب");
-    }
-  }
-
-  // بازیابی حالت ذخیره‌شده
-  const savedTheme = localStorage.getItem("theme");
-
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark");
-  } else {
-    document.body.classList.remove("dark");
-  }
-
-  updateThemeButton();
-
   if (themeButton) {
-    themeButton.addEventListener("click", () => {
 
-      const isDark = document.body.classList.toggle("dark");
+    // حالت ذخیره‌شده
+    const savedTheme = localStorage.getItem("theme");
 
-      localStorage.setItem(
-        "theme",
-        isDark ? "dark" : "light"
-      );
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+      themeButton.textContent = "☀️ حالت روز";
+    } else {
+      document.body.classList.remove("dark");
+      themeButton.textContent = "🌙 حالت شب";
+    }
 
-      updateThemeButton();
+    // تغییر حالت
+    themeButton.addEventListener("click", function () {
+
+      document.body.classList.toggle("dark");
+
+      if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        themeButton.textContent = "☀️ حالت روز";
+      } else {
+        localStorage.setItem("theme", "light");
+        themeButton.textContent = "🌙 حالت شب";
+      }
+
     });
   }
 
 
-  // =======================================
-  // 2. ساعت و تاریخ
-  // =======================================
+  // =========================================
+  // 🕐 2. ساعت و تاریخ
+  // =========================================
 
   const clock = document.getElementById("clock");
   const date = document.getElementById("date");
@@ -73,15 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (clock || date) {
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-  }
+  updateDateTime();
+  setInterval(updateDateTime, 1000);
 
 
-  // =======================================
-  // 3. شمارنده
-  // =======================================
+  // =========================================
+  // 🔢 3. شمارنده
+  // =========================================
 
   const counter = document.getElementById("counter");
   const increase = document.getElementById("increase");
@@ -92,33 +78,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let count = Number(localStorage.getItem("counter")) || 0;
 
-    function updateCounter() {
+    counter.textContent = count;
+
+    increase.addEventListener("click", function () {
+      count++;
       counter.textContent = count;
       localStorage.setItem("counter", count);
-    }
-
-    updateCounter();
-
-    increase.addEventListener("click", () => {
-      count++;
-      updateCounter();
     });
 
-    decrease.addEventListener("click", () => {
+    decrease.addEventListener("click", function () {
       count--;
-      updateCounter();
+      counter.textContent = count;
+      localStorage.setItem("counter", count);
     });
 
-    reset.addEventListener("click", () => {
+    reset.addEventListener("click", function () {
       count = 0;
-      updateCounter();
+      counter.textContent = count;
+      localStorage.setItem("counter", 0);
     });
   }
 
 
-  // =======================================
-  // 4. لایک و دیسلایک
-  // =======================================
+  // =========================================
+  // ❤️ 4. لایک و دیسلایک
+  // =========================================
 
   const votes = document.getElementById("votes");
   const like = document.getElementById("like");
@@ -137,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateVotes();
 
-    like.addEventListener("click", () => {
+    like.addEventListener("click", function () {
       likes++;
       localStorage.setItem("likes", likes);
       updateVotes();
@@ -147,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    dislike.addEventListener("click", () => {
+    dislike.addEventListener("click", function () {
       dislikes++;
       localStorage.setItem("dislikes", dislikes);
       updateVotes();
@@ -157,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    resetVotes.addEventListener("click", () => {
+    resetVotes.addEventListener("click", function () {
       likes = 0;
       dislikes = 0;
 
@@ -173,9 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // =======================================
-  // 5. فهرست کارها
-  // =======================================
+  // =========================================
+  // 📝 5. فهرست کارها
+  // =========================================
 
   const todoForm = document.getElementById("todoForm");
   const todoInput = document.getElementById("todoInput");
@@ -188,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       todos = JSON.parse(localStorage.getItem("todos")) || [];
-    } catch {
+    } catch (error) {
       todos = [];
     }
 
@@ -196,19 +180,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       todoList.innerHTML = "";
 
-      todos.forEach((todo, index) => {
+      todos.forEach(function (todo, index) {
 
         const li = document.createElement("li");
-        const span = document.createElement("span");
-        const button = document.createElement("button");
 
+        const span = document.createElement("span");
         span.textContent = todo;
 
+        const button = document.createElement("button");
         button.type = "button";
         button.textContent = "❌";
-        button.setAttribute("aria-label", "حذف کار");
 
-        button.addEventListener("click", () => {
+        button.addEventListener("click", function () {
 
           todos.splice(index, 1);
 
@@ -231,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    todoForm.addEventListener("submit", (event) => {
+    todoForm.addEventListener("submit", function (event) {
 
       event.preventDefault();
 
@@ -255,9 +238,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // =======================================
-  // 6. تغییر رنگ سایت
-  // =======================================
+  // =========================================
+  // 🎨 6. تغییر رنگ سایت
+  // =========================================
 
   const colorButtons = document.querySelectorAll("[data-color]");
 
@@ -292,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  function changeColor(colorName, save = true) {
+  function changeColor(colorName) {
 
     const color = colors[colorName];
 
@@ -318,14 +301,12 @@ document.addEventListener("DOMContentLoaded", () => {
       color.accent
     );
 
-    if (save) {
-      localStorage.setItem("siteColor", colorName);
-    }
+    localStorage.setItem("siteColor", colorName);
   }
 
-  colorButtons.forEach(button => {
+  colorButtons.forEach(function (button) {
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", function () {
       changeColor(button.dataset.color);
     });
 
@@ -333,14 +314,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const savedColor = localStorage.getItem("siteColor");
 
-  if (savedColor && colors[savedColor]) {
-    changeColor(savedColor, false);
+  if (savedColor) {
+    changeColor(savedColor);
   }
 
 
-  // =======================================
-  // 7. جمله انگیزشی
-  // =======================================
+  // =========================================
+  // 💡 7. جمله انگیزشی
+  // =========================================
 
   const quote = document.getElementById("quote");
   const newQuote = document.getElementById("newQuote");
@@ -356,7 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (quote && newQuote) {
 
-    newQuote.addEventListener("click", () => {
+    newQuote.addEventListener("click", function () {
 
       const randomIndex =
         Math.floor(Math.random() * quotes.length);
@@ -366,45 +347,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // =======================================
-  // 8. پیام مخصوص
-  // =======================================
+  // =========================================
+  // 🎉 8. پیام مخصوص
+  // =========================================
 
   const showMessage = document.getElementById("showMessage");
   const message = document.getElementById("message");
 
   if (showMessage && message) {
 
-    showMessage.addEventListener("click", () => {
+    showMessage.addEventListener("click", function () {
 
       message.textContent =
         "🎉 سلام متین! ادامه بده؛ داری قدم‌به‌قدم سایتت رو حرفه‌ای‌تر می‌کنی. 🚀";
+
     });
   }
 
 
-  // =======================================
-  // 9. بازگشت به بالا
-  // =======================================
+  // =========================================
+  // ⬆️ 9. بازگشت به بالا
+  // =========================================
 
   const topButton = document.getElementById("topButton");
 
   if (topButton) {
 
-    function updateTopButton() {
+    window.addEventListener("scroll", function () {
 
       if (window.scrollY > 300) {
         topButton.classList.add("show");
       } else {
         topButton.classList.remove("show");
       }
-    }
 
-    window.addEventListener("scroll", updateTopButton);
+    });
 
-    updateTopButton();
-
-    topButton.addEventListener("click", () => {
+    topButton.addEventListener("click", function () {
 
       window.scrollTo({
         top: 0,
@@ -415,32 +394,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // =======================================
-  // 10. فرم تماس
-  // =======================================
+  // =========================================
+  // 📩 10. فرم تماس
+  // =========================================
 
   const contactForm = document.getElementById("contactForm");
   const formResult = document.getElementById("formResult");
 
   if (contactForm && formResult) {
 
-    contactForm.addEventListener("submit", event => {
+    contactForm.addEventListener("submit", function (event) {
 
       event.preventDefault();
 
       const name = document.getElementById("name");
 
       if (name) {
+
         formResult.textContent =
           `✅ ممنون ${name.value}! پیام آزمایشی تو ثبت شد.`;
+
       }
     });
   }
 
 
-  // =======================================
-  // 11. چت‌بات
-  // =======================================
+  // =========================================
+  // 🤖 11. چت‌بات
+  // =========================================
 
   const chatToggle = document.getElementById("chat-toggle");
   const chatWindow = document.getElementById("chat-window");
@@ -448,9 +429,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatMessages = document.getElementById("chat-messages");
   const chatForm = document.getElementById("chat-form");
   const chatInput = document.getElementById("chat-input");
-
   const questionButtons =
     document.querySelectorAll("[data-question]");
+
 
   if (chatToggle && chatWindow) {
 
@@ -474,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    chatToggle.addEventListener("click", () => {
+    chatToggle.addEventListener("click", function () {
 
       if (chatWindow.hidden) {
         openChat();
@@ -484,15 +465,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+
     if (chatClose) {
-      chatClose.addEventListener("click", closeChat);
+      chatClose.addEventListener(
+        "click",
+        closeChat
+      );
     }
+
 
     function addChatMessage(text, type) {
 
       if (!chatMessages) return;
 
-      const element = document.createElement("div");
+      const element =
+        document.createElement("div");
 
       element.className =
         type === "user"
@@ -507,6 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chatMessages.scrollHeight;
     }
 
+
     function getBotAnswer(question) {
 
       const q = question.toLowerCase();
@@ -515,7 +503,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return "👋 سلام! خوش اومدی به سلطان وب!";
       }
 
-      if (q.includes("درباره") || q.includes("سایت")) {
+      if (
+        q.includes("درباره") ||
+        q.includes("سایت")
+      ) {
         return "🚀 سلطان وب یک سایت شخصی برای معرفی و تمرین طراحی سایت و برنامه‌نویسی است.";
       }
 
@@ -534,6 +525,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return "🤖 پیامت رو دریافت کردم! یکی از گزینه‌های راهنما رو امتحان کن.";
     }
 
+
     function sendChat(question) {
 
       if (!question.trim()) return;
@@ -542,14 +534,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const answer = getBotAnswer(question);
 
-      setTimeout(() => {
+      setTimeout(function () {
+
         addChatMessage(answer, "bot");
+
       }, 300);
     }
 
-    questionButtons.forEach(button => {
 
-      button.addEventListener("click", () => {
+    questionButtons.forEach(function (button) {
+
+      button.addEventListener("click", function () {
 
         sendChat(button.dataset.question);
 
@@ -557,27 +552,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+
     if (chatForm && chatInput) {
 
-      chatForm.addEventListener("submit", event => {
+      chatForm.addEventListener(
+        "submit",
+        function (event) {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        const question = chatInput.value.trim();
+          const question =
+            chatInput.value.trim();
 
-        if (!question) return;
+          if (!question) return;
 
-        sendChat(question);
+          sendChat(question);
 
-        chatInput.value = "";
-      });
+          chatInput.value = "";
+        }
+      );
     }
   }
 
 
-  // =======================================
-  // پایان
-  // =======================================
+  // =========================================
+  // 🚀 پایان
+  // =========================================
 
-  console.log("🚀 MATIN WEB READY!");
+  console.log("🚀 SULTAN WEB READY!");
+
 });
