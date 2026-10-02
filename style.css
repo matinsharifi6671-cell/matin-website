@@ -1148,3 +1148,51 @@ body.dark .todo-list li {
   font-size: 25px;
   font-weight: 900;
 }
+/* اصلاح نمایش موبایل */
+@media (max-width: 600px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .main-logo {
+    width: 94%;
+    max-width: none;
+    margin: 20px auto;
+  }
+
+  .main-logo img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+  }
+
+  section.container {
+    width: 94%;
+    max-width: none;
+    margin: 35px auto;
+    padding: 10px;
+  }
+
+  .hero {
+    width: 94%;
+    max-width: none;
+    margin: 25px auto;
+  }
+
+  .cards {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
