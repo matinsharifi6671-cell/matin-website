@@ -2,7 +2,7 @@
 // 🚀 MATIN WEB — COMPLETE JAVASCRIPT
 // =========================================
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   // =======================================
   // 1. حالت شب / روز
@@ -10,30 +10,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const themeButton = document.getElementById("themeButton");
 
-  if (themeButton) {
+  function updateThemeButton() {
+    if (!themeButton) return;
 
-    if (localStorage.getItem("theme") === "dark") {
-      document.body.classList.add("dark");
+    if (document.body.classList.contains("dark")) {
       themeButton.textContent = "☀️ حالت روز";
+      themeButton.setAttribute("aria-label", "تغییر به حالت روز");
+    } else {
+      themeButton.textContent = "🌙 حالت شب";
+      themeButton.setAttribute("aria-label", "تغییر به حالت شب");
     }
+  }
 
-    themeButton.addEventListener("click", function () {
+  // بازیابی حالت ذخیره‌شده
+  const savedTheme = localStorage.getItem("theme");
 
-      document.body.classList.toggle("dark");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
 
-      if (document.body.classList.contains("dark")) {
+  updateThemeButton();
 
-        localStorage.setItem("theme", "dark");
+  if (themeButton) {
+    themeButton.addEventListener("click", () => {
 
-        themeButton.textContent = "☀️ حالت روز";
+      const isDark = document.body.classList.toggle("dark");
 
-      } else {
+      localStorage.setItem(
+        "theme",
+        isDark ? "dark" : "light"
+      );
 
-        localStorage.setItem("theme", "light");
-
-        themeButton.textContent = "🌙 حالت شب";
-      }
-
+      updateThemeButton();
     });
   }
 
@@ -50,24 +60,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const now = new Date();
 
     if (clock) {
-      clock.textContent =
-        now.toLocaleTimeString("fa-IR");
+      clock.textContent = now.toLocaleTimeString("fa-IR");
     }
 
     if (date) {
-      date.textContent =
-        now.toLocaleDateString("fa-IR", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
+      date.textContent = now.toLocaleDateString("fa-IR", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
     }
   }
 
   if (clock || date) {
     updateDateTime();
-
     setInterval(updateDateTime, 1000);
   }
 
@@ -81,52 +88,30 @@ document.addEventListener("DOMContentLoaded", function () {
   const decrease = document.getElementById("decrease");
   const reset = document.getElementById("reset");
 
-  if (
-    counter &&
-    increase &&
-    decrease &&
-    reset
-  ) {
+  if (counter && increase && decrease && reset) {
 
-    let count =
-      Number(localStorage.getItem("counter")) || 0;
+    let count = Number(localStorage.getItem("counter")) || 0;
 
-    counter.textContent = count;
+    function updateCounter() {
+      counter.textContent = count;
+      localStorage.setItem("counter", count);
+    }
 
-    increase.addEventListener("click", function () {
+    updateCounter();
 
+    increase.addEventListener("click", () => {
       count++;
-
-      counter.textContent = count;
-
-      localStorage.setItem(
-        "counter",
-        count
-      );
+      updateCounter();
     });
 
-    decrease.addEventListener("click", function () {
-
+    decrease.addEventListener("click", () => {
       count--;
-
-      counter.textContent = count;
-
-      localStorage.setItem(
-        "counter",
-        count
-      );
+      updateCounter();
     });
 
-    reset.addEventListener("click", function () {
-
+    reset.addEventListener("click", () => {
       count = 0;
-
-      counter.textContent = count;
-
-      localStorage.setItem(
-        "counter",
-        0
-      );
+      updateCounter();
     });
   }
 
@@ -138,84 +123,53 @@ document.addEventListener("DOMContentLoaded", function () {
   const votes = document.getElementById("votes");
   const like = document.getElementById("like");
   const dislike = document.getElementById("dislike");
-  const resetVotes =
-    document.getElementById("resetVotes");
-  const voteMessage =
-    document.getElementById("voteMessage");
+  const resetVotes = document.getElementById("resetVotes");
+  const voteMessage = document.getElementById("voteMessage");
 
-  if (
-    votes &&
-    like &&
-    dislike &&
-    resetVotes
-  ) {
+  if (votes && like && dislike && resetVotes) {
 
-    let likes =
-      Number(localStorage.getItem("likes")) || 0;
-
-    let dislikes =
-      Number(localStorage.getItem("dislikes")) || 0;
+    let likes = Number(localStorage.getItem("likes")) || 0;
+    let dislikes = Number(localStorage.getItem("dislikes")) || 0;
 
     function updateVotes() {
-
-      votes.textContent =
-        `👍 ${likes} | 👎 ${dislikes}`;
+      votes.textContent = `👍 ${likes} | 👎 ${dislikes}`;
     }
 
     updateVotes();
 
-    like.addEventListener("click", function () {
-
+    like.addEventListener("click", () => {
       likes++;
-
-      localStorage.setItem(
-        "likes",
-        likes
-      );
-
+      localStorage.setItem("likes", likes);
       updateVotes();
 
       if (voteMessage) {
-        voteMessage.textContent =
-          "❤️ ممنون که سایت رو دوست داشتی!";
+        voteMessage.textContent = "❤️ ممنون که سایت رو دوست داشتی!";
       }
     });
 
-    dislike.addEventListener("click", function () {
-
+    dislike.addEventListener("click", () => {
       dislikes++;
+      localStorage.setItem("dislikes", dislikes);
+      updateVotes();
 
-      localStorage.setItem(
-        "dislikes",
-        dislikes
-      );
+      if (voteMessage) {
+        voteMessage.textContent = "👍 ممنون از نظرت!";
+      }
+    });
+
+    resetVotes.addEventListener("click", () => {
+      likes = 0;
+      dislikes = 0;
+
+      localStorage.setItem("likes", 0);
+      localStorage.setItem("dislikes", 0);
 
       updateVotes();
 
       if (voteMessage) {
-        voteMessage.textContent =
-          "👍 ممنون از نظرت!";
+        voteMessage.textContent = "رأی‌ها پاک شدند.";
       }
     });
-
-    resetVotes.addEventListener(
-      "click",
-      function () {
-
-        likes = 0;
-        dislikes = 0;
-
-        localStorage.setItem("likes", 0);
-        localStorage.setItem("dislikes", 0);
-
-        updateVotes();
-
-        if (voteMessage) {
-          voteMessage.textContent =
-            "رأی‌ها پاک شدند.";
-        }
-      }
-    );
   }
 
 
@@ -223,76 +177,48 @@ document.addEventListener("DOMContentLoaded", function () {
   // 5. فهرست کارها
   // =======================================
 
-  const todoForm =
-    document.getElementById("todoForm");
+  const todoForm = document.getElementById("todoForm");
+  const todoInput = document.getElementById("todoInput");
+  const todoList = document.getElementById("todoList");
+  const todoInfo = document.getElementById("todoInfo");
 
-  const todoInput =
-    document.getElementById("todoInput");
+  if (todoForm && todoInput && todoList) {
 
-  const todoList =
-    document.getElementById("todoList");
-
-  const todoInfo =
-    document.getElementById("todoInfo");
-
-  if (
-    todoForm &&
-    todoInput &&
-    todoList
-  ) {
-
-    let todos;
+    let todos = [];
 
     try {
-
-      todos =
-        JSON.parse(
-          localStorage.getItem("todos")
-        ) || [];
-
+      todos = JSON.parse(localStorage.getItem("todos")) || [];
     } catch {
-
       todos = [];
     }
-
 
     function showTodos() {
 
       todoList.innerHTML = "";
 
-      todos.forEach(function (todo, index) {
+      todos.forEach((todo, index) => {
 
-        const li =
-          document.createElement("li");
-
-        const span =
-          document.createElement("span");
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        const button = document.createElement("button");
 
         span.textContent = todo;
 
-
-        const button =
-          document.createElement("button");
-
         button.type = "button";
-
         button.textContent = "❌";
+        button.setAttribute("aria-label", "حذف کار");
 
-        button.addEventListener(
-          "click",
-          function () {
+        button.addEventListener("click", () => {
 
-            todos.splice(index, 1);
+          todos.splice(index, 1);
 
-            localStorage.setItem(
-              "todos",
-              JSON.stringify(todos)
-            );
+          localStorage.setItem(
+            "todos",
+            JSON.stringify(todos)
+          );
 
-            showTodos();
-          }
-        );
-
+          showTodos();
+        });
 
         li.appendChild(span);
         li.appendChild(button);
@@ -300,54 +226,40 @@ document.addEventListener("DOMContentLoaded", function () {
         todoList.appendChild(li);
       });
 
-
       if (todoInfo) {
-
-        todoInfo.textContent =
-          `تعداد کارها: ${todos.length}`;
+        todoInfo.textContent = `تعداد کارها: ${todos.length}`;
       }
     }
 
+    todoForm.addEventListener("submit", (event) => {
 
-    todoForm.addEventListener(
-      "submit",
-      function (event) {
+      event.preventDefault();
 
-        event.preventDefault();
+      const newTodo = todoInput.value.trim();
 
-        const newTodo =
-          todoInput.value.trim();
+      if (!newTodo) return;
 
-        if (!newTodo) {
-          return;
-        }
+      todos.push(newTodo);
 
-        todos.push(newTodo);
+      localStorage.setItem(
+        "todos",
+        JSON.stringify(todos)
+      );
 
-        localStorage.setItem(
-          "todos",
-          JSON.stringify(todos)
-        );
+      todoInput.value = "";
 
-        todoInput.value = "";
-
-        showTodos();
-      }
-    );
-
+      showTodos();
+    });
 
     showTodos();
   }
 
 
   // =======================================
-  // 6. تغییر رنگ
+  // 6. تغییر رنگ سایت
   // =======================================
 
-  const colorButtons =
-    document.querySelectorAll(
-      "[data-color]"
-    );
+  const colorButtons = document.querySelectorAll("[data-color]");
 
   const colors = {
 
@@ -380,15 +292,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  function changeColor(colorName, save = true) {
 
-  function changeColor(colorName) {
+    const color = colors[colorName];
 
-    const color =
-      colors[colorName];
-
-    if (!color) {
-      return;
-    }
+    if (!color) return;
 
     document.documentElement.style.setProperty(
       "--primary",
@@ -410,34 +318,23 @@ document.addEventListener("DOMContentLoaded", function () {
       color.accent
     );
 
-    localStorage.setItem(
-      "siteColor",
-      colorName
-    );
+    if (save) {
+      localStorage.setItem("siteColor", colorName);
+    }
   }
 
+  colorButtons.forEach(button => {
 
-  colorButtons.forEach(
-    function (button) {
+    button.addEventListener("click", () => {
+      changeColor(button.dataset.color);
+    });
 
-      button.addEventListener(
-        "click",
-        function () {
+  });
 
-          changeColor(
-            button.dataset.color
-          );
-        }
-      );
-    }
-  );
+  const savedColor = localStorage.getItem("siteColor");
 
-
-  const savedColor =
-    localStorage.getItem("siteColor");
-
-  if (savedColor) {
-    changeColor(savedColor);
+  if (savedColor && colors[savedColor]) {
+    changeColor(savedColor, false);
   }
 
 
@@ -445,45 +342,27 @@ document.addEventListener("DOMContentLoaded", function () {
   // 7. جمله انگیزشی
   // =======================================
 
-  const quote =
-    document.getElementById("quote");
-
-  const newQuote =
-    document.getElementById("newQuote");
-
+  const quote = document.getElementById("quote");
+  const newQuote = document.getElementById("newQuote");
 
   const quotes = [
-
     "هر روز یک قدم کوچک، یعنی یک قدم به جلو.",
-
     "با تمرین، برنامه‌نویسی ساده‌تر می‌شود.",
-
     "اشتباه کردن بخشی از یادگیری است.",
-
     "امروز می‌تواند شروع یک مهارت جدید باشد.",
-
     "کدی که امروز یاد می‌گیری، پایه‌ای برای فرداست.",
-
     "هیچ برنامه‌نویسی از روز اول حرفه‌ای نبوده است! 🚀"
-
   ];
-
 
   if (quote && newQuote) {
 
-    newQuote.addEventListener(
-      "click",
-      function () {
+    newQuote.addEventListener("click", () => {
 
-        const randomIndex =
-          Math.floor(
-            Math.random() * quotes.length
-          );
+      const randomIndex =
+        Math.floor(Math.random() * quotes.length);
 
-        quote.textContent =
-          quotes[randomIndex];
-      }
-    );
+      quote.textContent = quotes[randomIndex];
+    });
   }
 
 
@@ -491,62 +370,48 @@ document.addEventListener("DOMContentLoaded", function () {
   // 8. پیام مخصوص
   // =======================================
 
-  const showMessage =
-    document.getElementById("showMessage");
-
-  const message =
-    document.getElementById("message");
-
+  const showMessage = document.getElementById("showMessage");
+  const message = document.getElementById("message");
 
   if (showMessage && message) {
 
-    showMessage.addEventListener(
-      "click",
-      function () {
+    showMessage.addEventListener("click", () => {
 
-        message.textContent =
-          "🎉 سلام متین! ادامه بده؛ داری قدم‌به‌قدم سایتت رو حرفه‌ای‌تر می‌کنی. 🚀";
-      }
-    );
+      message.textContent =
+        "🎉 سلام متین! ادامه بده؛ داری قدم‌به‌قدم سایتت رو حرفه‌ای‌تر می‌کنی. 🚀";
+    });
   }
 
 
   // =======================================
-  // 9. دکمه بازگشت به بالا
+  // 9. بازگشت به بالا
   // =======================================
 
-  const topButton =
-    document.getElementById("topButton");
-
+  const topButton = document.getElementById("topButton");
 
   if (topButton) {
 
-    window.addEventListener(
-      "scroll",
-      function () {
+    function updateTopButton() {
 
-        if (window.scrollY > 300) {
-
-          topButton.classList.add("show");
-
-        } else {
-
-          topButton.classList.remove("show");
-        }
+      if (window.scrollY > 300) {
+        topButton.classList.add("show");
+      } else {
+        topButton.classList.remove("show");
       }
-    );
+    }
 
+    window.addEventListener("scroll", updateTopButton);
 
-    topButton.addEventListener(
-      "click",
-      function () {
+    updateTopButton();
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      }
-    );
+    topButton.addEventListener("click", () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
   }
 
 
@@ -554,31 +419,22 @@ document.addEventListener("DOMContentLoaded", function () {
   // 10. فرم تماس
   // =======================================
 
-  const contactForm =
-    document.getElementById("contactForm");
-
-  const formResult =
-    document.getElementById("formResult");
-
+  const contactForm = document.getElementById("contactForm");
+  const formResult = document.getElementById("formResult");
 
   if (contactForm && formResult) {
 
-    contactForm.addEventListener(
-      "submit",
-      function (event) {
+    contactForm.addEventListener("submit", event => {
 
-        event.preventDefault();
+      event.preventDefault();
 
-        const name =
-          document.getElementById("name");
+      const name = document.getElementById("name");
 
-        if (name) {
-
-          formResult.textContent =
-            `✅ ممنون ${name.value}! پیام آزمایشی تو ثبت شد.`;
-        }
+      if (name) {
+        formResult.textContent =
+          `✅ ممنون ${name.value}! پیام آزمایشی تو ثبت شد.`;
       }
-    );
+    });
   }
 
 
@@ -586,34 +442,17 @@ document.addEventListener("DOMContentLoaded", function () {
   // 11. چت‌بات
   // =======================================
 
-  const chatToggle =
-    document.getElementById("chat-toggle");
-
-  const chatWindow =
-    document.getElementById("chat-window");
-
-  const chatClose =
-    document.getElementById("chat-close");
-
-  const chatMessages =
-    document.getElementById("chat-messages");
-
-  const chatForm =
-    document.getElementById("chat-form");
-
-  const chatInput =
-    document.getElementById("chat-input");
+  const chatToggle = document.getElementById("chat-toggle");
+  const chatWindow = document.getElementById("chat-window");
+  const chatClose = document.getElementById("chat-close");
+  const chatMessages = document.getElementById("chat-messages");
+  const chatForm = document.getElementById("chat-form");
+  const chatInput = document.getElementById("chat-input");
 
   const questionButtons =
-    document.querySelectorAll(
-      "[data-question]"
-    );
+    document.querySelectorAll("[data-question]");
 
-
-  if (
-    chatToggle &&
-    chatWindow
-  ) {
+  if (chatToggle && chatWindow) {
 
     function openChat() {
 
@@ -625,7 +464,6 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-
     function closeChat() {
 
       chatWindow.hidden = true;
@@ -636,43 +474,25 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
+    chatToggle.addEventListener("click", () => {
 
-    chatToggle.addEventListener(
-      "click",
-      function () {
-
-        if (chatWindow.hidden) {
-
-          openChat();
-
-        } else {
-
-          closeChat();
-        }
+      if (chatWindow.hidden) {
+        openChat();
+      } else {
+        closeChat();
       }
-    );
 
+    });
 
     if (chatClose) {
-
-      chatClose.addEventListener(
-        "click",
-        closeChat
-      );
+      chatClose.addEventListener("click", closeChat);
     }
 
+    function addChatMessage(text, type) {
 
-    function addChatMessage(
-      text,
-      type
-    ) {
+      if (!chatMessages) return;
 
-      if (!chatMessages) {
-        return;
-      }
-
-      const element =
-        document.createElement("div");
+      const element = document.createElement("div");
 
       element.className =
         type === "user"
@@ -681,133 +501,76 @@ document.addEventListener("DOMContentLoaded", function () {
 
       element.textContent = text;
 
-      chatMessages.appendChild(
-        element
-      );
+      chatMessages.appendChild(element);
 
       chatMessages.scrollTop =
         chatMessages.scrollHeight;
     }
 
-
     function getBotAnswer(question) {
 
-      const q =
-        question.toLowerCase();
+      const q = question.toLowerCase();
 
-
-      if (
-        q.includes("سلام")
-      ) {
-
-        return "👋 سلام! خوش اومدی به متین وب!";
-
+      if (q.includes("سلام")) {
+        return "👋 سلام! خوش اومدی به سلطان وب!";
       }
 
-
-      if (
-        q.includes("درباره") ||
-        q.includes("سایت")
-      ) {
-
-        return "🚀 متین وب یک سایت شخصی برای معرفی متین و تمرین طراحی سایت و برنامه‌نویسی است.";
-
+      if (q.includes("درباره") || q.includes("سایت")) {
+        return "🚀 سلطان وب یک سایت شخصی برای معرفی و تمرین طراحی سایت و برنامه‌نویسی است.";
       }
-
 
       if (
         q.includes("راهنما") ||
         q.includes("امکانات") ||
         q.includes("چه کار")
       ) {
-
         return "📚 اینجا می‌تونی ساعت رو ببینی، شمارنده رو امتحان کنی، کار اضافه کنی، رنگ سایت رو عوض کنی و حالت شب رو فعال کنی.";
-
       }
 
-
-      if (
-        q.includes("متین")
-      ) {
-
+      if (q.includes("متین")) {
         return "😎 متین در حال یادگیری HTML، CSS و JavaScript است.";
-
       }
-
 
       return "🤖 پیامت رو دریافت کردم! یکی از گزینه‌های راهنما رو امتحان کن.";
     }
 
-
     function sendChat(question) {
 
-      if (!question.trim()) {
-        return;
-      }
+      if (!question.trim()) return;
 
-      addChatMessage(
-        question,
-        "user"
-      );
+      addChatMessage(question, "user");
 
+      const answer = getBotAnswer(question);
 
-      const answer =
-        getBotAnswer(question);
-
-
-      setTimeout(
-        function () {
-
-          addChatMessage(
-            answer,
-            "bot"
-          );
-
-        },
-        300
-      );
+      setTimeout(() => {
+        addChatMessage(answer, "bot");
+      }, 300);
     }
 
+    questionButtons.forEach(button => {
 
-    questionButtons.forEach(
-      function (button) {
+      button.addEventListener("click", () => {
 
-        button.addEventListener(
-          "click",
-          function () {
+        sendChat(button.dataset.question);
 
-            sendChat(
-              button.dataset.question
-            );
-          }
-        );
-      }
-    );
+      });
 
+    });
 
-    if (
-      chatForm &&
-      chatInput
-    ) {
+    if (chatForm && chatInput) {
 
-      chatForm.addEventListener(
-        "submit",
-        function (event) {
+      chatForm.addEventListener("submit", event => {
 
-          event.preventDefault();
+        event.preventDefault();
 
-          const question =
-            chatInput.value.trim();
+        const question = chatInput.value.trim();
 
-          if (!question) {
-            return;
-          }
+        if (!question) return;
 
-          sendChat(question);
+        sendChat(question);
 
-          chatInput.value = "";
-        }
-      );
+        chatInput.value = "";
+      });
     }
   }
 
@@ -816,8 +579,5 @@ document.addEventListener("DOMContentLoaded", function () {
   // پایان
   // =======================================
 
-  console.log(
-    "🚀 MATIN WEB READY!"
-  );
-
+  console.log("🚀 MATIN WEB READY!");
 });
