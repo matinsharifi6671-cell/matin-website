@@ -1129,3 +1129,22 @@ body.dark .todo-list li {
     scroll-behavior: auto !important;
   }
 }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 2px solid var(--primary);
+  box-shadow: 0 5px 18px rgba(117, 92, 255, 0.3);
+}
+
+.logo span {
+  font-size: 25px;
+  font-weight: 900;
+}
