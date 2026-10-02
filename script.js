@@ -1,71 +1,52 @@
-document.addEventListener("DOMContentLoaded", function () {
+// ==================================================
+// 👑 SULTAN WEB - JAVASCRIPT
+// ==================================================
 
-  // 🌙 حالت شب / روز
+document.addEventListener("DOMContentLoaded", () => {
 
-  const themeButton =
-    document.getElementById("themeButton");
+  // ==================================================
+  // 🌙 حالت شب و روز
+  // ==================================================
+
+  const themeButton = document.getElementById("themeButton");
 
   if (themeButton) {
 
-    const savedTheme =
-      localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("theme");
 
-    if (savedTheme === "dark") {
-
-      document.body.classList.add("dark");
-
-      themeButton.textContent =
-        "☀️ حالت روز";
-
-    } else {
-
-      document.body.classList.remove("dark");
-
-      themeButton.textContent =
-        "🌙 حالت شب";
+    if (savedTheme === "light") {
+      document.body.classList.add("light-mode");
+      themeButton.textContent = "☀️ حالت روز";
     }
 
+    themeButton.addEventListener("click", () => {
 
-    themeButton.addEventListener("click", function () {
+      document.body.classList.toggle("light-mode");
 
-      document.body.classList.toggle("dark");
+      const isLight =
+        document.body.classList.contains("light-mode");
 
-      const isDark =
-        document.body.classList.contains("dark");
+      localStorage.setItem(
+        "theme",
+        isLight ? "light" : "dark"
+      );
 
-      if (isDark) {
-
-        localStorage.setItem(
-          "theme",
-          "dark"
-        );
-
-        themeButton.textContent =
-          "☀️ حالت روز";
-
-      } else {
-
-        localStorage.setItem(
-          "theme",
-          "light"
-        );
-
-        themeButton.textContent =
-          "🌙 حالت شب";
-      }
+      themeButton.textContent =
+        isLight
+          ? "☀️ حالت روز"
+          : "🌙 حالت شب";
 
     });
+
   }
 
 
+  // ==================================================
   // 🕐 ساعت و تاریخ
+  // ==================================================
 
-  const clock =
-    document.getElementById("clock");
-
-  const date =
-    document.getElementById("date");
-
+  const clock = document.getElementById("clock");
+  const date = document.getElementById("date");
 
   function updateDateTime() {
 
@@ -75,233 +56,246 @@ document.addEventListener("DOMContentLoaded", function () {
 
       clock.textContent =
         now.toLocaleTimeString("fa-IR");
+
     }
 
     if (date) {
 
       date.textContent =
-        now.toLocaleDateString("fa-IR", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
-    }
-  }
+        now.toLocaleDateString(
+          "fa-IR",
+          {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
 
+    }
+
+  }
 
   updateDateTime();
 
-  setInterval(
-    updateDateTime,
-    1000
-  );
+  setInterval(updateDateTime, 1000);
 
 
+  // ==================================================
   // 🔢 شمارنده
+  // ==================================================
 
-  const counter =
+  const counterElement =
     document.getElementById("counter");
 
-  const increase =
+  const increaseButton =
     document.getElementById("increase");
 
-  const decrease =
+  const decreaseButton =
     document.getElementById("decrease");
 
-  const reset =
+  const resetButton =
     document.getElementById("reset");
 
 
-  if (
-    counter &&
-    increase &&
-    decrease &&
-    reset
-  ) {
-
-    let count =
-      Number(
-        localStorage.getItem("counter")
-      ) || 0;
+  let counter =
+    Number(
+      localStorage.getItem("counter")
+    ) || 0;
 
 
-    counter.textContent = count;
+  function updateCounter() {
 
+    if (counterElement) {
 
-    increase.addEventListener(
-      "click",
-      function () {
+      counterElement.textContent =
+        counter;
 
-        count++;
+    }
 
-        counter.textContent =
-          count;
-
-        localStorage.setItem(
-          "counter",
-          count
-        );
-      }
+    localStorage.setItem(
+      "counter",
+      counter
     );
 
-
-    decrease.addEventListener(
-      "click",
-      function () {
-
-        count--;
-
-        counter.textContent =
-          count;
-
-        localStorage.setItem(
-          "counter",
-          count
-        );
-      }
-    );
-
-
-    reset.addEventListener(
-      "click",
-      function () {
-
-        count = 0;
-
-        counter.textContent =
-          count;
-
-        localStorage.setItem(
-          "counter",
-          0
-        );
-      }
-    );
   }
 
 
-  // ❤️ لایک و دیسلایک
+  if (increaseButton) {
 
-  const votes =
+    increaseButton.addEventListener(
+      "click",
+      () => {
+
+        counter++;
+
+        updateCounter();
+
+      }
+    );
+
+  }
+
+
+  if (decreaseButton) {
+
+    decreaseButton.addEventListener(
+      "click",
+      () => {
+
+        counter--;
+
+        updateCounter();
+
+      }
+    );
+
+  }
+
+
+  if (resetButton) {
+
+    resetButton.addEventListener(
+      "click",
+      () => {
+
+        counter = 0;
+
+        updateCounter();
+
+      }
+    );
+
+  }
+
+
+  updateCounter();
+
+
+  // ==================================================
+  // ❤️ لایک و دیسلایک
+  // ==================================================
+
+  const votesElement =
     document.getElementById("votes");
 
-  const like =
+  const likeButton =
     document.getElementById("like");
 
-  const dislike =
+  const dislikeButton =
     document.getElementById("dislike");
 
-  const resetVotes =
+  const resetVotesButton =
     document.getElementById("resetVotes");
 
   const voteMessage =
     document.getElementById("voteMessage");
 
 
-  if (
-    votes &&
-    like &&
-    dislike &&
-    resetVotes
-  ) {
-
-    let likes =
-      Number(
-        localStorage.getItem("likes")
-      ) || 0;
-
-    let dislikes =
-      Number(
-        localStorage.getItem("dislikes")
-      ) || 0;
+  let likes =
+    Number(
+      localStorage.getItem("likes")
+    ) || 0;
 
 
-    function updateVotes() {
+  let dislikes =
+    Number(
+      localStorage.getItem("dislikes")
+    ) || 0;
 
-      votes.textContent =
+
+  function updateVotes() {
+
+    if (votesElement) {
+
+      votesElement.textContent =
         `👍 ${likes} | 👎 ${dislikes}`;
+
     }
 
-
-    updateVotes();
-
-
-    like.addEventListener(
-      "click",
-      function () {
-
-        likes++;
-
-        localStorage.setItem(
-          "likes",
-          likes
-        );
-
-        updateVotes();
-
-        if (voteMessage) {
-
-          voteMessage.textContent =
-            "❤️ ممنون که سایت رو دوست داشتی!";
-        }
-      }
+    localStorage.setItem(
+      "likes",
+      likes
     );
 
-
-    dislike.addEventListener(
-      "click",
-      function () {
-
-        dislikes++;
-
-        localStorage.setItem(
-          "dislikes",
-          dislikes
-        );
-
-        updateVotes();
-
-        if (voteMessage) {
-
-          voteMessage.textContent =
-            "👍 ممنون از نظرت!";
-        }
-      }
+    localStorage.setItem(
+      "dislikes",
+      dislikes
     );
 
-
-    resetVotes.addEventListener(
-      "click",
-      function () {
-
-        likes = 0;
-
-        dislikes = 0;
-
-        localStorage.setItem(
-          "likes",
-          0
-        );
-
-        localStorage.setItem(
-          "dislikes",
-          0
-        );
-
-        updateVotes();
-
-        if (voteMessage) {
-
-          voteMessage.textContent =
-            "رأی‌ها پاک شدند.";
-        }
-      }
-    );
   }
 
 
-  // 📝 فهرست کارها
+  if (likeButton) {
+
+    likeButton.addEventListener(
+      "click",
+      () => {
+
+        likes++;
+
+        if (voteMessage) {
+          voteMessage.textContent =
+            "ممنون از نظرت! ❤️";
+        }
+
+        updateVotes();
+
+      }
+    );
+
+  }
+
+
+  if (dislikeButton) {
+
+    dislikeButton.addEventListener(
+      "click",
+      () => {
+
+        dislikes++;
+
+        if (voteMessage) {
+          voteMessage.textContent =
+            "ممنون که نظرت رو گفتی! 👍";
+        }
+
+        updateVotes();
+
+      }
+    );
+
+  }
+
+
+  if (resetVotesButton) {
+
+    resetVotesButton.addEventListener(
+      "click",
+      () => {
+
+        likes = 0;
+        dislikes = 0;
+
+        if (voteMessage) {
+          voteMessage.textContent =
+            "رأی‌ها پاک شدند.";
+        }
+
+        updateVotes();
+
+      }
+    );
+
+  }
+
+
+  updateVotes();
+
+
+  // ==================================================
+  // 📝 Todo List
+  // ==================================================
 
   const todoForm =
     document.getElementById("todoForm");
@@ -316,126 +310,132 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("todoInfo");
 
 
-  if (
-    todoForm &&
-    todoInput &&
-    todoList
-  ) {
+  let todos =
+    JSON.parse(
+      localStorage.getItem("todos")
+    ) || [];
 
-    let todos = [];
 
-    try {
+  function saveTodos() {
 
-      todos =
-        JSON.parse(
-          localStorage.getItem("todos")
-        ) || [];
+    localStorage.setItem(
+      "todos",
+      JSON.stringify(todos)
+    );
 
-    } catch (error) {
+  }
 
-      todos = [];
+
+  function renderTodos() {
+
+    if (!todoList) {
+      return;
     }
 
-
-    function showTodos() {
-
-      todoList.innerHTML = "";
+    todoList.innerHTML = "";
 
 
-      todos.forEach(
-        function (todo, index) {
+    todos.forEach((todo, index) => {
 
-          const li =
-            document.createElement("li");
-
-          const span =
-            document.createElement("span");
-
-          span.textContent =
-            todo;
+      const li =
+        document.createElement("li");
 
 
-          const button =
-            document.createElement("button");
+      const text =
+        document.createElement("span");
 
-          button.type = "button";
-
-          button.textContent =
-            "❌";
+      text.textContent =
+        todo;
 
 
-          button.addEventListener(
-            "click",
-            function () {
+      const deleteButton =
+        document.createElement("button");
 
-              todos.splice(
-                index,
-                1
-              );
+      deleteButton.textContent =
+        "🗑️";
 
-              localStorage.setItem(
-                "todos",
-                JSON.stringify(todos)
-              );
-
-              showTodos();
-            }
-          );
+      deleteButton.className =
+        "btn";
 
 
-          li.appendChild(span);
+      deleteButton.addEventListener(
+        "click",
+        () => {
 
-          li.appendChild(button);
+          todos.splice(index, 1);
 
-          todoList.appendChild(li);
+          saveTodos();
+
+          renderTodos();
+
         }
       );
 
 
-      if (todoInfo) {
+      li.appendChild(text);
 
-        todoInfo.textContent =
-          `تعداد کارها: ${todos.length}`;
-      }
+      li.appendChild(deleteButton);
+
+      todoList.appendChild(li);
+
+    });
+
+
+    if (todoInfo) {
+
+      todoInfo.textContent =
+        `تعداد کارها: ${todos.length}`;
+
     }
 
+  }
+
+
+  if (todoForm) {
 
     todoForm.addEventListener(
       "submit",
-      function (event) {
+      (event) => {
 
         event.preventDefault();
 
 
-        const newTodo =
+        const value =
           todoInput.value.trim();
 
 
-        if (!newTodo) return;
+        if (!value) {
+
+          todoInput.focus();
+
+          return;
+
+        }
 
 
-        todos.push(newTodo);
+        todos.push(value);
 
+        saveTodos();
 
-        localStorage.setItem(
-          "todos",
-          JSON.stringify(todos)
-        );
+        renderTodos();
 
 
         todoInput.value = "";
 
+        todoInput.focus();
 
-        showTodos();
       }
     );
 
-
-    showTodos();
   }
 
 
+  renderTodos();
+
+
+  // ==================================================
   // 🎨 تغییر رنگ
+  // ==================================================
 
   const colorButtons =
     document.querySelectorAll(
@@ -443,84 +443,95 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-  const colors = {
+  const savedColor =
+    localStorage.getItem("siteColor");
 
-    default: {
-      primary: "#755cff",
-      primaryDark: "#5940df",
-      secondary: "#00c2ff",
-      accent: "#a78bfa"
-    },
 
-    blue: {
-      primary: "#2563eb",
-      primaryDark: "#1d4ed8",
-      secondary: "#06b6d4",
-      accent: "#60a5fa"
-    },
+  function applyColor(color) {
 
-    pink: {
-      primary: "#db2777",
-      primaryDark: "#be185d",
-      secondary: "#a855f7",
-      accent: "#f472b6"
-    },
+    const root =
+      document.documentElement;
 
-    green: {
-      primary: "#16a34a",
-      primaryDark: "#15803d",
-      secondary: "#06b6d4",
-      accent: "#4ade80"
+
+    if (color === "blue") {
+
+      root.style.setProperty(
+        "--primary",
+        "#2196f3"
+      );
+
+      root.style.setProperty(
+        "--secondary",
+        "#00c6ff"
+      );
+
     }
 
-  };
+    else if (color === "pink") {
+
+      root.style.setProperty(
+        "--primary",
+        "#ff4f9a"
+      );
+
+      root.style.setProperty(
+        "--secondary",
+        "#ff8acb"
+      );
+
+    }
+
+    else if (color === "green") {
+
+      root.style.setProperty(
+        "--primary",
+        "#00b894"
+      );
+
+      root.style.setProperty(
+        "--secondary",
+        "#00cec9"
+      );
+
+    }
+
+    else {
+
+      root.style.setProperty(
+        "--primary",
+        "#755cff"
+      );
+
+      root.style.setProperty(
+        "--secondary",
+        "#00b4ff"
+      );
+
+    }
+
+  }
 
 
-  function changeColor(colorName) {
-
-    const color =
-      colors[colorName];
-
-    if (!color) return;
-
-
-    document.documentElement.style.setProperty(
-      "--primary",
-      color.primary
-    );
-
-    document.documentElement.style.setProperty(
-      "--primary-dark",
-      color.primaryDark
-    );
-
-    document.documentElement.style.setProperty(
-      "--secondary",
-      color.secondary
-    );
-
-    document.documentElement.style.setProperty(
-      "--accent",
-      color.accent
-    );
-
-
-    localStorage.setItem(
-      "siteColor",
-      colorName
-    );
+  if (savedColor) {
+    applyColor(savedColor);
   }
 
 
   colorButtons.forEach(
-    function (button) {
+    (button) => {
 
       button.addEventListener(
         "click",
-        function () {
+        () => {
 
-          changeColor(
-            button.dataset.color
+          const color =
+            button.dataset.color;
+
+          applyColor(color);
+
+          localStorage.setItem(
+            "siteColor",
+            color
           );
 
         }
@@ -530,50 +541,39 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
 
-  const savedColor =
-    localStorage.getItem("siteColor");
+  // ==================================================
+  // 💡 جمله تصادفی
+  // ==================================================
 
-
-  if (savedColor) {
-
-    changeColor(savedColor);
-  }
-
-
-  // 💡 جمله انگیزشی
-
-  const quote =
+  const quoteElement =
     document.getElementById("quote");
 
-  const newQuote =
+  const newQuoteButton =
     document.getElementById("newQuote");
 
 
   const quotes = [
 
-    "هر روز یک قدم کوچک، یعنی یک قدم به جلو.",
+    "هر روز یک قدم جلوتر برو 🚀",
 
-    "با تمرین، برنامه‌نویسی ساده‌تر می‌شود.",
+    "اشتباه کردن بخشی از یادگیری است 💪",
 
-    "اشتباه کردن بخشی از یادگیری است.",
+    "ایده‌هایت را به پروژه تبدیل کن 💡",
 
-    "امروز می‌تواند شروع یک مهارت جدید باشد.",
+    "با تمرین بهتر می‌شوی 🔥",
 
-    "کدی که امروز یاد می‌گیری، پایه‌ای برای فرداست.",
+    "کدنویسی یعنی ساختن چیزهای جدید 💻",
 
-    "هیچ برنامه‌نویسی از روز اول حرفه‌ای نبوده است! 🚀"
+    "امروز شروع کن؛ منتظر فردا نباش 🌟"
 
   ];
 
 
-  if (
-    quote &&
-    newQuote
-  ) {
+  if (newQuoteButton) {
 
-    newQuote.addEventListener(
+    newQuoteButton.addEventListener(
       "click",
-      function () {
+      () => {
 
         const randomIndex =
           Math.floor(
@@ -582,75 +582,102 @@ document.addEventListener("DOMContentLoaded", function () {
           );
 
 
-        quote.textContent =
-          quotes[randomIndex];
+        if (quoteElement) {
+
+          quoteElement.textContent =
+            quotes[randomIndex];
+
+        }
+
       }
     );
+
   }
 
 
-  // 🎉 پیام مخصوص
+  // ==================================================
+  // 💬 پیام شخصی
+  // ==================================================
 
-  const showMessage =
-    document.getElementById(
-      "showMessage"
-    );
+  const messageInput =
+    document.getElementById("message");
 
-  const message =
-    document.getElementById(
-      "message"
-    );
+  const showMessageButton =
+    document.getElementById("showMessage");
+
+  const customMessage =
+    document.getElementById("customMessage");
 
 
-  if (
-    showMessage &&
-    message
-  ) {
+  if (showMessageButton) {
 
-    showMessage.addEventListener(
+    showMessageButton.addEventListener(
       "click",
-      function () {
+      () => {
 
-        message.textContent =
-          "🎉 سلام متین! ادامه بده؛ داری قدم‌به‌قدم سایتت رو حرفه‌ای‌تر می‌کنی. 🚀";
+        const message =
+          messageInput
+            ? messageInput.value.trim()
+            : "";
+
+
+        if (!customMessage) {
+          return;
+        }
+
+
+        if (!message) {
+
+          customMessage.textContent =
+            "اول یک پیام بنویس 😊";
+
+          return;
+
+        }
+
+
+        customMessage.textContent =
+          message;
+
       }
     );
+
   }
 
 
-  // ⬆️ بازگشت به بالا
+  // ==================================================
+  // ⬆️ رفتن به بالای صفحه
+  // ==================================================
 
   const topButton =
-    document.getElementById(
-      "topButton"
-    );
+    document.getElementById("topButton");
 
 
   if (topButton) {
 
     window.addEventListener(
       "scroll",
-      function () {
+      () => {
 
-        if (window.scrollY > 300) {
+        if (window.scrollY > 400) {
 
-          topButton.classList.add(
-            "show"
-          );
+          topButton.classList.add("show");
 
-        } else {
-
-          topButton.classList.remove(
-            "show"
-          );
         }
+
+        else {
+
+          topButton.classList.remove("show");
+
+        }
+
       }
     );
 
 
     topButton.addEventListener(
       "click",
-      function () {
+      () => {
 
         window.scrollTo({
           top: 0,
@@ -659,40 +686,252 @@ document.addEventListener("DOMContentLoaded", function () {
 
       }
     );
+
   }
 
 
+  // ==================================================
   // 🤖 چت‌بات
+  // ==================================================
 
   const chatToggle =
-    document.getElementById(
-      "chat-toggle"
-    );
+    document.getElementById("chat-toggle");
 
   const chatWindow =
-    document.getElementById(
-      "chat-window"
-    );
+    document.getElementById("chat-window");
 
   const chatClose =
-    document.getElementById(
-      "chat-close"
-    );
+    document.getElementById("chat-close");
 
   const chatMessages =
-    document.getElementById(
-      "chat-messages"
-    );
+    document.getElementById("chat-messages");
 
   const chatForm =
-    document.getElementById(
-      "chat-form"
-    );
+    document.getElementById("chat-form");
 
   const chatInput =
-    document.getElementById(
-      "chat-input"
+    document.getElementById("chat-input");
+
+
+  function openChat() {
+
+    if (chatWindow) {
+
+      chatWindow.classList.add("open");
+
+    }
+
+  }
+
+
+  function closeChat() {
+
+    if (chatWindow) {
+
+      chatWindow.classList.remove("open");
+
+    }
+
+  }
+
+
+  if (chatToggle) {
+
+    chatToggle.addEventListener(
+      "click",
+      () => {
+
+        if (
+          chatWindow &&
+          chatWindow.classList.contains("open")
+        ) {
+
+          closeChat();
+
+        }
+
+        else {
+
+          openChat();
+
+        }
+
+      }
     );
+
+  }
+
+
+  if (chatClose) {
+
+    chatClose.addEventListener(
+      "click",
+      closeChat
+    );
+
+  }
+
+
+  function addMessage(
+    message,
+    type
+  ) {
+
+    if (!chatMessages) {
+      return;
+    }
+
+
+    const div =
+      document.createElement("div");
+
+
+    div.className =
+      type === "user"
+        ? "user-message"
+        : "bot-message";
+
+
+    div.textContent =
+      message;
+
+
+    chatMessages.appendChild(div);
+
+
+    chatMessages.scrollTop =
+      chatMessages.scrollHeight;
+
+  }
+
+
+  function getBotAnswer(message) {
+
+    const text =
+      message.toLowerCase();
+
+
+    if (
+      text.includes("سلام") ||
+      text.includes("hello")
+    ) {
+
+      return "سلام 👋 خوش اومدی به سلطان وب!";
+
+    }
+
+
+    if (
+      text.includes("سلطان وب") ||
+      text.includes("سایت")
+    ) {
+
+      return "سلطان وب یک سایت تمرینی و شخصی برای یادگیری و ساخت پروژه‌های وب است. 👑";
+
+    }
+
+
+    if (
+      text.includes("مهارت") ||
+      text.includes("html") ||
+      text.includes("css") ||
+      text.includes("javascript")
+    ) {
+
+      return "مهارت‌های اصلی این پروژه HTML، CSS و JavaScript هستند. 💻";
+
+    }
+
+
+    if (
+      text.includes("تماس")
+    ) {
+
+      return "برای اطلاعات تماس می‌تونی وارد صفحه «تماس با من» بشی. 📩";
+
+    }
+
+
+    if (
+      text.includes("پروژه")
+    ) {
+
+      return "برای دیدن پروژه‌ها وارد بخش «پروژه‌های من» شو. 🚀";
+
+    }
+
+
+    if (
+      text.includes("ممنون") ||
+      text.includes("مرسی")
+    ) {
+
+      return "خواهش می‌کنم! 😎";
+
+    }
+
+
+    return "سؤال جالبیه! فعلاً پاسخ آماده‌ای برای این سؤال ندارم، ولی می‌تونیم قابلیت‌های بیشتری به من اضافه کنیم. 🤖";
+
+  }
+
+
+  if (chatForm) {
+
+    chatForm.addEventListener(
+      "submit",
+      (event) => {
+
+        event.preventDefault();
+
+
+        if (!chatInput) {
+          return;
+        }
+
+
+        const message =
+          chatInput.value.trim();
+
+
+        if (!message) {
+          return;
+        }
+
+
+        addMessage(
+          message,
+          "user"
+        );
+
+
+        chatInput.value = "";
+
+
+        setTimeout(
+          () => {
+
+            const answer =
+              getBotAnswer(message);
+
+            addMessage(
+              answer,
+              "bot"
+            );
+
+          },
+          400
+        );
+
+      }
+    );
+
+  }
+
+
+  // ==================================================
+  // 🤖 سوال‌های آماده چت‌بات
+  // ==================================================
 
   const questionButtons =
     document.querySelectorAll(
@@ -700,228 +939,59 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-  if (
-    chatToggle &&
-    chatWindow
-  ) {
+  questionButtons.forEach(
+    (button) => {
 
-
-    function openChat() {
-
-      chatWindow.hidden =
-        false;
-
-      chatToggle.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-    }
-
-
-    function closeChat() {
-
-      chatWindow.hidden =
-        true;
-
-      chatToggle.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-    }
-
-
-    chatToggle.addEventListener(
-      "click",
-      function () {
-
-        if (chatWindow.hidden) {
-
-          openChat();
-
-        } else {
-
-          closeChat();
-        }
-      }
-    );
-
-
-    if (chatClose) {
-
-      chatClose.addEventListener(
+      button.addEventListener(
         "click",
-        closeChat
-      );
-    }
-
-
-    function addChatMessage(
-      text,
-      type
-    ) {
-
-      if (!chatMessages) return;
-
-
-      const element =
-        document.createElement(
-          "div"
-        );
-
-
-      element.className =
-        type === "user"
-          ? "user-message"
-          : "bot-message";
-
-
-      element.textContent =
-        text;
-
-
-      chatMessages.appendChild(
-        element
-      );
-
-
-      chatMessages.scrollTop =
-        chatMessages.scrollHeight;
-    }
-
-
-    function getBotAnswer(
-      question
-    ) {
-
-      const q =
-        question.toLowerCase();
-
-
-      if (
-        q.includes("سلام")
-      ) {
-
-        return "👋 سلام! خوش اومدی به سلطان وب!";
-      }
-
-
-      if (
-        q.includes("درباره") ||
-        q.includes("سایت")
-      ) {
-
-        return "🚀 سلطان وب یک سایت شخصی برای معرفی و تمرین طراحی سایت و برنامه‌نویسی است.";
-      }
-
-
-      if (
-        q.includes("راهنما") ||
-        q.includes("امکانات") ||
-        q.includes("چه کار")
-      ) {
-
-        return "📚 اینجا می‌تونی ساعت رو ببینی، شمارنده رو امتحان کنی، کار اضافه کنی، رنگ سایت رو عوض کنی و حالت شب رو فعال کنی.";
-      }
-
-
-      if (
-        q.includes("متین")
-      ) {
-
-        return "😎 متین در حال یادگیری HTML، CSS و JavaScript است.";
-      }
-
-
-      return "🤖 پیامت رو دریافت کردم! یکی از گزینه‌های راهنما رو امتحان کن.";
-    }
-
-
-    function sendChat(
-      question
-    ) {
-
-      if (!question.trim()) return;
-
-
-      addChatMessage(
-        question,
-        "user"
-      );
-
-
-      const answer =
-        getBotAnswer(
-          question
-        );
-
-
-      setTimeout(
-        function () {
-
-          addChatMessage(
-            answer,
-            "bot"
-          );
-
-        },
-        300
-      );
-    }
-
-
-    questionButtons.forEach(
-      function (button) {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            sendChat(
-              button.dataset.question
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-    if (
-      chatForm &&
-      chatInput
-    ) {
-
-      chatForm.addEventListener(
-        "submit",
-        function (event) {
-
-          event.preventDefault();
-
+        () => {
 
           const question =
-            chatInput.value.trim();
+            button.dataset.question;
 
 
-          if (!question) return;
-
-
-          sendChat(
-            question
+          addMessage(
+            question,
+            "user"
           );
 
 
-          chatInput.value = "";
+          setTimeout(
+            () => {
+
+              addMessage(
+                getBotAnswer(question),
+                "bot"
+              );
+
+            },
+            300
+          );
 
         }
       );
+
     }
-
-  }
-
-
-  console.log(
-    "🚀 SULTAN WEB READY!"
   );
+
+
+  // ==================================================
+  // ✨ ورود نرم صفحه
+  // ==================================================
+
+  const animatedElements =
+    document.querySelectorAll(
+      ".container, .main-logo, .hero"
+    );
+
+
+  animatedElements.forEach(
+    (element) => {
+
+      element.style.opacity = "1";
+
+    }
+  );
+
 
 });
