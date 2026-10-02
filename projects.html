@@ -1,92 +1,289 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>پروژه‌های من | سلطان وب</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-  <a class="logo" href="index.html">👑 سلطان وب</a>
+  <!-- هدر -->
+  <header class="site-header">
 
-  <nav>
-    <a href="index.html">خانه</a>
-    <a href="about.html">درباره من</a>
-    <a href="projects.html">پروژه‌های من</a>
-    <a href="contact.html">تماس با من</a>
-  </nav>
+    <a class="logo" href="index.html">
+      👑 سلطان وب
+    </a>
 
-  <button id="themeButton" type="button">
-    🌙 حالت شب
-  </button>
-</header>
+    <nav class="nav-menu">
+      <a href="index.html">خانه</a>
+      <a href="about.html">درباره من</a>
+      <a href="projects.html">پروژه‌های من</a>
+      <a href="contact.html">تماس با من</a>
+    </nav>
 
-<main>
+    <button id="themeButton" class="theme-button" type="button">
+      🌙 حالت شب
+    </button>
 
-  <section class="hero">
-    <h1>🚀 پروژه‌های من</h1>
-    <p>
-      اینجا پروژه‌هایی که می‌سازم و تمرین می‌کنم نمایش داده می‌شوند.
-    </p>
-  </section>
+  </header>
 
-  <section class="container">
 
-    <h2>💻 پروژه‌های من</h2>
+  <main>
 
-    <div class="cards">
+    <!-- معرفی پروژه‌ها -->
+    <section class="hero">
 
-      <article class="card center">
-        <div class="emoji">🌐</div>
-        <h3>اولین سایت من</h3>
-        <p>
-          یک سایت ساده با HTML و CSS که برای تمرین ساختم.
-        </p>
-        <br>
+      <div class="hero-badge">
+        💻 پروژه‌های سلطان وب
+      </div>
+
+      <h1>
+        پروژه‌های من
+        <span>🚀</span>
+      </h1>
+
+      <p>
+        اینجا پروژه‌هایی را که برای یادگیری و تمرین برنامه‌نویسی می‌سازم
+        می‌توانی ببینی.
+      </p>
+
+      <div class="hero-buttons">
+
         <a class="btn" href="index.html">
-  مشاهده پروژه
-</a>
-      </article>
-
-      <article class="card center">
-        <div class="emoji">🔢</div>
-        <h3>شمارنده کلیک</h3>
-        <p>
-          پروژه‌ای برای تمرین JavaScript و کار با دکمه‌ها.
-        </p>
-        <br>
-        <a class="btn" href="index.html">
-          مشاهده پروژه
+          🏠 صفحه اصلی
         </a>
-      </article>
 
-      <article class="card center">
-        <div class="emoji">📝</div>
-        <h3>فهرست کارها</h3>
-        <p>
-          یک Todo List برای تمرین JavaScript و localStorage.
-        </p>
-        <br>
-        <a class="btn" href="index.html">
-          مشاهده پروژه
+        <a class="btn secondary-btn" href="contact.html">
+          📩 تماس با من
         </a>
-      </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- کارت پروژه‌ها -->
+    <section class="container">
+
+      <h2 class="section-title">
+        🔥 پروژه‌های ساخته‌شده
+      </h2>
+
+      <div class="cards">
+
+        <!-- پروژه اول -->
+        <article class="card center">
+
+          <div class="emoji">
+            🌐
+          </div>
+
+          <h3>
+            سایت سلطان وب
+          </h3>
+
+          <p>
+            یک سایت چندصفحه‌ای با HTML و CSS که برای تمرین طراحی و ساخت
+            صفحات وب ساخته شده است.
+          </p>
+
+          <br>
+
+          <a class="btn" href="index.html">
+            👀 مشاهده
+          </a>
+
+        </article>
+
+
+        <!-- پروژه دوم -->
+        <article class="card center">
+
+          <div class="emoji">
+            🔢
+          </div>
+
+          <h3>
+            شمارنده کلیک
+          </h3>
+
+          <p>
+            یک ابزار ساده برای تمرین JavaScript که با دکمه‌ها عدد را افزایش،
+            کاهش یا صفر می‌کند.
+          </p>
+
+          <br>
+
+          <a class="btn" href="index.html">
+            👀 مشاهده
+          </a>
+
+        </article>
+
+
+        <!-- پروژه سوم -->
+        <article class="card center">
+
+          <div class="emoji">
+            📝
+          </div>
+
+          <h3>
+            فهرست کارها
+          </h3>
+
+          <p>
+            یک Todo List برای اضافه کردن کارها، حذف آن‌ها و ذخیره اطلاعات
+            در مرورگر.
+          </p>
+
+          <br>
+
+          <a class="btn" href="index.html">
+            👀 مشاهده
+          </a>
+
+        </article>
+
+
+        <!-- پروژه چهارم -->
+        <article class="card center">
+
+          <div class="emoji">
+            🤖
+          </div>
+
+          <h3>
+            دستیار سایت
+          </h3>
+
+          <p>
+            یک چت‌بات ساده برای پاسخ دادن به سؤال‌های مختلف درباره سایت
+            سلطان وب.
+          </p>
+
+          <br>
+
+          <a class="btn" href="index.html">
+            🤖 امتحان کردن
+          </a>
+
+        </article>
+
+
+        <!-- پروژه پنجم -->
+        <article class="card center">
+
+          <div class="emoji">
+            🎨
+          </div>
+
+          <h3>
+            تغییر رنگ سایت
+          </h3>
+
+          <p>
+            قابلیتی برای انتخاب رنگ‌های مختلف سایت و ذخیره انتخاب کاربر.
+          </p>
+
+          <br>
+
+          <a class="btn" href="index.html">
+            🎨 امتحان کردن
+          </a>
+
+        </article>
+
+
+        <!-- پروژه ششم -->
+        <article class="card center">
+
+          <div class="emoji">
+            🌙
+          </div>
+
+          <h3>
+            حالت شب و روز
+          </h3>
+
+          <p>
+            با استفاده از JavaScript می‌توان ظاهر سایت را بین حالت روشن و
+            تاریک تغییر داد.
+          </p>
+
+          <br>
+
+          <a class="btn" href="index.html">
+            🌙 امتحان کردن
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- پروژه‌های آینده -->
+    <section class="container">
+
+      <div class="card center">
+
+        <div class="emoji">
+          🚧
+        </div>
+
+        <h2>
+          پروژه‌های بیشتر در راه هستند!
+        </h2>
+
+        <p>
+          این بخش با یادگیری بیشتر، پروژه‌های جدید و جذاب‌تری خواهد داشت.
+        </p>
+
+        <p>
+          هدف: ساختن پروژه‌های واقعی‌تر و کاربردی‌تر 💪
+        </p>
+
+        <br>
+
+        <a class="btn" href="about.html">
+          📚 درباره مسیر یادگیری
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- فوتر -->
+  <footer class="site-footer">
+
+    <div class="footer-links">
+
+      <a href="index.html">خانه</a>
+      <a href="about.html">درباره من</a>
+      <a href="projects.html">پروژه‌ها</a>
+      <a href="contact.html">تماس</a>
 
     </div>
 
-  </section>
+    <p class="copyright">
+      © ۲۰۲۶ سلطان وب | ساخته‌شده با 💜 و کدنویسی
+    </p>
 
-</main>
+  </footer>
 
-<footer>
-  <p>© ۲۰۲۶ متین وب | ساخته‌شده با ❤️</p>
-  <a href="about.html">درباره من</a> |
-  <a href="contact.html">تماس با من</a>
-</footer>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
+
 </html>
