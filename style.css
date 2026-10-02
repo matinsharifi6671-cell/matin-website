@@ -1,5 +1,11 @@
 /* =========================================
-   🚀 MATIN WEB — MODERN PURPLE + BLUE
+   👑 SULTAN WEB — MODERN PURPLE + BLUE
+   نسخه کامل و یکدست
+========================================= */
+
+
+/* =========================================
+   🎨 VARIABLES
 ========================================= */
 
 :root {
@@ -15,16 +21,18 @@
 
   --text: #24223d;
   --muted: #77758e;
+
   --border: rgba(117, 92, 255, 0.15);
 
   --shadow: 0 15px 45px rgba(70, 55, 160, 0.12);
-  --shadow-hover: 0 22px 55px rgba(70, 55, 160, 0.2);
+  --shadow-hover: 0 22px 55px rgba(70, 55, 160, 0.20);
 
   --radius: 22px;
 }
 
+
 /* =========================================
-   RESET
+   🔄 RESET
 ========================================= */
 
 * {
@@ -48,6 +56,7 @@ body {
     sans-serif;
 
   line-height: 1.9;
+
   color: var(--text);
 
   background:
@@ -67,14 +76,55 @@ body {
       #edf4ff
     );
 
+  background-size: 200% 200%;
+
+  animation:
+    backgroundMove 14s ease infinite;
+
   transition:
     background 0.4s ease,
     color 0.4s ease;
 }
 
+body.dark {
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(117, 92, 255, 0.20),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(0, 194, 255, 0.10),
+      transparent 28%
+    ),
+    #101020;
+
+  background-size: 200% 200%;
+}
+
+body,
 button,
 input,
-textarea {
+textarea,
+select,
+.card,
+header {
+  transition:
+    background 0.35s ease,
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+}
+
+button,
+input,
+textarea,
+select {
   font: inherit;
 }
 
@@ -92,8 +142,34 @@ a:hover {
   color: var(--secondary);
 }
 
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
 /* =========================================
-   HEADER
+   🌌 BACKGROUND ANIMATION
+========================================= */
+
+@keyframes backgroundMove {
+
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+
+/* =========================================
+   👑 HEADER
 ========================================= */
 
 header {
@@ -104,12 +180,15 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 18px;
 
   padding: 13px 5%;
 
   background: rgba(255, 255, 255, 0.78);
-  border-bottom: 1px solid var(--border);
+
+  border-bottom:
+    1px solid var(--border);
 
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -118,15 +197,32 @@ header {
     0 8px 30px rgba(50, 40, 120, 0.08);
 }
 
-/* لوگو */
+body.dark header {
+  background: rgba(20, 20, 38, 0.88);
+
+  border-color:
+    var(--border);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   👑 LOGO
+========================================= */
 
 .logo {
   display: inline-flex;
+
   align-items: center;
-  gap: 7px;
+
+  gap: 10px;
 
   color: var(--primary);
+
   font-size: 25px;
+
   font-weight: 900;
 
   white-space: nowrap;
@@ -134,16 +230,43 @@ header {
 
 .logo:hover {
   color: var(--secondary);
-  transform: scale(1.04);
+
+  transform: scale(1.03);
 }
 
-/* منو */
+.logo img {
+  width: 55px;
+  height: 55px;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+
+  border:
+    2px solid var(--primary);
+
+  box-shadow:
+    0 5px 18px rgba(117, 92, 255, 0.30);
+}
+
+.logo span {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+
+/* =========================================
+   🧭 NAVIGATION
+========================================= */
 
 nav {
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   flex-wrap: wrap;
+
   gap: 6px;
 }
 
@@ -153,16 +276,23 @@ nav a {
   padding: 8px 14px;
 
   color: var(--text);
+
   border-radius: 12px;
 
   font-size: 14px;
+
   font-weight: bold;
+}
+
+body.dark nav a {
+  color: var(--text);
 }
 
 nav a::after {
   content: "";
 
   position: absolute;
+
   right: 50%;
   bottom: 3px;
 
@@ -171,27 +301,33 @@ nav a::after {
 
   border-radius: 10px;
 
-  background: linear-gradient(
-    90deg,
-    var(--primary),
-    var(--secondary)
-  );
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      var(--secondary)
+    );
 
   transform: translateX(50%);
-  transition: width 0.25s ease;
+
+  transition:
+    width 0.25s ease;
 }
 
 nav a:hover {
   color: var(--primary);
-  background: rgba(117, 92, 255, 0.08);
+
+  background:
+    rgba(117, 92, 255, 0.08);
 }
 
 nav a:hover::after {
   width: 55%;
 }
 
+
 /* =========================================
-   BUTTONS
+   🔘 BUTTONS
 ========================================= */
 
 button,
@@ -213,7 +349,8 @@ input[type="submit"] {
     );
 
   box-shadow:
-    0 8px 22px rgba(117, 92, 255, 0.22);
+    0 8px 22px
+    rgba(117, 92, 255, 0.22);
 
   font-weight: bold;
 
@@ -231,22 +368,41 @@ input[type="submit"]:hover {
   transform: translateY(-3px);
 
   box-shadow:
-    0 14px 30px rgba(117, 92, 255, 0.3);
+    0 14px 30px
+    rgba(117, 92, 255, 0.30);
 
   filter: brightness(1.05);
 }
 
-button:active {
+button:active,
+.btn:active {
   transform: scale(0.96);
 }
 
+
 /* =========================================
-   HERO
+   🌙 THEME BUTTON
+========================================= */
+
+#themeButton {
+  min-width: 125px;
+
+  white-space: nowrap;
+
+  padding:
+    10px 14px;
+}
+
+
+/* =========================================
+   🚀 HERO
 ========================================= */
 
 .hero {
   position: relative;
+
   isolation: isolate;
+
   overflow: hidden;
 
   width: 90%;
@@ -254,9 +410,10 @@ button:active {
 
   margin: 38px auto;
 
-  padding: 85px 25px;
+  padding: 75px 25px;
 
   text-align: center;
+
   color: white;
 
   border-radius: 32px;
@@ -275,15 +432,18 @@ button:active {
     );
 
   box-shadow:
-    0 25px 65px rgba(82, 62, 210, 0.28);
+    0 25px 65px
+    rgba(82, 62, 210, 0.28);
 
-  animation: heroIn 0.8s ease both;
+  animation:
+    fadeUp 0.8s ease both;
 }
 
 .hero::before {
   content: "";
 
   position: absolute;
+
   z-index: -1;
 
   width: 260px;
@@ -292,17 +452,21 @@ button:active {
   top: -150px;
   right: -80px;
 
-  border: 35px solid rgba(255,255,255,0.12);
+  border:
+    35px solid
+    rgba(255, 255, 255, 0.12);
 
   border-radius: 50%;
 
-  animation: float 6s ease-in-out infinite;
+  animation:
+    float 6s ease-in-out infinite;
 }
 
 .hero::after {
   content: "";
 
   position: absolute;
+
   z-index: -1;
 
   width: 200px;
@@ -311,11 +475,14 @@ button:active {
   left: -70px;
   bottom: -110px;
 
-  border: 28px solid rgba(255,255,255,0.12);
+  border:
+    28px solid
+    rgba(255, 255, 255, 0.12);
 
   border-radius: 50%;
 
-  animation: float 7s ease-in-out infinite reverse;
+  animation:
+    float 7s ease-in-out infinite reverse;
 }
 
 .hero h1 {
@@ -323,182 +490,54 @@ button:active {
 
   color: white;
 
-  font-size: clamp(28px, 5vw, 48px);
+  font-size:
+    clamp(28px, 5vw, 48px);
 
   line-height: 1.65;
+}
+
+.hero h1 span {
+  color: white;
 }
 
 .hero p {
   max-width: 760px;
 
-  margin: 0 auto 28px;
+  margin:
+    0 auto 28px;
 
-  color: rgba(255,255,255,0.92);
+  color:
+    rgba(255, 255, 255, 0.92);
 
   font-size: 17px;
 }
 
-.hero .btn {
-  color: var(--primary-dark);
-  background: white;
-}
+.hero-badge {
+  display: inline-block;
 
-.hero .btn:hover {
-  color: var(--primary);
-}
+  margin-bottom: 15px;
 
-/* =========================================
-   CONTAINERS
-========================================= */
+  padding:
+    6px 14px;
 
-section.container {
-  width: 90%;
-  max-width: 1200px;
+  color: white;
 
-  margin: 55px auto;
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.25);
 
-  padding: 25px;
-}
-
-/* =========================================
-   TITLES
-========================================= */
-
-h1,
-h2,
-h3 {
-  line-height: 1.8;
-}
-
-h2 {
-  width: fit-content;
-  max-width: 100%;
-
-  margin: 0 auto 30px;
-
-  color: var(--primary);
-
-  text-align: center;
-
-  font-size: clamp(23px, 4vw, 32px);
-}
-
-h2::after {
-  content: "";
-
-  display: block;
-
-  width: 65%;
-  height: 4px;
-
-  margin: 5px auto 0;
-
-  border-radius: 20px;
+  border-radius: 50px;
 
   background:
-    linear-gradient(
-      90deg,
-      var(--primary),
-      var(--secondary)
-    );
+    rgba(255, 255, 255, 0.12);
+
+  backdrop-filter:
+    blur(10px);
+
+  font-size: 14px;
 }
 
-/* =========================================
-   CARDS
-========================================= */
-
-.cards {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 24px;
-
-  margin-top: 25px;
-}
-
-.card {
-  min-width: 0;
-
-  padding: 28px;
-
-  border: 1px solid var(--border);
-
-  border-radius: var(--radius);
-
-  background: var(--surface);
-
-  backdrop-filter: blur(15px);
-
-  box-shadow: var(--shadow);
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-
-  border-color: rgba(117, 92, 255, 0.35);
-
-  box-shadow: var(--shadow-hover);
-}
-
-.card p {
-  color: var(--muted);
-}
-
-.center {
-  text-align: center;
-}
-
-/* =========================================
-   SKILLS
-========================================= */
-
-.emoji {
-  margin-bottom: 10px;
-
-  font-size: 46px;
-
-  filter:
-    drop-shadow(
-      0 8px 12px
-      rgba(117,92,255,0.15)
-    );
-}
-
-h3 {
-  margin-bottom: 8px;
-
-  color: var(--primary);
-
-  font-size: 21px;
-}
-
-/* =========================================
-   BIG NUMBERS
-========================================= */
-
-.big-number {
-  margin: 18px 0;
-
-  color: var(--primary);
-
-  font-size: clamp(28px, 5vw, 43px);
-
-  font-weight: 900;
-
-  overflow-wrap: anywhere;
-}
-
-/* =========================================
-   BUTTON ROW
-========================================= */
-
+.hero-buttons,
 .button-row {
   display: flex;
 
@@ -512,8 +551,343 @@ h3 {
   margin: 20px 0;
 }
 
+.hero .btn {
+  color: var(--primary);
+
+  background: white;
+}
+
+.hero .btn:hover {
+  color: var(--primary);
+
+  background: white;
+}
+
+.hero .secondary-btn {
+  color: white;
+
+  background:
+    rgba(255, 255, 255, 0.15);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.30);
+
+  box-shadow: none;
+}
+
+.hero .secondary-btn:hover {
+  color: white;
+
+  background:
+    rgba(255, 255, 255, 0.25);
+}
+
+
 /* =========================================
-   FORMS
+   🖼️ MAIN LOGO / IMAGE
+========================================= */
+
+.main-logo {
+  width: 90%;
+  max-width: 900px;
+
+  margin: 30px auto;
+
+  padding: 10px;
+
+  text-align: center;
+
+  animation:
+    fadeUp 1s ease both;
+}
+
+.main-logo img {
+  width: 100%;
+
+  max-height: 500px;
+
+  object-fit: cover;
+
+  margin: auto;
+
+  border-radius: 25px;
+
+  border:
+    2px solid
+    var(--border);
+
+  box-shadow:
+    var(--shadow);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.main-logo img:hover {
+  transform:
+    scale(1.01);
+
+  box-shadow:
+    var(--shadow-hover);
+}
+
+
+/* =========================================
+   📦 CONTAINERS
+========================================= */
+
+section.container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 55px auto;
+
+  padding: 25px;
+}
+
+.center {
+  text-align: center;
+}
+
+
+/* =========================================
+   📝 TITLES
+========================================= */
+
+h1,
+h2,
+h3 {
+  line-height: 1.8;
+}
+
+h2 {
+  width: fit-content;
+
+  max-width: 100%;
+
+  margin:
+    0 auto 30px;
+
+  color: var(--primary);
+
+  text-align: center;
+
+  font-size:
+    clamp(23px, 4vw, 32px);
+}
+
+h2::after {
+  content: "";
+
+  display: block;
+
+  width: 65%;
+  height: 4px;
+
+  margin:
+    5px auto 0;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      var(--secondary)
+    );
+}
+
+h3 {
+  margin-bottom: 8px;
+
+  color: var(--primary);
+
+  font-size: 21px;
+}
+
+
+/* =========================================
+   💻 CARDS
+========================================= */
+
+.cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 25px;
+
+  margin-top: 25px;
+}
+
+.card {
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  padding: 30px 20px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 24px;
+
+  background:
+    var(--surface);
+
+  backdrop-filter:
+    blur(15px);
+
+  box-shadow:
+    var(--shadow);
+
+  animation:
+    fadeUp 0.8s ease both;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+body.dark .card {
+  background:
+    var(--surface);
+
+  border-color:
+    var(--border);
+}
+
+.card::before {
+  content: "";
+
+  position: absolute;
+
+  top: -80px;
+  right: -80px;
+
+  width: 160px;
+  height: 160px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(117, 92, 255, 0.15);
+
+  filter:
+    blur(10px);
+
+  transition:
+    transform 0.4s ease;
+}
+
+.card:hover {
+  transform:
+    translateY(-10px)
+    scale(1.01);
+
+  border-color:
+    rgba(117, 92, 255, 0.35);
+
+  box-shadow:
+    var(--shadow-hover);
+}
+
+.card:hover::before {
+  transform:
+    scale(1.5);
+}
+
+.card p {
+  color: var(--muted);
+
+  line-height: 1.9;
+}
+
+.card .emoji {
+  position: relative;
+
+  z-index: 1;
+
+  margin-bottom: 12px;
+
+  font-size: 55px;
+
+  transition:
+    transform 0.35s ease;
+
+  filter:
+    drop-shadow(
+      0 8px 12px
+      rgba(117, 92, 255, 0.15)
+    );
+}
+
+.card:hover .emoji {
+  transform:
+    scale(1.15)
+    rotate(5deg);
+}
+
+.card h3 {
+  position: relative;
+  z-index: 1;
+
+  font-size: 24px;
+}
+
+
+/* =========================================
+   🔢 BIG NUMBER
+========================================= */
+
+.big-number,
+#counter {
+  margin: 18px 0;
+
+  color: var(--primary);
+
+  font-size:
+    clamp(28px, 5vw, 43px);
+
+  font-weight: 900;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   🕐 CLOCK
+========================================= */
+
+#clock {
+  margin: 10px 0;
+
+  color: var(--primary);
+
+  font-size:
+    clamp(30px, 7vw, 55px);
+
+  font-weight: 900;
+
+  direction: ltr;
+}
+
+#date {
+  color: var(--muted);
+
+  font-size: 16px;
+}
+
+
+/* =========================================
+   📝 FORMS
 ========================================= */
 
 form {
@@ -525,37 +899,45 @@ form {
 }
 
 label {
-  font-weight: bold;
   color: var(--text);
+
+  font-weight: bold;
 }
 
 input,
 textarea,
 select {
   width: 100%;
+
   min-width: 0;
 
   padding: 14px 16px;
 
-  border: 1px solid var(--border);
+  color: var(--text);
+
+  border:
+    1px solid
+    var(--border);
 
   border-radius: 14px;
 
   outline: none;
 
-  color: var(--text);
-
-  background: var(--surface-solid);
+  background:
+    var(--surface-solid);
 
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--primary);
+  border-color:
+    var(--primary);
 
   box-shadow:
     0 0 0 4px
@@ -564,20 +946,46 @@ select:focus {
 
 textarea {
   min-height: 130px;
+
   resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
 }
 
 .muted {
   color: var(--muted);
+
   font-size: 14px;
 }
 
+body.dark input,
+body.dark textarea,
+body.dark select {
+  color: var(--text);
+
+  background:
+    var(--surface-solid);
+
+  border-color:
+    var(--border);
+}
+
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+  color: #9997b6;
+}
+
+
 /* =========================================
-   TODO
+   📋 TODO
 ========================================= */
 
 .todo-form {
   display: flex;
+
   flex-direction: row;
 
   gap: 10px;
@@ -605,19 +1013,25 @@ textarea {
 
   padding: 13px 15px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid
+    var(--border);
 
   border-radius: 14px;
 
-  background: var(--surface-soft);
+  background:
+    var(--surface-soft);
 
-  transition: 0.25s ease;
+  transition:
+    0.25s ease;
 }
 
 .todo-list li:hover {
-  transform: translateX(-4px);
+  transform:
+    translateX(-4px);
 
-  border-color: var(--primary);
+  border-color:
+    var(--primary);
 }
 
 .todo-list li span {
@@ -625,25 +1039,62 @@ textarea {
 }
 
 .todo-list li button {
-  flex: 0 0 auto;
+  flex:
+    0 0 auto;
 
-  padding: 7px 10px;
+  padding:
+    7px 10px;
 
-  border-radius: 10px;
+  border-radius:
+    10px;
 
-  background: #ef4444;
+  background:
+    #ef4444;
 
   box-shadow: none;
 }
 
+.todo-list li button:hover {
+  background:
+    #dc2626;
+
+  transform:
+    translateY(-2px);
+}
+
+
 /* =========================================
-   FOOTER
+   💜 VOTE
+========================================= */
+
+#votes {
+  margin: 15px 0;
+
+  color: var(--primary);
+
+  font-size: 24px;
+
+  font-weight: bold;
+}
+
+#voteMessage,
+#message,
+#formResult {
+  margin-top: 12px;
+
+  color: var(--muted);
+}
+
+
+/* =========================================
+   🦶 FOOTER
 ========================================= */
 
 footer {
   margin-top: 80px;
 
-  padding: 42px 20px;
+  padding:
+    42px 20px;
 
   text-align: center;
 
@@ -652,7 +1103,7 @@ footer {
   background:
     radial-gradient(
       circle at 20% 20%,
-      rgba(117,92,255,0.5),
+      rgba(117, 92, 255, 0.5),
       transparent 30%
     ),
     linear-gradient(
@@ -674,8 +1125,9 @@ footer a:hover {
   color: white;
 }
 
+
 /* =========================================
-   TOP BUTTON
+   ⬆️ TOP BUTTON
 ========================================= */
 
 #topButton {
@@ -696,9 +1148,11 @@ footer a:hover {
   font-size: 25px;
 
   opacity: 0;
+
   visibility: hidden;
 
-  transform: translateY(15px);
+  transform:
+    translateY(15px);
 
   transition:
     opacity 0.25s ease,
@@ -708,13 +1162,16 @@ footer a:hover {
 
 #topButton.show {
   opacity: 1;
+
   visibility: visible;
 
-  transform: translateY(0);
+  transform:
+    translateY(0);
 }
 
+
 /* =========================================
-   CHATBOT
+   🤖 CHATBOT
 ========================================= */
 
 #chatbot {
@@ -738,9 +1195,10 @@ footer a:hover {
 
   box-shadow:
     0 12px 30px
-    rgba(117,92,255,0.35);
+    rgba(117, 92, 255, 0.35);
 
-  animation: chatPulse 2.5s infinite;
+  animation:
+    chatPulse 2.5s infinite;
 }
 
 #chat-window {
@@ -753,23 +1211,30 @@ footer a:hover {
 
   flex-direction: column;
 
-  width: min(370px, calc(100vw - 30px));
+  width:
+    min(370px, calc(100vw - 30px));
+
   height: 470px;
+
   max-height: 72vh;
 
   overflow: hidden;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid
+    var(--border);
 
   border-radius: 22px;
 
-  background: var(--surface-solid);
+  background:
+    var(--surface-solid);
 
   box-shadow:
     0 25px 70px
-    rgba(35, 25, 100, 0.2);
+    rgba(35, 25, 100, 0.20);
 
-  animation: chatIn 0.25s ease;
+  animation:
+    chatIn 0.25s ease;
 }
 
 #chat-window[hidden] {
@@ -801,15 +1266,18 @@ footer a:hover {
 }
 
 .chat-header button {
-  padding: 5px 10px;
+  padding:
+    5px 10px;
 
-  background: rgba(255,255,255,0.18);
+  background:
+    rgba(255, 255, 255, 0.18);
 
   box-shadow: none;
 }
 
 .chat-status {
   font-size: 12px;
+
   opacity: 0.85;
 }
 
@@ -827,7 +1295,8 @@ footer a:hover {
 .user-message {
   max-width: 88%;
 
-  padding: 11px 13px;
+  padding:
+    11px 13px;
 
   margin-bottom: 11px;
 
@@ -841,7 +1310,8 @@ footer a:hover {
 
   color: var(--text);
 
-  background: var(--surface-soft);
+  background:
+    var(--surface-soft);
 }
 
 .user-message {
@@ -868,7 +1338,8 @@ footer a:hover {
 }
 
 .chat-suggestions button {
-  padding: 7px 10px;
+  padding:
+    7px 10px;
 
   font-size: 12px;
 }
@@ -882,7 +1353,9 @@ footer a:hover {
 
   padding: 9px;
 
-  border-top: 1px solid var(--border);
+  border-top:
+    1px solid
+    var(--border);
 }
 
 #chat-form input {
@@ -892,155 +1365,138 @@ footer a:hover {
 }
 
 #chat-form button {
-  padding: 9px 14px;
+  padding:
+    9px 14px;
 }
+
 
 /* =========================================
-   DARK MODE
+   ✨ ANIMATIONS
 ========================================= */
 
-body.dark {
-  --bg: #101020;
+@keyframes fadeUp {
 
-  --surface: rgba(31, 31, 55, 0.9);
-  --surface-solid: #1f1f37;
-  --surface-soft: #292943;
-
-  --text: #f5f3ff;
-  --muted: #c0bfd7;
-
-  --border: rgba(167, 139, 250, 0.18);
-
-  --shadow:
-    0 15px 45px
-    rgba(0,0,0,0.28);
-
-  color: var(--text);
-
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(117,92,255,0.18),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(0,194,255,0.10),
-      transparent 28%
-    ),
-    #101020;
-}
-
-body.dark header {
-  background: rgba(20,20,38,0.82);
-  border-color: var(--border);
-}
-
-body.dark nav a {
-  color: var(--text);
-}
-
-body.dark .card {
-  background: var(--surface);
-}
-
-body.dark input,
-body.dark textarea,
-body.dark select {
-  color: var(--text);
-  background: var(--surface-solid);
-  border-color: var(--border);
-}
-
-body.dark input::placeholder,
-body.dark textarea::placeholder {
-  color: #9997b6;
-}
-
-body.dark .todo-list li {
-  background: var(--surface-soft);
-}
-
-/* =========================================
-   ANIMATIONS
-========================================= */
-
-@keyframes heroIn {
   from {
     opacity: 0;
-    transform: translateY(25px) scale(0.98);
+
+    transform:
+      translateY(30px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+
+    transform:
+      translateY(0);
   }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+
+  0%,
+  100% {
+    transform:
+      translateY(0);
   }
 
   50% {
-    transform: translateY(15px);
+    transform:
+      translateY(15px);
   }
 }
 
 @keyframes chatPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow:
       0 12px 30px
-      rgba(117,92,255,0.3);
+      rgba(117, 92, 255, 0.30);
   }
 
   50% {
     box-shadow:
       0 12px 40px
-      rgba(0,194,255,0.45);
+      rgba(0, 194, 255, 0.45);
   }
 }
 
 @keyframes chatIn {
+
   from {
     opacity: 0;
-    transform: translateY(15px) scale(0.97);
+
+    transform:
+      translateY(15px)
+      scale(0.97);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+
+    transform:
+      translateY(0)
+      scale(1);
   }
 }
 
+
 /* =========================================
-   TABLET
+   📱 TABLET
 ========================================= */
 
 @media (max-width: 850px) {
+
   header {
     justify-content: center;
+
+    flex-wrap: wrap;
   }
 
   .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 }
 
+
 /* =========================================
-   MOBILE
+   📱 MOBILE
 ========================================= */
 
 @media (max-width: 600px) {
+
+  html,
+  body {
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow-x: hidden;
+  }
+
   header {
-    padding: 12px 4%;
+    padding:
+      12px 4%;
+
+    justify-content: center;
   }
 
   .logo {
     width: 100%;
+
     justify-content: center;
 
     font-size: 23px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logo span {
+    font-size: 21px;
   }
 
   nav {
@@ -1048,11 +1504,18 @@ body.dark .todo-list li {
   }
 
   nav a {
-    padding: 7px 9px;
+    padding:
+      7px 9px;
+
     font-size: 12px;
   }
 
-  header > button {
+  #themeButton {
+    min-width: 110px;
+
+    padding:
+      9px 12px;
+
     font-size: 12px;
   }
 
@@ -1061,7 +1524,8 @@ body.dark .todo-list li {
 
     margin-top: 25px;
 
-    padding: 52px 17px;
+    padding:
+      52px 17px;
 
     border-radius: 24px;
   }
@@ -1074,26 +1538,64 @@ body.dark .todo-list li {
     font-size: 15px;
   }
 
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .main-logo {
+    width: 94%;
+
+    margin:
+      20px auto;
+  }
+
+  .main-logo img {
+    width: 100%;
+
+    height: auto;
+
+    max-height: none;
+  }
+
   section.container {
-    width: 96%;
+    width: 94%;
 
-    margin: 35px auto;
+    max-width: none;
 
-    padding: 12px 5px;
+    margin:
+      35px auto;
+
+    padding:
+      12px 5px;
   }
 
   .cards {
-    grid-template-columns: 1fr;
+    width: 100%;
+
+    grid-template-columns:
+      1fr;
 
     gap: 16px;
   }
 
   .card {
-    padding: 21px;
+    width: 100%;
+
+    padding:
+      24px 18px;
   }
 
-  .button-row button {
-    flex: 1 1 120px;
+  .button-row {
+    flex-direction: column;
+  }
+
+  .button-row button,
+  .button-row .btn {
+    width: 100%;
   }
 
   .todo-form {
@@ -1102,6 +1604,7 @@ body.dark .todo-list li {
 
   #chatbot {
     right: 12px;
+
     bottom: 12px;
   }
 
@@ -1110,208 +1613,37 @@ body.dark .todo-list li {
     height: 56px;
   }
 
+  #chat-window {
+    right: 0;
+
+    width:
+      min(
+        370px,
+        calc(100vw - 24px)
+      );
+  }
+
   #topButton {
     left: 12px;
+
     bottom: 12px;
   }
 }
 
+
 /* =========================================
-   REDUCE MOTION
+   ♿ REDUCE MOTION
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
     animation: none !important;
+
     transition: none !important;
+
     scroll-behavior: auto !important;
   }
-}
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo img {
-  width: 55px;
-  height: 55px;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 2px solid var(--primary);
-  box-shadow: 0 5px 18px rgba(117, 92, 255, 0.3);
-}
-
-.logo span {
-  font-size: 25px;
-  font-weight: 900;
-}
-/* اصلاح نمایش موبایل */
-@media (max-width: 600px) {
-
-  html,
-  body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  main {
-    width: 100%;
-  }
-
-  .main-logo {
-    width: 94%;
-    max-width: none;
-    margin: 20px auto;
-  }
-
-  .main-logo img {
-    width: 100%;
-    height: auto;
-    max-height: none;
-  }
-
-  section.container {
-    width: 94%;
-    max-width: none;
-    margin: 35px auto;
-    padding: 10px;
-  }
-
-  .hero {
-    width: 94%;
-    max-width: none;
-    margin: 25px auto;
-  }
-
-  .cards {
-    width: 100%;
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    width: 100%;
-  }
-}
-/* ✨ انیمیشن‌های سلطان وب */
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero {
-  animation: fadeUp 1s ease;
-}
-
-.main-logo {
-  animation: fadeUp 1.2s ease;
-}
-
-.card {
-  animation: fadeUp 1s ease;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(117, 92, 255, 0.3);
-}
-
-.btn {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(117, 92, 255, 0.3);
-}
-/* 🌌 پس‌زمینه متحرک سلطان وب */
-
-body {
-  background:
-    radial-gradient(circle at 20% 20%, rgba(117, 92, 255, 0.18), transparent 30%),
-    radial-gradient(circle at 80% 80%, rgba(0, 180, 255, 0.15), transparent 30%),
-    #0b0b18;
-
-  background-size: 200% 200%;
-  animation: backgroundMove 10s ease infinite;
-}
-
-@keyframes backgroundMove {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  50% {
-    background-position: 100% 100%;
-  }
-
-  100% {
-    background-position: 0% 0%;
-  }
-}
-/* 💻 کارت‌های مهارت حرفه‌ای */
-
-.cards {
-  gap: 25px;
-}
-
-.card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 24px;
-  padding: 30px 20px;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: -80px;
-  right: -80px;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: rgba(117, 92, 255, 0.15);
-  filter: blur(10px);
-  transition: 0.4s ease;
-}
-
-.card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 45px rgba(117, 92, 255, 0.25);
-}
-
-.card:hover::before {
-  transform: scale(1.5);
-}
-
-.card .emoji {
-  font-size: 55px;
-  margin-bottom: 15px;
-  transition: transform 0.35s ease;
-}
-
-.card:hover .emoji {
-  transform: scale(1.15) rotate(5deg);
-}
-
-.card h3 {
-  font-size: 24px;
-  margin: 10px 0;
-}
-
-.card p {
-  line-height: 1.9;
 }
