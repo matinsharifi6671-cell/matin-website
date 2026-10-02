@@ -1196,3 +1196,43 @@ body.dark .todo-list li {
     width: 100%;
   }
 }
+/* ✨ انیمیشن‌های سلطان وب */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero {
+  animation: fadeUp 1s ease;
+}
+
+.main-logo {
+  animation: fadeUp 1.2s ease;
+}
+
+.card {
+  animation: fadeUp 1s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(117, 92, 255, 0.3);
+}
+
+.btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(117, 92, 255, 0.3);
+}
