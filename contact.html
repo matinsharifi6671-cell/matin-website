@@ -1,58 +1,228 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>تماس با من | سلطان وب</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>تماس با من | سلطان وب</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-  <a class="logo" href="index.html">👑 سلطان وب</a>
-  <nav>
-  <a href="index.html">خانه</a>
-  <a href="about.html">درباره من</a>
-  <a href="projects.html">پروژه‌های من</a>
-  <a href="contact.html">تماس با من</a>
-</nav>
-  <button id="themeButton" type="button">🌙 حالت شب</button>
-</header>
+  <!-- هدر -->
+  <header class="site-header">
 
-<main>
-  <section class="hero">
-    <h1>📩 تماس با من</h1>
-    <p>از این فرم آزمایشی برای تمرین استفاده کن.</p>
-  </section>
+    <a class="logo" href="index.html">
+      👑 سلطان وب
+    </a>
 
-  <section class="container">
-    <div class="card">
-      <form id="contactForm">
-        <label for="name">نام</label>
-        <input id="name" name="name" maxlength="80"
-          placeholder="نامت را بنویس" required>
+    <nav class="nav-menu">
+      <a href="index.html">خانه</a>
+      <a href="about.html">درباره من</a>
+      <a href="projects.html">پروژه‌های من</a>
+      <a href="contact.html">تماس با من</a>
+    </nav>
 
-        <p><label for="email">ایمیل</label></p>
-        <input id="email" name="email" type="email"
-          placeholder="ایمیل آزمایشی" required>
+    <button id="themeButton" class="theme-button" type="button">
+      🌙 حالت شب
+    </button>
 
-        <p><label for="userMessage">پیام</label></p>
-        <textarea id="userMessage" name="message" rows="5"
-          maxlength="1000" placeholder="پیامت را بنویس"
-          required></textarea>
+  </header>
 
-        <div class="button-row">
-          <button type="submit">نمایش پیام</button>
-        </div>
-      </form>
-      <p id="formResult" aria-live="polite"></p>
-      <p class="muted">این فرم پیام را به اینترنت یا ایمیل ارسال نمی‌کند.</p>
+
+  <main>
+
+    <!-- معرفی -->
+    <section class="hero">
+
+      <div class="hero-badge">
+        📩 ارتباط با سلطان وب
+      </div>
+
+      <h1>
+        تماس با من
+        <span>💬</span>
+      </h1>
+
+      <p>
+        اگر می‌خواهی پیامی برای من بنویسی، از فرم زیر استفاده کن.
+      </p>
+
+    </section>
+
+
+    <!-- فرم تماس -->
+    <section class="container">
+
+      <div class="card">
+
+        <h2 class="section-title">
+          📨 ارسال پیام
+        </h2>
+
+        <form id="contactForm">
+
+          <label for="contactName">
+            نام
+          </label>
+
+          <input
+            class="text-input"
+            id="contactName"
+            type="text"
+            placeholder="نامت را وارد کن"
+            required
+          >
+
+
+          <label for="contactEmail">
+            ایمیل
+          </label>
+
+          <input
+            class="text-input"
+            id="contactEmail"
+            type="email"
+            placeholder="ایمیل را وارد کن"
+            required
+          >
+
+
+          <label for="contactMessage">
+            پیام
+          </label>
+
+          <textarea
+            class="text-input"
+            id="contactMessage"
+            rows="6"
+            placeholder="پیامت را بنویس..."
+            required
+          ></textarea>
+
+
+          <button class="btn" type="submit">
+            🚀 ارسال پیام
+          </button>
+
+        </form>
+
+        <div id="formResult" class="message"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- راه‌های ارتباطی -->
+    <section class="container">
+
+      <h2 class="section-title">
+        🔗 راه‌های ارتباطی
+      </h2>
+
+      <div class="cards">
+
+        <article class="card center">
+
+          <div class="emoji">
+            💻
+          </div>
+
+          <h3>
+            پروژه‌ها
+          </h3>
+
+          <p>
+            برای دیدن پروژه‌های من می‌توانی به صفحه پروژه‌ها بروی.
+          </p>
+
+          <br>
+
+          <a class="btn" href="projects.html">
+            مشاهده پروژه‌ها
+          </a>
+
+        </article>
+
+
+        <article class="card center">
+
+          <div class="emoji">
+            👋
+          </div>
+
+          <h3>
+            درباره من
+          </h3>
+
+          <p>
+            برای آشنایی بیشتر با مسیر یادگیری من، صفحه درباره من را ببین.
+          </p>
+
+          <br>
+
+          <a class="btn" href="about.html">
+            درباره من
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- بازگشت -->
+    <section class="container">
+
+      <div class="cta">
+
+        <h2>
+          👑 به سلطان وب خوش آمدی!
+        </h2>
+
+        <p>
+          برای دیدن امکانات سایت به صفحه اصلی برگرد.
+        </p>
+
+        <br>
+
+        <a class="btn" href="index.html">
+          🏠 صفحه اصلی
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- فوتر -->
+  <footer class="site-footer">
+
+    <div class="footer-links">
+
+      <a href="index.html">خانه</a>
+      <a href="about.html">درباره من</a>
+      <a href="projects.html">پروژه‌ها</a>
+      <a href="contact.html">تماس</a>
+
     </div>
-  </section>
-</main>
 
-<footer>© ۲۰۲۶ متین وب</footer>
-<script src="script.js"></script>
+    <p class="copyright">
+      © ۲۰۲۶ سلطان وب | ساخته‌شده با 💜 و کدنویسی
+    </p>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
 </body>
+
 </html>
