@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,300 +12,454 @@
 
 <body>
 
-<header>
-  <a class="logo" href="index.html">
-    <img src="sultan-web.jpg" alt="سلطان وب">
-    <span>👑 سلطان وب</span>
-  </a>
+  <!-- ================= HEADER ================= -->
 
-  <nav>
-    <a href="index.html">خانه</a>
-    <a href="about.html">درباره من</a>
-    <a href="projects.html">پروژه‌های من</a>
-    <a href="contact.html">تماس با من</a>
-  </nav>
+  <header class="site-header">
 
-  <button id="themeButton" type="button">
-    🌙 حالت شب
-  </button>
-</header>
+    <a class="logo" href="index.html">
+      <img src="sultan-web.jpg" alt="سلطان وب">
+      <span>👑 سلطان وب</span>
+    </a>
 
+    <nav class="nav-menu">
 
-<main>
+      <a class="active" href="index.html">خانه</a>
 
-  <section class="hero">
-    <span class="hero-badge">
-      👑 به سلطان وب خوش آمدید
-    </span>
-
-    <h1>
-      دنیای کدنویسی من
-      <br>
-      <span>اینجا شروع می‌شود 🚀</span>
-    </h1>
-
-    <p>
-      به سلطان وب خوش آمدید؛
-      جایی برای ساختن پروژه‌های جذاب،
-      یادگیری برنامه‌نویسی و تبدیل ایده‌ها
-      به سایت‌های واقعی.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="projects.html" class="btn">
-        🚀 مشاهده پروژه‌ها
+      <a href="about.html">
+        درباره من
       </a>
 
-      <a href="about.html" class="btn secondary-btn">
-        👋 درباره من
+      <a href="projects.html">
+        پروژه‌های من
       </a>
-    </div>
-  </section>
+
+      <a href="contact.html">
+        تماس با من
+      </a>
+
+    </nav>
+
+    <button id="themeButton" class="theme-button" type="button">
+      🌙 حالت شب
+    </button>
+
+  </header>
 
 
-  <div class="main-logo">
-    <img src="sultan-web.jpg" alt="تصویر سلطان وب">
-  </div>
+  <!-- ================= MAIN ================= -->
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <span class="hero-badge">
+        👑 به سلطان وب خوش آمدید
+      </span>
+
+      <h1>
+        دنیای کدنویسی من
+        <br>
+        <span>اینجا شروع می‌شود 🚀</span>
+      </h1>
+
+      <p>
+        اینجا جایی برای یادگیری برنامه‌نویسی،
+        ساخت پروژه‌های جذاب و تبدیل ایده‌ها
+        به سایت‌های واقعی است.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="projects.html" class="btn">
+          🚀 مشاهده پروژه‌ها
+        </a>
+
+        <a href="about.html" class="btn secondary-btn">
+          👋 درباره من
+        </a>
+
+      </div>
+
+    </section>
 
 
-  <section class="container center">
-    <h2>🕐 زمان</h2>
+    <!-- MAIN IMAGE -->
 
-    <div id="clock">00:00:00</div>
+    <section class="main-logo">
 
-    <div id="date"></div>
-  </section>
-
-
-  <section class="container">
-    <h2>💻 مهارت‌های من</h2>
-
-    <div class="cards">
-
-      <article class="card center">
-        <div class="emoji">🌐</div>
-        <h3>HTML</h3>
-        <p>ساختار و اسکلت صفحات وب</p>
-      </article>
-
-      <article class="card center">
-        <div class="emoji">🎨</div>
-        <h3>CSS</h3>
-        <p>طراحی، رنگ‌بندی و ظاهر سایت</p>
-      </article>
-
-      <article class="card center">
-        <div class="emoji">⚡</div>
-        <h3>JavaScript</h3>
-        <p>ساخت قابلیت‌های تعاملی و کاربردی</p>
-      </article>
-
-    </div>
-  </section>
-
-
-  <section class="container center">
-    <h2>🔢 شمارنده</h2>
-
-    <div id="counter">0</div>
-
-    <div class="hero-buttons">
-      <button class="btn" id="increase" type="button">
-        ➕ افزایش
-      </button>
-
-      <button class="btn" id="decrease" type="button">
-        ➖ کاهش
-      </button>
-
-      <button class="btn" id="reset" type="button">
-        🔄 صفر کردن
-      </button>
-    </div>
-  </section>
-
-
-  <section class="container center">
-    <h2>❤️ نظر شما</h2>
-
-    <div id="votes">
-      👍 0 | 👎 0
-    </div>
-
-    <div class="hero-buttons">
-      <button class="btn" id="like" type="button">
-        👍 لایک
-      </button>
-
-      <button class="btn" id="dislike" type="button">
-        👎 دیسلایک
-      </button>
-
-      <button class="btn" id="resetVotes" type="button">
-        🔄 پاک کردن
-      </button>
-    </div>
-
-    <p id="voteMessage"></p>
-  </section>
-
-
-  <section class="container">
-    <h2>📝 فهرست کارها</h2>
-
-    <form id="todoForm">
-
-      <input
-        type="text"
-        id="todoInput"
-        placeholder="یک کار جدید بنویس..."
-        autocomplete="off"
+      <img
+        src="sultan-web.jpg"
+        alt="تصویر سلطان وب"
       >
 
-      <button class="btn" type="submit">
-        ➕ اضافه کردن
+    </section>
+
+
+    <!-- QUICK INFO -->
+
+    <section class="container">
+
+      <div class="quick-info">
+
+        <div class="info-box">
+          <strong>🚀</strong>
+          <span>پروژه‌های در حال ساخت</span>
+        </div>
+
+        <div class="info-box">
+          <strong>💻</strong>
+          <span>یادگیری برنامه‌نویسی</span>
+        </div>
+
+        <div class="info-box">
+          <strong>👑</strong>
+          <span>سلطان وب</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CLOCK -->
+
+    <section class="container center">
+
+      <h2>🕐 ساعت و تاریخ</h2>
+
+      <div id="clock" class="clock">
+        00:00:00
+      </div>
+
+      <div id="date" class="date"></div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section class="container">
+
+      <div class="section-title">
+
+        <span>💻</span>
+
+        <div>
+          <h2>مهارت‌های من</h2>
+
+          <p>
+            چیزهایی که در حال یادگیری و تمرین آن‌ها هستم.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="cards">
+
+
+        <!-- HTML -->
+
+        <article class="card skill-card">
+
+          <div class="emoji">
+            🌐
+          </div>
+
+          <h3>
+            HTML
+          </h3>
+
+          <p>
+            ساختار و اسکلت اصلی صفحات وب.
+          </p>
+
+          <div class="skill-bar">
+            <span style="width: 80%;"></span>
+          </div>
+
+        </article>
+
+
+        <!-- CSS -->
+
+        <article class="card skill-card">
+
+          <div class="emoji">
+            🎨
+          </div>
+
+          <h3>
+            CSS
+          </h3>
+
+          <p>
+            طراحی، رنگ‌بندی و زیباسازی سایت.
+          </p>
+
+          <div class="skill-bar">
+            <span style="width: 70%;"></span>
+          </div>
+
+        </article>
+
+
+        <!-- JAVASCRIPT -->
+
+        <article class="card skill-card">
+
+          <div class="emoji">
+            ⚡
+          </div>
+
+          <h3>
+            JavaScript
+          </h3>
+
+          <p>
+            ساخت قابلیت‌های تعاملی و کاربردی.
+          </p>
+
+          <div class="skill-bar">
+            <span style="width: 55%;"></span>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- COUNTER -->
+
+    <section class="container center">
+
+      <div class="section-title center-title">
+        <span>🔢</span>
+
+        <div>
+          <h2>شمارنده</h2>
+
+          <p>
+            یک ابزار کوچک برای تمرین JavaScript
+          </p>
+        </div>
+      </div>
+
+      <div id="counter" class="counter">
+        0
+      </div>
+
+      <div class="action-buttons">
+
+        <button
+          id="increase"
+          class="btn"
+          type="button">
+          ➕ افزایش
+        </button>
+
+        <button
+          id="decrease"
+          class="btn"
+          type="button">
+          ➖ کاهش
+        </button>
+
+        <button
+          id="reset"
+          class="btn"
+          type="button">
+          🔄 صفر کردن
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- VOTES -->
+
+    <section class="container center">
+
+      <div class="section-title center-title">
+
+        <span>❤️</span>
+
+        <div>
+          <h2>نظرت درباره سایت چیه؟</h2>
+
+          <p>
+            نظرت به بهتر شدن سایت کمک می‌کند.
+          </p>
+        </div>
+
+      </div>
+
+      <div id="votes" class="votes">
+        👍 0 | 👎 0
+      </div>
+
+      <div class="action-buttons">
+
+        <button
+          id="like"
+          class="btn"
+          type="button">
+          👍 پسندیدم
+        </button>
+
+        <button
+          id="dislike"
+          class="btn"
+          type="button">
+          👎 نپسندیدم
+        </button>
+
+        <button
+          id="resetVotes"
+          class="btn"
+          type="button">
+          🔄 پاک کردن
+        </button>
+
+      </div>
+
+      <p id="voteMessage" class="message"></p>
+
+    </section>
+
+
+    <!-- TODO -->
+
+    <section class="container">
+
+      <div class="section-title">
+
+        <span>📝</span>
+
+        <div>
+          <h2>فهرست کارها</h2>
+
+          <p>
+            کارهای روزانه‌ات را اینجا بنویس.
+          </p>
+        </div>
+
+      </div>
+
+      <form id="todoForm" class="todo-form">
+
+        <input
+          id="todoInput"
+          type="text"
+          placeholder="مثلاً تمرین CSS"
+          autocomplete="off"
+        >
+
+        <button
+          class="btn"
+          type="submit">
+          ➕ اضافه کن
+        </button>
+
+      </form>
+
+      <ul id="todoList" class="todo-list"></ul>
+
+      <p id="todoInfo" class="todo-info"></p>
+
+    </section>
+
+
+    <!-- COLORS -->
+
+    <section class="container center">
+
+      <div class="section-title center-title">
+
+        <span>🎨</span>
+
+        <div>
+          <h2>رنگ سایت</h2>
+
+          <p>
+            ظاهر مورد علاقه‌ات را انتخاب کن.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="color-buttons">
+
+        <button
+          class="color-button"
+          data-color="default"
+          type="button">
+          🟣 بنفش
+        </button>
+
+        <button
+          class="color-button"
+          data-color="blue"
+          type="button">
+          🔵 آبی
+        </button>
+
+        <button
+          class="color-button"
+          data-color="pink"
+          type="button">
+          🌸 صورتی
+        </button>
+
+        <button
+          class="color-button"
+          data-color="green"
+          type="button">
+          🟢 سبز
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- QUOTE -->
+
+    <section class="container quote-box center">
+
+      <div class="section-title center-title">
+
+        <span>💡</span>
+
+        <div>
+          <h2>جمله امروز</h2>
+        </div>
+
+      </div>
+
+      <p id="quote">
+        هر روز یک قدم جلوتر برو 🚀
+      </p>
+
+      <button
+        id="newQuote"
+        class="btn"
+        type="button">
+        ✨ جمله جدید
       </button>
 
-    </form>
-
-    <p id="todoInfo">
-      تعداد کارها: 0
-    </p>
-
-    <ul id="todoList"></ul>
-  </section>
+    </section>
 
 
-  <section class="container center">
-    <h2>🎨 تغییر رنگ سایت</h2>
+    <!-- CUSTOM MESSAGE -->
 
-    <div class="hero-buttons">
+    <section class="container center">
 
-      <button class="btn" data-color="default" type="button">
-        🟣 بنفش
-      </button>
+      <div class="section-title center-title">
 
-      <button class="btn" data-color="blue" type="button">
-        🔵 آبی
-      </button>
-
-      <button class="btn" data-color="pink" type="button">
-        🩷 صورتی
-      </button>
-
-      <button class="btn" data-color="green" type="button">
-        🟢 سبز
-      </button>
-
-    </div>
-  </section>
-
-
-  <section class="container center">
-    <h2>💡 جمله انگیزشی</h2>
-
-    <p id="quote">
-      هر روز یک قدم کوچک، یعنی یک قدم به جلو.
-    </p>
-
-    <button class="btn" id="newQuote" type="button">
-      🔄 جمله جدید
-    </button>
-  </section>
-
-
-  <section class="container center">
-    <h2>🎉 پیام مخصوص</h2>
-
-    <button class="btn" id="showMessage" type="button">
-      ✨ نمایش پیام
-    </button>
-
-    <p id="message"></p>
-  </section>
-
-</main>
-
-
-<button id="topButton" type="button" aria-label="بازگشت به بالا">
-  ⬆️
-</button>
-
-
-<button
-  id="chat-toggle"
-  type="button"
-  aria-expanded="false"
-  aria-controls="chat-window"
->
-  💬
-</button>
-
-
-<div id="chat-window" hidden>
-
-  <div id="chat-header">
-    <strong>🤖 دستیار سلطان وب</strong>
-
-    <button id="chat-close" type="button">
-      ✖
-    </button>
-  </div>
-
-
-  <div id="chat-messages">
-
-    <div class="bot-message">
-      👋 سلام! چطور می‌تونم کمکت کنم؟
-    </div>
-
-  </div>
-
-
-  <div class="chat-questions">
-
-    <button type="button" data-question="سلام">
-      👋 سلام
-    </button>
-
-    <button type="button" data-question="درباره سایت بگو">
-      🌐 درباره سایت
-    </button>
-
-    <button type="button" data-question="چه امکاناتی دارد؟">
-      📚 امکانات
-    </button>
-
-  </div>
-
-
-  <form id="chat-form">
-
-    <input
-      type="text"
-      id="chat-input"
-      placeholder="پیامت رو بنویس..."
-      autocomplete="off"
-    >
-
-    <button type="submit">
-      ➤
-    </button>
-
-  </form>
-
-</div>
-
-
-<footer>
-  <p>
-    👑 سلطان وب | ساخته شده با ❤️ و کدنویسی
-  </p>
-</footer>
-
-
-<!-- حتماً این خط آخر باشد -->
-<script src="script.js"></script>
-
-</body>
-</html>
+        <span>💬</span>
