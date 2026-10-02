@@ -1,584 +1,1175 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-  // =========================================
-  // 🌙 1. حالت شب / روز
-  // =========================================
-
-  const themeButton = document.getElementById("themeButton");
-
-  if (themeButton) {
-
-    // حالت ذخیره‌شده
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-      themeButton.textContent = "☀️ حالت روز";
-    } else {
-      document.body.classList.remove("dark");
-      themeButton.textContent = "🌙 حالت شب";
-    }
-
-    // تغییر حالت
-    themeButton.addEventListener("click", function () {
-
-      document.body.classList.toggle("dark");
-
-      if (document.body.classList.contains("dark")) {
-        localStorage.setItem("theme", "dark");
-        themeButton.textContent = "☀️ حالت روز";
-      } else {
-        localStorage.setItem("theme", "light");
-        themeButton.textContent = "🌙 حالت شب";
-      }
-
-    });
-  }
-
-
-  // =========================================
-  // 🕐 2. ساعت و تاریخ
-  // =========================================
-
-  const clock = document.getElementById("clock");
-  const date = document.getElementById("date");
-
-  function updateDateTime() {
-
-    const now = new Date();
-
-    if (clock) {
-      clock.textContent = now.toLocaleTimeString("fa-IR");
-    }
-
-    if (date) {
-      date.textContent = now.toLocaleDateString("fa-IR", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      });
-    }
-  }
-
-  updateDateTime();
-  setInterval(updateDateTime, 1000);
-
-
-  // =========================================
-  // 🔢 3. شمارنده
-  // =========================================
-
-  const counter = document.getElementById("counter");
-  const increase = document.getElementById("increase");
-  const decrease = document.getElementById("decrease");
-  const reset = document.getElementById("reset");
-
-  if (counter && increase && decrease && reset) {
-
-    let count = Number(localStorage.getItem("counter")) || 0;
-
-    counter.textContent = count;
-
-    increase.addEventListener("click", function () {
-      count++;
-      counter.textContent = count;
-      localStorage.setItem("counter", count);
-    });
-
-    decrease.addEventListener("click", function () {
-      count--;
-      counter.textContent = count;
-      localStorage.setItem("counter", count);
-    });
-
-    reset.addEventListener("click", function () {
-      count = 0;
-      counter.textContent = count;
-      localStorage.setItem("counter", 0);
-    });
-  }
-
-
-  // =========================================
-  // ❤️ 4. لایک و دیسلایک
-  // =========================================
-
-  const votes = document.getElementById("votes");
-  const like = document.getElementById("like");
-  const dislike = document.getElementById("dislike");
-  const resetVotes = document.getElementById("resetVotes");
-  const voteMessage = document.getElementById("voteMessage");
-
-  if (votes && like && dislike && resetVotes) {
-
-    let likes = Number(localStorage.getItem("likes")) || 0;
-    let dislikes = Number(localStorage.getItem("dislikes")) || 0;
-
-    function updateVotes() {
-      votes.textContent = `👍 ${likes} | 👎 ${dislikes}`;
-    }
-
-    updateVotes();
-
-    like.addEventListener("click", function () {
-      likes++;
-      localStorage.setItem("likes", likes);
-      updateVotes();
-
-      if (voteMessage) {
-        voteMessage.textContent = "❤️ ممنون که سایت رو دوست داشتی!";
-      }
-    });
-
-    dislike.addEventListener("click", function () {
-      dislikes++;
-      localStorage.setItem("dislikes", dislikes);
-      updateVotes();
-
-      if (voteMessage) {
-        voteMessage.textContent = "👍 ممنون از نظرت!";
-      }
-    });
-
-    resetVotes.addEventListener("click", function () {
-      likes = 0;
-      dislikes = 0;
-
-      localStorage.setItem("likes", 0);
-      localStorage.setItem("dislikes", 0);
-
-      updateVotes();
-
-      if (voteMessage) {
-        voteMessage.textContent = "رأی‌ها پاک شدند.";
-      }
-    });
-  }
-
-
-  // =========================================
-  // 📝 5. فهرست کارها
-  // =========================================
-
-  const todoForm = document.getElementById("todoForm");
-  const todoInput = document.getElementById("todoInput");
-  const todoList = document.getElementById("todoList");
-  const todoInfo = document.getElementById("todoInfo");
-
-  if (todoForm && todoInput && todoList) {
-
-    let todos = [];
-
-    try {
-      todos = JSON.parse(localStorage.getItem("todos")) || [];
-    } catch (error) {
-      todos = [];
-    }
-
-    function showTodos() {
-
-      todoList.innerHTML = "";
-
-      todos.forEach(function (todo, index) {
-
-        const li = document.createElement("li");
-
-        const span = document.createElement("span");
-        span.textContent = todo;
-
-        const button = document.createElement("button");
-        button.type = "button";
-        button.textContent = "❌";
-
-        button.addEventListener("click", function () {
-
-          todos.splice(index, 1);
-
-          localStorage.setItem(
-            "todos",
-            JSON.stringify(todos)
-          );
-
-          showTodos();
-        });
-
-        li.appendChild(span);
-        li.appendChild(button);
-
-        todoList.appendChild(li);
-      });
-
-      if (todoInfo) {
-        todoInfo.textContent = `تعداد کارها: ${todos.length}`;
-      }
-    }
-
-    todoForm.addEventListener("submit", function (event) {
-
-      event.preventDefault();
-
-      const newTodo = todoInput.value.trim();
-
-      if (!newTodo) return;
-
-      todos.push(newTodo);
-
-      localStorage.setItem(
-        "todos",
-        JSON.stringify(todos)
-      );
-
-      todoInput.value = "";
-
-      showTodos();
-    });
-
-    showTodos();
-  }
-
-
-  // =========================================
-  // 🎨 6. تغییر رنگ سایت
-  // =========================================
-
-  const colorButtons = document.querySelectorAll("[data-color]");
-
-  const colors = {
-
-    default: {
-      primary: "#755cff",
-      primaryDark: "#5940df",
-      secondary: "#00c2ff",
-      accent: "#a78bfa"
-    },
-
-    blue: {
-      primary: "#2563eb",
-      primaryDark: "#1d4ed8",
-      secondary: "#06b6d4",
-      accent: "#60a5fa"
-    },
-
-    pink: {
-      primary: "#db2777",
-      primaryDark: "#be185d",
-      secondary: "#a855f7",
-      accent: "#f472b6"
-    },
-
-    green: {
-      primary: "#16a34a",
-      primaryDark: "#15803d",
-      secondary: "#06b6d4",
-      accent: "#4ade80"
-    }
-  };
-
-  function changeColor(colorName) {
-
-    const color = colors[colorName];
-
-    if (!color) return;
-
-    document.documentElement.style.setProperty(
-      "--primary",
-      color.primary
+/* =========================================
+   👑 SULTAN WEB - STYLE.CSS
+   ========================================= */
+
+/* ---------- رنگ‌ها ---------- */
+
+:root {
+  --primary: #755cff;
+  --primary-dark: #5940df;
+  --secondary: #00c2ff;
+  --accent: #a78bfa;
+
+  --bg: #f5f7ff;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-solid: #ffffff;
+  --surface-soft: #f0efff;
+
+  --text: #17152b;
+  --muted: #6b6880;
+  --border: rgba(117, 92, 255, 0.14);
+
+  --shadow: 0 15px 45px rgba(45, 35, 100, 0.12);
+  --shadow-hover: 0 22px 55px rgba(45, 35, 100, 0.18);
+
+  --radius: 20px;
+}
+
+
+/* ---------- حالت شب ---------- */
+
+body.dark {
+  --bg: #0d0d18;
+  --surface: rgba(28, 28, 48, 0.94);
+  --surface-solid: #1c1c30;
+  --surface-soft: #252540;
+
+  --text: #f5f3ff;
+  --muted: #c0bdd2;
+  --border: rgba(167, 139, 250, 0.2);
+
+  --shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 22px 55px rgba(0, 0, 0, 0.5);
+
+  color: var(--text);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(117, 92, 255, 0.18),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #0d0d18,
+      #15152a
+    );
+}
+
+
+/* =========================================
+   🔄 RESET
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Tahoma, Arial, sans-serif;
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(117, 92, 255, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #f5f7ff,
+      #eef1ff
     );
 
-    document.documentElement.style.setProperty(
-      "--primary-dark",
-      color.primaryDark
+  background-size: 200% 200%;
+  animation: backgroundMove 15s ease infinite;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+
+/* =========================================
+   🎬 انیمیشن پس‌زمینه
+   ========================================= */
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* =========================================
+   🧭 HEADER
+   ========================================= */
+
+header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 15px 6%;
+
+  background: var(--surface);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid var(--border);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+/* =========================================
+   👑 LOGO
+   ========================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--text);
+  text-decoration: none;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  white-space: nowrap;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 2px solid var(--primary);
+
+  box-shadow:
+    0 5px 18px rgba(117, 92, 255, 0.25);
+}
+
+
+/* =========================================
+   🔗 NAV
+   ========================================= */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+
+  padding: 9px 13px;
+
+  border-radius: 12px;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+nav a:hover {
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
     );
 
-    document.documentElement.style.setProperty(
-      "--secondary",
-      color.secondary
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   🌙 THEME BUTTON
+   ========================================= */
+
+#themeButton {
+  border: none;
+
+  padding: 10px 15px;
+
+  border-radius: 14px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
     );
 
-    document.documentElement.style.setProperty(
-      "--accent",
-      color.accent
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(117, 92, 255, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+#themeButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(117, 92, 255, 0.35);
+}
+
+
+/* =========================================
+   🚀 HERO
+   ========================================= */
+
+.hero {
+  width: min(1000px, 90%);
+
+  margin: 60px auto 30px;
+
+  padding: 65px 30px;
+
+  text-align: center;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(117, 92, 255, 0.14),
+      rgba(0, 194, 255, 0.08)
     );
 
-    localStorage.setItem("siteColor", colorName);
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.hero-badge {
+  display: inline-block;
+
+  padding: 8px 15px;
+
+  margin-bottom: 18px;
+
+  color: var(--primary);
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+
+  border-radius: 999px;
+
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 6vw, 62px);
+
+  line-height: 1.4;
+
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.hero p {
+  max-width: 720px;
+
+  margin: 0 auto 25px;
+
+  color: var(--muted);
+
+  line-height: 2;
+  font-size: 17px;
+}
+
+
+/* =========================================
+   🔘 BUTTONS
+   ========================================= */
+
+.hero-buttons {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  padding: 12px 20px;
+
+  border-radius: 14px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 22px rgba(117, 92, 255, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 14px 30px rgba(117, 92, 255, 0.3);
+}
+
+.secondary-btn {
+  background:
+    linear-gradient(
+      135deg,
+      var(--secondary),
+      #1688e8
+    );
+}
+
+
+/* =========================================
+   🖼️ MAIN LOGO
+   ========================================= */
+
+.main-logo {
+  display: flex;
+  justify-content: center;
+
+  margin: 35px auto;
+}
+
+.main-logo img {
+  width: min(250px, 70vw);
+  height: min(250px, 70vw);
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 5px solid var(--primary);
+
+  box-shadow:
+    0 20px 50px rgba(117, 92, 255, 0.25);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.main-logo img:hover {
+  transform: scale(1.04);
+}
+
+
+/* =========================================
+   📦 CONTAINER
+   ========================================= */
+
+.container {
+  width: min(1050px, 90%);
+
+  margin: 30px auto;
+
+  padding: 30px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.center {
+  text-align: center;
+}
+
+.container h2 {
+  margin-bottom: 20px;
+
+  font-size: 25px;
+}
+
+
+/* =========================================
+   💻 CARDS
+   ========================================= */
+
+.cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.card {
+  padding: 25px;
+
+  background: var(--surface-solid);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: var(--shadow-hover);
+}
+
+.card .emoji {
+  font-size: 45px;
+
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--muted);
+
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   🕐 CLOCK
+   ========================================= */
+
+#clock {
+  margin: 10px 0;
+
+  font-size: clamp(35px, 8vw, 65px);
+
+  font-weight: bold;
+
+  color: var(--primary);
+}
+
+#date {
+  color: var(--muted);
+
+  font-size: 16px;
+}
+
+
+/* =========================================
+   🔢 COUNTER
+   ========================================= */
+
+#counter {
+  margin: 10px 0 20px;
+
+  font-size: 55px;
+
+  font-weight: bold;
+
+  color: var(--primary);
+}
+
+
+/* =========================================
+   ❤️ VOTES
+   ========================================= */
+
+#votes {
+  margin: 15px 0;
+
+  font-size: 25px;
+
+  font-weight: bold;
+
+  color: var(--primary);
+}
+
+#voteMessage {
+  margin-top: 15px;
+
+  color: var(--muted);
+}
+
+
+/* =========================================
+   📝 TODO
+   ========================================= */
+
+#todoForm {
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 15px;
+}
+
+#todoInput {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 13px 15px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  outline: none;
+
+  color: var(--text);
+
+  background: var(--surface-solid);
+
+  font-family: inherit;
+  font-size: 15px;
+
+  transition:
+    border 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.35s ease;
+}
+
+#todoInput:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(117, 92, 255, 0.12);
+}
+
+#todoInfo {
+  margin-bottom: 12px;
+
+  color: var(--muted);
+}
+
+#todoList {
+  list-style: none;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+#todoList li {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 12px 15px;
+
+  background: var(--surface-soft);
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border);
+
+  color: var(--text);
+}
+
+#todoList button {
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 17px;
+}
+
+
+/* =========================================
+   💡 QUOTE
+   ========================================= */
+
+#quote {
+  max-width: 700px;
+
+  margin: 0 auto 18px;
+
+  color: var(--muted);
+
+  line-height: 2;
+
+  font-size: 17px;
+}
+
+
+/* =========================================
+   🎉 MESSAGE
+   ========================================= */
+
+#message {
+  margin-top: 18px;
+
+  color: var(--primary);
+
+  font-weight: bold;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   📩 FORM
+   ========================================= */
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  margin-bottom: 12px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  outline: none;
+
+  color: var(--text);
+
+  background: var(--surface-solid);
+
+  font-family: inherit;
+
+  transition:
+    border 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.35s ease;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(117, 92, 255, 0.12);
+}
+
+form textarea {
+  min-height: 140px;
+
+  resize: vertical;
+}
+
+#formResult {
+  margin-top: 15px;
+
+  color: var(--primary);
+
+  font-weight: bold;
+}
+
+
+/* =========================================
+   ⬆️ TOP BUTTON
+   ========================================= */
+
+#topButton {
+  position: fixed;
+
+  left: 20px;
+  bottom: 20px;
+
+  width: 48px;
+  height: 48px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translateY(15px);
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+
+  z-index: 900;
+}
+
+#topButton.show {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   🤖 CHATBOT
+   ========================================= */
+
+#chat-toggle {
+  position: fixed;
+
+  right: 20px;
+  bottom: 20px;
+
+  width: 58px;
+  height: 58px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+
+  font-size: 25px;
+
+  cursor: pointer;
+
+  box-shadow: var(--shadow);
+
+  z-index: 1001;
+
+  transition:
+    transform 0.25s ease;
+}
+
+#chat-toggle:hover {
+  transform: scale(1.08);
+}
+
+#chat-window {
+  position: fixed;
+
+  right: 20px;
+  bottom: 90px;
+
+  width: min(360px, calc(100vw - 40px));
+
+  max-height: 600px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: var(--surface-solid);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  box-shadow: var(--shadow-hover);
+
+  z-index: 1000;
+}
+
+#chat-window[hidden] {
+  display: none;
+}
+
+#chat-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+}
+
+#chat-close {
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+#chat-messages {
+  min-height: 200px;
+  max-height: 300px;
+
+  overflow-y: auto;
+
+  padding: 15px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.bot-message,
+.user-message {
+  max-width: 85%;
+
+  padding: 10px 13px;
+
+  border-radius: 14px;
+
+  line-height: 1.7;
+
+  word-break: break-word;
+}
+
+.bot-message {
+  align-self: flex-start;
+
+  background: var(--surface-soft);
+
+  color: var(--text);
+}
+
+.user-message {
+  align-self: flex-end;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+}
+
+.chat-questions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  padding: 0 15px 10px;
+}
+
+.chat-questions button {
+  border: 1px solid var(--border);
+
+  padding: 7px 10px;
+
+  border-radius: 10px;
+
+  color: var(--text);
+
+  background: var(--surface-soft);
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+#chat-form {
+  display: flex;
+
+  gap: 8px;
+
+  padding: 10px 15px 15px;
+}
+
+#chat-form input {
+  margin: 0;
+}
+
+#chat-form button {
+  width: 48px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+    );
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   🦶 FOOTER
+   ========================================= */
+
+footer {
+  margin-top: 50px;
+
+  padding: 30px 20px;
+
+  text-align: center;
+
+  color: var(--muted);
+
+  border-top: 1px solid var(--border);
+
+  background: var(--surface);
+}
+
+
+/* =========================================
+   📱 TABLET
+   ========================================= */
+
+@media (max-width: 850px) {
+
+  header {
+    flex-wrap: wrap;
+
+    justify-content: center;
   }
 
-  colorButtons.forEach(function (button) {
+  .logo {
+    width: 100%;
 
-    button.addEventListener("click", function () {
-      changeColor(button.dataset.color);
-    });
-
-  });
-
-  const savedColor = localStorage.getItem("siteColor");
-
-  if (savedColor) {
-    changeColor(savedColor);
+    justify-content: center;
   }
 
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
-  // =========================================
-  // 💡 7. جمله انگیزشی
-  // =========================================
 
-  const quote = document.getElementById("quote");
-  const newQuote = document.getElementById("newQuote");
+/* =========================================
+   📱 MOBILE
+   ========================================= */
 
-  const quotes = [
-    "هر روز یک قدم کوچک، یعنی یک قدم به جلو.",
-    "با تمرین، برنامه‌نویسی ساده‌تر می‌شود.",
-    "اشتباه کردن بخشی از یادگیری است.",
-    "امروز می‌تواند شروع یک مهارت جدید باشد.",
-    "کدی که امروز یاد می‌گیری، پایه‌ای برای فرداست.",
-    "هیچ برنامه‌نویسی از روز اول حرفه‌ای نبوده است! 🚀"
-  ];
+@media (max-width: 600px) {
 
-  if (quote && newQuote) {
+  header {
+    position: relative;
 
-    newQuote.addEventListener("click", function () {
-
-      const randomIndex =
-        Math.floor(Math.random() * quotes.length);
-
-      quote.textContent = quotes[randomIndex];
-    });
+    padding: 14px;
   }
 
+  nav {
+    width: 100%;
 
-  // =========================================
-  // 🎉 8. پیام مخصوص
-  // =========================================
-
-  const showMessage = document.getElementById("showMessage");
-  const message = document.getElementById("message");
-
-  if (showMessage && message) {
-
-    showMessage.addEventListener("click", function () {
-
-      message.textContent =
-        "🎉 سلام متین! ادامه بده؛ داری قدم‌به‌قدم سایتت رو حرفه‌ای‌تر می‌کنی. 🚀";
-
-    });
+    gap: 5px;
   }
 
+  nav a {
+    font-size: 13px;
 
-  // =========================================
-  // ⬆️ 9. بازگشت به بالا
-  // =========================================
-
-  const topButton = document.getElementById("topButton");
-
-  if (topButton) {
-
-    window.addEventListener("scroll", function () {
-
-      if (window.scrollY > 300) {
-        topButton.classList.add("show");
-      } else {
-        topButton.classList.remove("show");
-      }
-
-    });
-
-    topButton.addEventListener("click", function () {
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    });
+    padding: 8px 9px;
   }
 
-
-  // =========================================
-  // 📩 10. فرم تماس
-  // =========================================
-
-  const contactForm = document.getElementById("contactForm");
-  const formResult = document.getElementById("formResult");
-
-  if (contactForm && formResult) {
-
-    contactForm.addEventListener("submit", function (event) {
-
-      event.preventDefault();
-
-      const name = document.getElementById("name");
-
-      if (name) {
-
-        formResult.textContent =
-          `✅ ممنون ${name.value}! پیام آزمایشی تو ثبت شد.`;
-
-      }
-    });
+  #themeButton {
+    width: 100%;
   }
 
+  .hero {
+    width: 92%;
 
-  // =========================================
-  // 🤖 11. چت‌بات
-  // =========================================
+    margin-top: 30px;
 
-  const chatToggle = document.getElementById("chat-toggle");
-  const chatWindow = document.getElementById("chat-window");
-  const chatClose = document.getElementById("chat-close");
-  const chatMessages = document.getElementById("chat-messages");
-  const chatForm = document.getElementById("chat-form");
-  const chatInput = document.getElementById("chat-input");
-  const questionButtons =
-    document.querySelectorAll("[data-question]");
-
-
-  if (chatToggle && chatWindow) {
-
-    function openChat() {
-
-      chatWindow.hidden = false;
-
-      chatToggle.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-    }
-
-    function closeChat() {
-
-      chatWindow.hidden = true;
-
-      chatToggle.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-    }
-
-    chatToggle.addEventListener("click", function () {
-
-      if (chatWindow.hidden) {
-        openChat();
-      } else {
-        closeChat();
-      }
-
-    });
-
-
-    if (chatClose) {
-      chatClose.addEventListener(
-        "click",
-        closeChat
-      );
-    }
-
-
-    function addChatMessage(text, type) {
-
-      if (!chatMessages) return;
-
-      const element =
-        document.createElement("div");
-
-      element.className =
-        type === "user"
-          ? "user-message"
-          : "bot-message";
-
-      element.textContent = text;
-
-      chatMessages.appendChild(element);
-
-      chatMessages.scrollTop =
-        chatMessages.scrollHeight;
-    }
-
-
-    function getBotAnswer(question) {
-
-      const q = question.toLowerCase();
-
-      if (q.includes("سلام")) {
-        return "👋 سلام! خوش اومدی به سلطان وب!";
-      }
-
-      if (
-        q.includes("درباره") ||
-        q.includes("سایت")
-      ) {
-        return "🚀 سلطان وب یک سایت شخصی برای معرفی و تمرین طراحی سایت و برنامه‌نویسی است.";
-      }
-
-      if (
-        q.includes("راهنما") ||
-        q.includes("امکانات") ||
-        q.includes("چه کار")
-      ) {
-        return "📚 اینجا می‌تونی ساعت رو ببینی، شمارنده رو امتحان کنی، کار اضافه کنی، رنگ سایت رو عوض کنی و حالت شب رو فعال کنی.";
-      }
-
-      if (q.includes("متین")) {
-        return "😎 متین در حال یادگیری HTML، CSS و JavaScript است.";
-      }
-
-      return "🤖 پیامت رو دریافت کردم! یکی از گزینه‌های راهنما رو امتحان کن.";
-    }
-
-
-    function sendChat(question) {
-
-      if (!question.trim()) return;
-
-      addChatMessage(question, "user");
-
-      const answer = getBotAnswer(question);
-
-      setTimeout(function () {
-
-        addChatMessage(answer, "bot");
-
-      }, 300);
-    }
-
-
-    questionButtons.forEach(function (button) {
-
-      button.addEventListener("click", function () {
-
-        sendChat(button.dataset.question);
-
-      });
-
-    });
-
-
-    if (chatForm && chatInput) {
-
-      chatForm.addEventListener(
-        "submit",
-        function (event) {
-
-          event.preventDefault();
-
-          const question =
-            chatInput.value.trim();
-
-          if (!question) return;
-
-          sendChat(question);
-
-          chatInput.value = "";
-        }
-      );
-    }
+    padding: 40px 18px;
   }
 
+  .hero p {
+    font-size: 15px;
+  }
 
-  // =========================================
-  // 🚀 پایان
-  // =========================================
+  .container {
+    width: 92%;
 
-  console.log("🚀 SULTAN WEB READY!");
+    padding: 22px 17px;
+  }
 
-});
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  #todoForm {
+    flex-direction: column;
+  }
+
+  #todoForm .btn {
+    width: 100%;
+  }
+
+  #chat-window {
+    right: 10px;
+    bottom: 85px;
+
+    width: calc(100vw - 20px);
+  }
+
+  #chat-toggle {
+    right: 15px;
+    bottom: 15px;
+  }
+
+  #topButton {
+    left: 15px;
+    bottom: 15px;
+  }
+}
+
+
+/* =========================================
+   ♿ کاهش حرکت
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}
