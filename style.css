@@ -1236,3 +1236,28 @@ body.dark .todo-list li {
   transform: scale(1.05);
   box-shadow: 0 8px 20px rgba(117, 92, 255, 0.3);
 }
+/* 🌌 پس‌زمینه متحرک سلطان وب */
+
+body {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(117, 92, 255, 0.18), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(0, 180, 255, 0.15), transparent 30%),
+    #0b0b18;
+
+  background-size: 200% 200%;
+  animation: backgroundMove 10s ease infinite;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
