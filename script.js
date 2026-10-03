@@ -1,778 +1,581 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================================
+👑 SULTAN WEB — JAVASCRIPT
+========================================= */
 
-  /* =========================
-     حالت شب و روز
-  ========================= */
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* =========================================
+  🌙 حالت شب / روز
+  ========================================= */
 
   const themeButton = document.getElementById("themeButton");
 
-  function updateThemeButton() {
-    if (!themeButton) return;
+  if (themeButton) {
 
-    if (document.body.classList.contains("light-mode")) {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
       themeButton.textContent = "☀️ حالت روز";
     } else {
+      document.body.classList.remove("dark");
       themeButton.textContent = "🌙 حالت شب";
     }
-  }
 
-  const savedTheme = localStorage.getItem("theme");
+    themeButton.addEventListener("click", function () {
 
-  if (savedTheme === "light") {
-    document.body.classList.add("light-mode");
-  }
+      document.body.classList.toggle("dark");
 
-  updateThemeButton();
+      if (document.body.classList.contains("dark")) {
 
-  if (themeButton) {
-    themeButton.addEventListener("click", () => {
+        localStorage.setItem("theme", "dark");
 
-      document.body.classList.toggle("light-mode");
+        themeButton.textContent = "☀️ حالت روز";
 
-      const isLight =
-        document.body.classList.contains("light-mode");
+      } else {
 
-      localStorage.setItem(
-        "theme",
-        isLight ? "light" : "dark"
-      );
+        localStorage.setItem("theme", "light");
 
-      updateThemeButton();
+        themeButton.textContent = "🌙 حالت شب";
+      }
+
     });
   }
 
 
-  /* =========================
-     ساعت و تاریخ
-  ========================= */
+  /* =========================================
+  🕐 ساعت و تاریخ
+  ========================================= */
 
-  const clock = document.getElementById("clock");
-  const date = document.getElementById("date");
+  function updateClock() {
 
-  function updateDateTime() {
+    const clock = document.getElementById("clock");
+    const date = document.getElementById("date");
 
     const now = new Date();
 
     if (clock) {
-      clock.textContent =
-        now.toLocaleTimeString("fa-IR");
+
+      clock.textContent = now.toLocaleTimeString("fa-IR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      });
+
     }
 
     if (date) {
-      date.textContent =
-        now.toLocaleDateString("fa-IR", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
-    }
-  }
 
-  updateDateTime();
+      date.textContent = now.toLocaleDateString("fa-IR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
 
-  setInterval(updateDateTime, 1000);
-
-
-  /* =========================
-     شمارنده
-  ========================= */
-
-  const counterElement =
-    document.getElementById("counter");
-
-  const increaseButton =
-    document.getElementById("increase");
-
-  const decreaseButton =
-    document.getElementById("decrease");
-
-  const resetButton =
-    document.getElementById("reset");
-
-  let counter =
-    Number(localStorage.getItem("counter")) || 0;
-
-  function updateCounter() {
-
-    if (counterElement) {
-      counterElement.textContent = counter;
     }
 
-    localStorage.setItem(
-      "counter",
-      counter
-    );
   }
 
-  updateCounter();
+  updateClock();
 
-  if (increaseButton) {
-    increaseButton.addEventListener("click", () => {
-      counter++;
-      updateCounter();
-    });
-  }
-
-  if (decreaseButton) {
-    decreaseButton.addEventListener("click", () => {
-      counter--;
-      updateCounter();
-    });
-  }
-
-  if (resetButton) {
-    resetButton.addEventListener("click", () => {
-      counter = 0;
-      updateCounter();
-    });
-  }
+  setInterval(updateClock, 1000);
 
 
-  /* =========================
-     لایک و دیسلایک
-  ========================= */
+  /* =========================================
+  📊 شمارنده
+  ========================================= */
 
-  const votesElement =
-    document.getElementById("votes");
+  const counter = document.getElementById("counter");
 
-  const likeButton =
-    document.getElementById("like");
+  if (counter) {
 
-  const dislikeButton =
-    document.getElementById("dislike");
+    let count = Number(counter.textContent) || 0;
 
-  const resetVotesButton =
-    document.getElementById("resetVotes");
+    const target = Number(counter.dataset.target) || count;
 
-  const voteMessage =
-    document.getElementById("voteMessage");
+    if (count < target) {
 
-  let likes =
-    Number(localStorage.getItem("likes")) || 0;
+      const interval = setInterval(function () {
 
-  let dislikes =
-    Number(localStorage.getItem("dislikes")) || 0;
+        count++;
 
-  function updateVotes() {
+        counter.textContent = count;
 
-    if (votesElement) {
-      votesElement.textContent =
-        `👍 ${likes} | 👎 ${dislikes}`;
+        if (count >= target) {
+          clearInterval(interval);
+        }
+
+      }, 30);
+
     }
 
-    localStorage.setItem(
-      "likes",
-      likes
-    );
-
-    localStorage.setItem(
-      "dislikes",
-      dislikes
-    );
   }
 
-  updateVotes();
 
-  if (likeButton) {
-    likeButton.addEventListener("click", () => {
+  /* =========================================
+  👍 لایک و 👎 دیسلایک
+  ========================================= */
 
-      likes++;
+  const likeButton = document.getElementById("likeButton");
+  const dislikeButton = document.getElementById("dislikeButton");
 
-      updateVotes();
+  const likeCount = document.getElementById("likeCount");
+  const dislikeCount = document.getElementById("dislikeCount");
 
-      if (voteMessage) {
-        voteMessage.textContent =
-          "ممنون از نظرت! ❤️";
-      }
+  if (likeButton && likeCount) {
+
+    likeButton.addEventListener("click", function () {
+
+      let count = Number(likeCount.textContent) || 0;
+
+      count++;
+
+      likeCount.textContent = count;
+
     });
+
   }
 
-  if (dislikeButton) {
-    dislikeButton.addEventListener("click", () => {
+  if (dislikeButton && dislikeCount) {
 
-      dislikes++;
+    dislikeButton.addEventListener("click", function () {
 
-      updateVotes();
+      let count = Number(dislikeCount.textContent) || 0;
 
-      if (voteMessage) {
-        voteMessage.textContent =
-          "ممنون که نظرت رو گفتی! 💜";
-      }
+      count++;
+
+      dislikeCount.textContent = count;
+
     });
+
   }
 
-  if (resetVotesButton) {
-    resetVotesButton.addEventListener("click", () => {
 
-      likes = 0;
-      dislikes = 0;
+  /* =========================================
+  📝 TODO LIST
+  ========================================= */
 
-      updateVotes();
+  const todoForm = document.getElementById("todoForm");
+  const todoInput = document.getElementById("todoInput");
+  const todoList = document.getElementById("todoList");
 
-      if (voteMessage) {
-        voteMessage.textContent =
-          "آمار نظرسنجی صفر شد.";
+  if (todoForm && todoInput && todoList) {
+
+    todoForm.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      const text = todoInput.value.trim();
+
+      if (!text) {
+        return;
       }
-    });
-  }
-
-
-  /* =========================
-     Todo List
-  ========================= */
-
-  const todoForm =
-    document.getElementById("todoForm");
-
-  const todoInput =
-    document.getElementById("todoInput");
-
-  const todoList =
-    document.getElementById("todoList");
-
-  const todoInfo =
-    document.getElementById("todoInfo");
-
-  let todos =
-    JSON.parse(
-      localStorage.getItem("todos") || "[]"
-    );
-
-  function saveTodos() {
-
-    localStorage.setItem(
-      "todos",
-      JSON.stringify(todos)
-    );
-  }
-
-  function renderTodos() {
-
-    if (!todoList) return;
-
-    todoList.innerHTML = "";
-
-    todos.forEach((todo, index) => {
 
       const li = document.createElement("li");
 
-      const text = document.createElement("span");
+      const span = document.createElement("span");
 
-      text.textContent = todo;
+      span.textContent = text;
 
-      const deleteButton =
-        document.createElement("button");
-
-      deleteButton.textContent = "🗑️ حذف";
-
-      deleteButton.className = "btn";
+      const deleteButton = document.createElement("button");
 
       deleteButton.type = "button";
+      deleteButton.textContent = "حذف";
 
-      deleteButton.addEventListener(
-        "click",
-        () => {
+      deleteButton.addEventListener("click", function () {
 
-          todos.splice(index, 1);
+        li.remove();
 
-          saveTodos();
+      });
 
-          renderTodos();
-        }
-      );
-
-      li.appendChild(text);
+      li.appendChild(span);
       li.appendChild(deleteButton);
 
       todoList.appendChild(li);
+
+      todoInput.value = "";
+
+      todoInput.focus();
+
     });
 
-    if (todoInfo) {
-
-      todoInfo.textContent =
-        `تعداد کارها: ${todos.length}`;
-    }
   }
 
-  renderTodos();
 
-  if (todoForm) {
+  /* =========================================
+  🎨 تغییر رنگ
+  ========================================= */
 
-    todoForm.addEventListener(
-      "submit",
-      (event) => {
+  const colorButtons = document.querySelectorAll("[data-color]");
 
-        event.preventDefault();
+  colorButtons.forEach(function (button) {
 
-        const value =
-          todoInput.value.trim();
+    button.addEventListener("click", function () {
 
-        if (!value) return;
+      const color = button.dataset.color;
 
-        todos.push(value);
+      if (color) {
 
-        saveTodos();
+        document.documentElement.style.setProperty(
+          "--primary",
+          color
+        );
 
-        renderTodos();
-
-        todoInput.value = "";
-
-        todoInput.focus();
       }
-    );
-  }
 
+    });
 
-  /* =========================
-     تغییر رنگ سایت
-  ========================= */
-
-  const colorButtons =
-    document.querySelectorAll(
-      "[data-color]"
-    );
-
-  const savedColor =
-    localStorage.getItem("siteColor");
-
-  function setSiteColor(color) {
-
-    if (color === "blue") {
-
-      document.documentElement.style.setProperty(
-        "--primary",
-        "#2563eb"
-      );
-
-      document.documentElement.style.setProperty(
-        "--secondary",
-        "#06b6d4"
-      );
-
-    } else if (color === "pink") {
-
-      document.documentElement.style.setProperty(
-        "--primary",
-        "#ec4899"
-      );
-
-      document.documentElement.style.setProperty(
-        "--secondary",
-        "#a855f7"
-      );
-
-    } else if (color === "green") {
-
-      document.documentElement.style.setProperty(
-        "--primary",
-        "#10b981"
-      );
-
-      document.documentElement.style.setProperty(
-        "--secondary",
-        "#22c55e"
-      );
-
-    } else {
-
-      document.documentElement.style.setProperty(
-        "--primary",
-        "#755cff"
-      );
-
-      document.documentElement.style.setProperty(
-        "--secondary",
-        "#00b4ff"
-      );
-    }
-
-    localStorage.setItem(
-      "siteColor",
-      color
-    );
-  }
-
-  if (savedColor) {
-    setSiteColor(savedColor);
-  }
-
-  colorButtons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        const color =
-          button.dataset.color;
-
-        setSiteColor(color);
-      }
-    );
   });
 
 
-  /* =========================
-     جمله انگیزشی
-  ========================= */
+  /* =========================================
+  💬 نقل قول
+  ========================================= */
 
-  const quoteElement =
-    document.getElementById("quote");
-
-  const newQuoteButton =
-    document.getElementById("newQuote");
+  const quoteButton = document.getElementById("quoteButton");
+  const quoteText = document.getElementById("quoteText");
 
   const quotes = [
     "هر روز یک قدم جلوتر برو 🚀",
-    "اشتباه کردن بخشی از یادگیری است 💪",
-    "ایده‌هایت را به پروژه تبدیل کن 💡",
-    "با تمرین بهتر می‌شوی 🔥",
-    "کدنویسی یعنی ساختن چیزهای جدید 💻",
-    "امروز شروع کن؛ منتظر فردا نباش 🌟"
+    "با تمرین، برنامه‌نویسی آسان‌تر می‌شود 💻",
+    "ایده‌هایت را به کد تبدیل کن ✨",
+    "هیچ برنامه‌نویسی از روز اول حرفه‌ای نبوده است 🔥",
+    "یادگیری را ادامه بده 👑"
   ];
 
-  function showRandomQuote() {
+  if (quoteButton && quoteText) {
 
-    if (!quoteElement) return;
+    quoteButton.addEventListener("click", function () {
 
-    const randomIndex =
-      Math.floor(
-        Math.random() * quotes.length
-      );
+      const randomIndex =
+        Math.floor(Math.random() * quotes.length);
 
-    quoteElement.textContent =
-      quotes[randomIndex];
-  }
+      quoteText.textContent = quotes[randomIndex];
 
-  if (quoteElement) {
-    showRandomQuote();
-  }
+    });
 
-  if (newQuoteButton) {
-    newQuoteButton.addEventListener(
-      "click",
-      showRandomQuote
-    );
   }
 
 
-  /* =========================
-     پیام شخصی
-  ========================= */
+  /* =========================================
+  💡 پیام ویژه
+  ========================================= */
 
-  const messageInput =
-    document.getElementById("message");
+  const messageButton = document.getElementById("messageButton");
+  const specialMessage = document.getElementById("specialMessage");
 
-  const showMessageButton =
-    document.getElementById("showMessage");
+  if (messageButton && specialMessage) {
 
-  const customMessage =
-    document.getElementById("customMessage");
+    messageButton.addEventListener("click", function () {
 
-  if (showMessageButton) {
+      specialMessage.textContent =
+        "🔥 متین، ادامه بده! سایت سلطان وب روزبه‌روز حرفه‌ای‌تر می‌شود.";
 
-    showMessageButton.addEventListener(
-      "click",
-      () => {
+    });
 
-        const message =
-          messageInput
-            ? messageInput.value.trim()
-            : "";
-
-        if (!customMessage) return;
-
-        if (!message) {
-
-          customMessage.textContent =
-            "اول یک پیام بنویس 😊";
-
-          return;
-        }
-
-        customMessage.textContent =
-          `پیامت دریافت شد: ${message} 💜`;
-      }
-    );
   }
 
 
-  /* =========================
-     دکمه رفتن به بالا
-  ========================= */
+  /* =========================================
+  ⬆️ رفتن به بالای صفحه
+  ========================================= */
 
-  const topButton =
-    document.getElementById("topButton");
-
-  function updateTopButton() {
-
-    if (!topButton) return;
-
-    if (window.scrollY > 400) {
-      topButton.classList.add("show");
-    } else {
-      topButton.classList.remove("show");
-    }
-  }
-
-  window.addEventListener(
-    "scroll",
-    updateTopButton
-  );
-
-  updateTopButton();
+  const topButton = document.getElementById("topButton");
 
   if (topButton) {
 
-    topButton.addEventListener(
-      "click",
-      () => {
+    window.addEventListener("scroll", function () {
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
+      if (window.scrollY > 400) {
+
+        topButton.classList.add("show");
+
+      } else {
+
+        topButton.classList.remove("show");
+
       }
-    );
+
+    });
+
+    topButton.addEventListener("click", function () {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
   }
 
 
-  /* =========================
-     فرم تماس
-  ========================= */
+  /* =========================================
+  🤖 دستیار سلطان وب
+  ========================================= */
 
-  const contactForm =
-    document.getElementById("contactForm");
+  const chatToggle = document.getElementById("chat-toggle");
+  const chatWindow = document.getElementById("chat-window");
+  const chatForm = document.getElementById("chat-form");
+  const chatInput = document.querySelector("#chat-form input");
+  const chatMessages = document.getElementById("chat-messages");
 
-  const formResult =
-    document.getElementById("formResult");
+  const chatClose = document.querySelector(
+    "#chat-window .chat-close"
+  );
 
-  if (contactForm) {
 
-    contactForm.addEventListener(
-      "submit",
-      (event) => {
+  /* -----------------------------------------
+  🚫 مهم:
+  دستیار هنگام ورود بسته باشد
+  ----------------------------------------- */
 
-        event.preventDefault();
-
-        if (!formResult) return;
-
-        formResult.textContent =
-          "پیامت با موفقیت ثبت شد! 🚀";
-
-        contactForm.reset();
-      }
-    );
+  if (chatWindow) {
+    chatWindow.hidden = true;
   }
 
 
-  /* =========================
-     Chatbot
-  ========================= */
+  /* -----------------------------------------
+  ➕ اضافه کردن پیام
+  ----------------------------------------- */
 
-  const chatToggle =
-    document.getElementById("chat-toggle");
+  function addChatMessage(text, type) {
 
-  const chatWindow =
-    document.getElementById("chat-window");
+    if (!chatMessages) {
+      return;
+    }
 
-  const chatClose =
-    document.getElementById("chat-close");
+    const message = document.createElement("div");
 
-  const chatMessages =
-    document.getElementById("chat-messages");
-
-  const chatForm =
-    document.getElementById("chat-form");
-
-  const chatInput =
-    document.getElementById("chat-input");
-
-  const questionButtons =
-    document.querySelectorAll(
-      "[data-question]"
-    );
-
-
-  function addChatMessage(
-    message,
-    type = "bot"
-  ) {
-
-    if (!chatMessages) return;
-
-    const div =
-      document.createElement("div");
-
-    div.className =
+    message.className =
       type === "user"
         ? "user-message"
         : "bot-message";
 
-    div.textContent = message;
+    message.textContent = text;
 
-    chatMessages.appendChild(div);
+    chatMessages.appendChild(message);
 
     chatMessages.scrollTop =
       chatMessages.scrollHeight;
   }
 
 
+  /* -----------------------------------------
+  👋 پیام شروع دستیار
+  ----------------------------------------- */
+
+  let welcomeShown = false;
+
+  function showWelcomeMessage() {
+
+    if (welcomeShown) {
+      return;
+    }
+
+    addChatMessage(
+      "سلام 👋 من دستیار سلطان وب هستم! 🤖 هر سؤالی درباره سایت یا برنامه‌نویسی داری بپرس.",
+      "bot"
+    );
+
+    welcomeShown = true;
+  }
+
+
+  /* -----------------------------------------
+  🤖 باز و بسته کردن دستیار
+  ----------------------------------------- */
+
+  if (chatToggle && chatWindow) {
+
+    chatToggle.addEventListener("click", function () {
+
+      const isClosed = chatWindow.hidden;
+
+      chatWindow.hidden = !isClosed;
+
+      if (isClosed) {
+
+        showWelcomeMessage();
+
+        if (chatInput) {
+          setTimeout(function () {
+            chatInput.focus();
+          }, 100);
+        }
+
+      }
+
+    });
+
+  }
+
+
+  /* -----------------------------------------
+  ❌ دکمه بستن
+  ----------------------------------------- */
+
+  if (chatClose && chatWindow) {
+
+    chatClose.addEventListener("click", function () {
+
+      chatWindow.hidden = true;
+
+    });
+
+  }
+
+
+  /* -----------------------------------------
+  💬 پاسخ دستیار
+  ----------------------------------------- */
+
   function getBotAnswer(message) {
 
-    const text =
-      message.toLowerCase().trim();
+    const text = message.toLowerCase();
 
     if (
       text.includes("سلام") ||
-      text.includes("hello") ||
-      text.includes("hi")
+      text.includes("hello")
     ) {
-      return "سلام 👋 به سلطان وب خوش آمدی!";
+
+      return "سلام 👋 خوش اومدی به سلطان وب! 👑";
+
     }
 
     if (
-      text.includes("سلطان وب") ||
-      text.includes("سایت")
+      text.includes("html")
     ) {
-      return "سلطان وب یک سایت تمرینی برای یادگیری و ساخت پروژه‌های وب است 👑";
+
+      return "HTML ساختار اصلی صفحات وب را می‌سازد. 🧱";
+
     }
 
     if (
-      text.includes("مهارت") ||
-      text.includes("html") ||
-      text.includes("css") ||
-      text.includes("javascript")
+      text.includes("css")
     ) {
-      return "در این سایت روی HTML، CSS و JavaScript تمرین می‌کنیم 💻";
+
+      return "CSS برای طراحی و زیباسازی سایت استفاده می‌شود. 🎨";
+
     }
 
     if (
-      text.includes("تماس")
+      text.includes("javascript") ||
+      text.includes("جاوا")
     ) {
-      return "برای تماس می‌توانی از صفحه «تماس با من» استفاده کنی 📩";
+
+      return "JavaScript باعث می‌شود سایت تعاملی و پویا شود. ⚡";
+
     }
 
     if (
-      text.includes("پروژه")
+      text.includes("سایت") ||
+      text.includes("وب")
     ) {
-      return "در صفحه پروژه‌ها می‌توانی پروژه‌های سلطان وب را ببینی 🚀";
+
+      return "تو الان داخل سایت سلطان وب هستی! 👑💻";
+
     }
 
     if (
-      text.includes("ممنون") ||
-      text.includes("مرسی")
+      text.includes("کمک")
     ) {
-      return "خواهش می‌کنم! 💜";
+
+      return "حتماً! درباره HTML، CSS، JavaScript یا طراحی سایت ازم بپرس. 🚀";
+
     }
 
-    return "سؤال جالبی بود! 😊 می‌توانی درباره سایت، پروژه‌ها، HTML، CSS یا JavaScript از من بپرسی.";
+    if (
+      text.includes("متین")
+    ) {
+
+      return "متین، ادامه بده! داری قدم‌به‌قدم حرفه‌ای‌تر می‌شی. 🔥";
+
+    }
+
+    return "جالب بود! 🤖 فعلاً پاسخ این سؤال رو بلد نیستم، ولی می‌تونی درباره HTML، CSS، JavaScript یا طراحی سایت ازم سؤال کنی.";
   }
 
 
-  if (chatToggle) {
+  /* -----------------------------------------
+  📩 ارسال پیام
+  ----------------------------------------- */
 
-    chatToggle.addEventListener(
-      "click",
-      () => {
+  if (chatForm && chatInput && chatMessages) {
 
-        if (chatWindow) {
-          chatWindow.classList.toggle("open");
-        }
+    chatForm.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      const message = chatInput.value.trim();
+
+      if (!message) {
+        return;
       }
-    );
+
+      addChatMessage(message, "user");
+
+      chatInput.value = "";
+
+      setTimeout(function () {
+
+        const answer = getBotAnswer(message);
+
+        addChatMessage(answer, "bot");
+
+      }, 500);
+
+    });
+
   }
 
 
-  if (chatClose) {
+  /* -----------------------------------------
+  ⚡ پیشنهادهای آماده چت
+  ----------------------------------------- */
 
-    chatClose.addEventListener(
-      "click",
-      () => {
+  const suggestions =
+    document.querySelectorAll(
+      ".chat-suggestions button"
+    );
 
-        if (chatWindow) {
-          chatWindow.classList.remove("open");
-        }
+  suggestions.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+      const question =
+        button.textContent.trim();
+
+      if (!question) {
+        return;
       }
-    );
-  }
 
+      if (chatWindow) {
+        chatWindow.hidden = false;
+      }
 
-  questionButtons.forEach(button => {
+      showWelcomeMessage();
 
-    button.addEventListener(
-      "click",
-      () => {
+      addChatMessage(question, "user");
 
-        const question =
-          button.dataset.question;
-
-        if (!question) return;
+      setTimeout(function () {
 
         addChatMessage(
-          question,
-          "user"
+          getBotAnswer(question),
+          "bot"
         );
 
-        setTimeout(() => {
+      }, 500);
 
-          addChatMessage(
-            getBotAnswer(question),
-            "bot"
-          );
+    });
 
-        }, 300);
-      }
-    );
   });
 
 
-  if (chatForm) {
+  /* =========================================
+  ✅ سایت آماده است
+  ========================================= */
 
-    chatForm.addEventListener(
-      "submit",
-      (event) => {
-
-        event.preventDefault();
-
-        if (!chatInput) return;
-
-        const message =
-          chatInput.value.trim();
-
-        if (!message) return;
-
-        addChatMessage(
-          message,
-          "user"
-        );
-
-        chatInput.value = "";
-
-        setTimeout(() => {
-
-          addChatMessage(
-            getBotAnswer(message),
-            "bot"
-          );
-
-        }, 400);
-      }
-    );
-  }
-
-
-  /* =========================
-     شروع انیمیشن صفحه
-  ========================= */
-
-  document
-    .querySelectorAll(
-      ".container, .main-logo, .hero"
-    )
-    .forEach(element => {
-
-      element.style.opacity = "1";
-    });
+  console.log("SULTAN WEB READY! 👑");
 
 });
