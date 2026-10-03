@@ -4,298 +4,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>تماس با من | سلطان وب</title>
-
-  <meta
-    name="description"
-    content="صفحه تماس با سلطان وب"
-  >
-
+  <title>سلطان وب | تماس</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- =========================
-       هدر
-  ========================== -->
+<header class="site-header">
 
-  <header class="site-header">
+  <a class="logo" href="index.html">
+    👑 سلطان وب
+  </a>
 
-    <a class="logo" href="index.html">
-      👑 سلطان وب
-    </a>
+  <nav class="nav-menu">
+    <a href="index.html">خانه</a>
+    <a href="about.html">درباره من</a>
+    <a href="projects.html">پروژه‌ها</a>
+    <a class="active" href="contact.html">تماس</a>
+  </nav>
 
-    <nav class="nav-menu">
+</header>
 
-      <a href="index.html">
-        خانه
-      </a>
+<main>
 
-      <a href="about.html">
-        درباره من
-      </a>
+<section class="page-title">
 
-      <a href="projects.html">
-        پروژه‌ها
-      </a>
+  <h1>📩 تماس با من</h1>
 
-      <a href="contact.html">
-        تماس
-      </a>
+  <p>
+    اگر پیامی داری، از فرم زیر استفاده کن.
+  </p>
 
-    </nav>
+</section>
 
-    <button
-      id="themeButton"
-      class="theme-button"
-      type="button"
-    >
-      🌙 حالت شب
-    </button>
+<section class="container">
 
-  </header>
+  <div class="card contact-card">
 
+    <form id="contactForm">
 
-  <main>
+      <label for="name">
+        نام:
+      </label>
 
-    <!-- =========================
-         معرفی
-    ========================== -->
+      <input
+        id="name"
+        type="text"
+        placeholder="نامت را بنویس"
+        required
+      >
 
-    <section class="hero">
+      <label for="email">
+        ایمیل:
+      </label>
 
-      <div class="hero-badge">
-        📩 ارتباط با سلطان وب
-      </div>
+      <input
+        id="email"
+        type="email"
+        placeholder="example@email.com"
+        required
+      >
 
-      <h1>
-        تماس با من
-        <span>پیامت رو بفرست 🚀</span>
-      </h1>
+      <label for="contactMessage">
+        پیام:
+      </label>
 
-      <p>
-        اگر پیشنهادی برای سایت داری یا می‌خواهی پیامی بفرستی،
-        می‌توانی از فرم زیر استفاده کنی.
-      </p>
+      <textarea
+        id="contactMessage"
+        rows="6"
+        placeholder="پیامت را بنویس..."
+        required
+      ></textarea>
 
-    </section>
+      <button class="btn" type="submit">
+        🚀 ارسال پیام
+      </button>
 
+      <p id="contactResult" class="message"></p>
 
-    <!-- =========================
-         فرم تماس
-    ========================== -->
+    </form>
 
-    <section class="container">
+  </div>
 
-      <div class="card">
+</section>
 
-        <h2 class="section-title">
-          ✉️ ارسال پیام
-        </h2>
+</main>
 
-        <form id="contactForm">
+<footer class="site-footer">
 
-          <label for="name">
-            👤 نام
-          </label>
+  <div class="footer-links">
+    <a href="index.html">خانه</a>
+    <a href="about.html">درباره من</a>
+    <a href="projects.html">پروژه‌ها</a>
+    <a href="contact.html">تماس</a>
+  </div>
 
-          <input
-            id="name"
-            name="name"
-            class="text-input"
-            type="text"
-            placeholder="نامت را وارد کن"
-            required
-          >
+  <p>
+    © ۲۰۲۶ سلطان وب | کدنویسی امروز، موفقیت فردا 🚀
+  </p>
 
+</footer>
 
-          <label for="email">
-            📧 ایمیل
-          </label>
-
-          <input
-            id="email"
-            name="email"
-            class="text-input"
-            type="email"
-            placeholder="example@email.com"
-            required
-          >
-
-
-          <label for="message">
-            💬 پیام
-          </label>
-
-          <textarea
-            id="message"
-            name="message"
-            class="text-input"
-            rows="6"
-            placeholder="پیامت را اینجا بنویس..."
-            required
-          ></textarea>
-
-
-          <br>
-
-          <button
-            class="btn"
-            type="submit"
-          >
-            🚀 ارسال پیام
-          </button>
-
-        </form>
-
-
-        <p
-          id="formResult"
-          class="message"
-        ></p>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         راه‌های ارتباطی
-    ========================== -->
-
-    <section class="container">
-
-      <h2 class="section-title">
-        💡 درباره این فرم
-      </h2>
-
-      <div class="cards">
-
-        <article class="card center">
-
-          <div class="emoji">
-            📩
-          </div>
-
-          <h3>
-            پیام
-          </h3>
-
-          <p>
-            می‌توانی از فرم بالا برای فرستادن یک پیام آزمایشی
-            استفاده کنی.
-          </p>
-
-        </article>
-
-
-        <article class="card center">
-
-          <div class="emoji">
-            💻
-          </div>
-
-          <h3>
-            پیشنهاد پروژه
-          </h3>
-
-          <p>
-            اگر ایده‌ای برای یک پروژه جدید داری،
-            می‌توانی پیشنهادت را در پیام بنویسی.
-          </p>
-
-        </article>
-
-
-        <article class="card center">
-
-          <div class="emoji">
-            🚀
-          </div>
-
-          <h3>
-            ادامه مسیر
-          </h3>
-
-          <p>
-            سلطان وب به مرور با پروژه‌ها و قابلیت‌های جدید
-            کامل‌تر می‌شود.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         بازگشت
-    ========================== -->
-
-    <section class="container">
-
-      <div class="cta">
-
-        <h2>
-          👑 سلطان وب
-        </h2>
-
-        <p>
-          کدنویسی امروز، موفقیت فردا 🚀
-        </p>
-
-        <a
-          class="btn"
-          href="index.html"
-        >
-          🏠 برگشت به خانه
-        </a>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =========================
-       Footer
-  ========================== -->
-
-  <footer class="site-footer">
-
-    <div class="footer-links">
-
-      <a href="index.html">
-        خانه
-      </a>
-
-      <a href="about.html">
-        درباره من
-      </a>
-
-      <a href="projects.html">
-        پروژه‌ها
-      </a>
-
-      <a href="contact.html">
-        تماس
-      </a>
-
-    </div>
-
-    <p class="copyright">
-      © ۲۰۲۶ سلطان وب | کدنویسی امروز، موفقیت فردا 🚀
-    </p>
-
-  </footer>
-
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
