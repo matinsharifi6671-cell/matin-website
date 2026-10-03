@@ -1,548 +1,287 @@
-/* =========================================
-👑 SULTAN WEB — JAVASCRIPT
-========================================= */
-
 document.addEventListener("DOMContentLoaded", function () {
 
-
-  /* =========================================
-  🌙 حالت شب / روز
-  ========================================= */
+  /* =========================
+     🌙 حالت شب / روز
+  ========================= */
 
   const themeButton = document.getElementById("themeButton");
 
   if (themeButton) {
-
     const savedTheme = localStorage.getItem("theme");
 
     if (savedTheme === "dark") {
       document.body.classList.add("dark");
       themeButton.textContent = "☀️ حالت روز";
-    } else {
-      document.body.classList.remove("dark");
-      themeButton.textContent = "🌙 حالت شب";
     }
 
     themeButton.addEventListener("click", function () {
-
       document.body.classList.toggle("dark");
 
       if (document.body.classList.contains("dark")) {
-
         localStorage.setItem("theme", "dark");
-
         themeButton.textContent = "☀️ حالت روز";
-
       } else {
-
         localStorage.setItem("theme", "light");
-
         themeButton.textContent = "🌙 حالت شب";
-
       }
-
     });
-
   }
 
 
-  /* =========================================
-  🕐 ساعت و تاریخ
-  ========================================= */
+  /* =========================
+     🕐 ساعت و تاریخ
+  ========================= */
 
   function updateClock() {
-
     const clock = document.getElementById("clock");
     const date = document.getElementById("date");
 
     const now = new Date();
 
     if (clock) {
-
-      clock.textContent =
-        now.toLocaleTimeString("fa-IR", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit"
-        });
-
+      clock.textContent = now.toLocaleTimeString("fa-IR");
     }
 
     if (date) {
-
-      date.textContent =
-        now.toLocaleDateString("fa-IR", {
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
-
+      date.textContent = now.toLocaleDateString("fa-IR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
     }
-
   }
 
   updateClock();
-
   setInterval(updateClock, 1000);
 
 
-  /* =========================================
-  🔢 شمارنده
-  ========================================= */
+  /* =========================
+     🔢 شمارنده
+  ========================= */
 
   const counter = document.getElementById("counter");
-
-  const increaseButton =
-    document.getElementById("increase");
-
-  const decreaseButton =
-    document.getElementById("decrease");
-
-  const resetButton =
-    document.getElementById("reset");
+  const increase = document.getElementById("increase");
+  const decrease = document.getElementById("decrease");
+  const reset = document.getElementById("reset");
 
   if (counter) {
+    let count = Number(counter.textContent) || 0;
 
-    let count =
-      Number(counter.textContent) || 0;
-
-
-    if (increaseButton) {
-
-      increaseButton.addEventListener(
-        "click",
-        function () {
-
-          count++;
-
-          counter.textContent = count;
-
-        }
-      );
-
+    if (increase) {
+      increase.addEventListener("click", function () {
+        count++;
+        counter.textContent = count;
+      });
     }
 
-
-    if (decreaseButton) {
-
-      decreaseButton.addEventListener(
-        "click",
-        function () {
-
-          count--;
-
-          counter.textContent = count;
-
-        }
-      );
-
+    if (decrease) {
+      decrease.addEventListener("click", function () {
+        count--;
+        counter.textContent = count;
+      });
     }
 
-
-    if (resetButton) {
-
-      resetButton.addEventListener(
-        "click",
-        function () {
-
-          count = 0;
-
-          counter.textContent = count;
-
-        }
-      );
-
+    if (reset) {
+      reset.addEventListener("click", function () {
+        count = 0;
+        counter.textContent = count;
+      });
     }
-
   }
 
 
-  /* =========================================
-  ❤️ نظرسنجی
-  ========================================= */
+  /* =========================
+     ❤️ رأی دادن
+  ========================= */
 
-  const likeButton =
-    document.getElementById("like");
-
-  const dislikeButton =
-    document.getElementById("dislike");
-
-  const resetVotes =
-    document.getElementById("resetVotes");
-
-  const votes =
-    document.getElementById("votes");
-
-  const voteMessage =
-    document.getElementById("voteMessage");
+  const like = document.getElementById("like");
+  const dislike = document.getElementById("dislike");
+  const resetVotes = document.getElementById("resetVotes");
+  const votes = document.getElementById("votes");
+  const voteMessage = document.getElementById("voteMessage");
 
   let likes = 0;
   let dislikes = 0;
 
-
   function updateVotes() {
-
     if (votes) {
-
       votes.textContent =
-        "👍 " + likes +
-        " | 👎 " + dislikes;
-
+        "👍 " + likes + " | 👎 " + dislikes;
     }
-
   }
 
+  if (like) {
+    like.addEventListener("click", function () {
+      likes++;
+      updateVotes();
 
-  if (likeButton) {
-
-    likeButton.addEventListener(
-      "click",
-      function () {
-
-        likes++;
-
-        updateVotes();
-
-        if (voteMessage) {
-          voteMessage.textContent =
-            "ممنون از نظرت! ❤️";
-        }
-
+      if (voteMessage) {
+        voteMessage.textContent = "ممنون از نظرت! ❤️";
       }
-    );
-
+    });
   }
 
+  if (dislike) {
+    dislike.addEventListener("click", function () {
+      dislikes++;
+      updateVotes();
 
-  if (dislikeButton) {
-
-    dislikeButton.addEventListener(
-      "click",
-      function () {
-
-        dislikes++;
-
-        updateVotes();
-
-        if (voteMessage) {
-          voteMessage.textContent =
-            "ممنون که نظرت رو گفتی! 👍";
-        }
-
+      if (voteMessage) {
+        voteMessage.textContent = "ممنون که نظرت رو گفتی! 👍";
       }
-    );
-
+    });
   }
-
 
   if (resetVotes) {
+    resetVotes.addEventListener("click", function () {
+      likes = 0;
+      dislikes = 0;
+      updateVotes();
 
-    resetVotes.addEventListener(
-      "click",
-      function () {
-
-        likes = 0;
-
-        dislikes = 0;
-
-        updateVotes();
-
-        if (voteMessage) {
-          voteMessage.textContent = "";
-        }
-
+      if (voteMessage) {
+        voteMessage.textContent = "";
       }
-    );
-
+    });
   }
 
 
-  /* =========================================
-  📝 TODO LIST
-  ========================================= */
+  /* =========================
+     📝 فهرست کارها
+  ========================= */
 
-  const todoForm =
-    document.getElementById("todoForm");
-
-  const todoInput =
-    document.getElementById("todoInput");
-
-  const todoList =
-    document.getElementById("todoList");
-
-  const todoInfo =
-    document.getElementById("todoInfo");
-
+  const todoForm = document.getElementById("todoForm");
+  const todoInput = document.getElementById("todoInput");
+  const todoList = document.getElementById("todoList");
+  const todoInfo = document.getElementById("todoInfo");
 
   function updateTodoCount() {
-
     if (todoInfo && todoList) {
-
       todoInfo.textContent =
-        "تعداد کارها: " +
-        todoList.children.length;
-
+        "تعداد کارها: " + todoList.children.length;
     }
-
   }
 
+  if (todoForm && todoInput && todoList) {
 
-  if (
-    todoForm &&
-    todoInput &&
-    todoList
-  ) {
+    todoForm.addEventListener("submit", function (event) {
 
-    todoForm.addEventListener(
-      "submit",
-      function (event) {
+      event.preventDefault();
 
-        event.preventDefault();
+      const text = todoInput.value.trim();
 
-        const text =
-          todoInput.value.trim();
+      if (!text) return;
 
-        if (!text) {
-          return;
-        }
+      const li = document.createElement("li");
 
+      const span = document.createElement("span");
+      span.textContent = text;
 
-        const li =
-          document.createElement("li");
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "حذف";
 
-
-        const span =
-          document.createElement("span");
-
-        span.textContent = text;
-
-
-        const deleteButton =
-          document.createElement("button");
-
-        deleteButton.type = "button";
-
-        deleteButton.textContent = "حذف";
-
-
-        deleteButton.addEventListener(
-          "click",
-          function () {
-
-            li.remove();
-
-            updateTodoCount();
-
-          }
-        );
-
-
-        li.appendChild(span);
-
-        li.appendChild(deleteButton);
-
-        todoList.appendChild(li);
-
-
-        todoInput.value = "";
-
-        todoInput.focus();
-
+      button.addEventListener("click", function () {
+        li.remove();
         updateTodoCount();
+      });
 
-      }
-    );
+      li.appendChild(span);
+      li.appendChild(button);
+      todoList.appendChild(li);
 
+      todoInput.value = "";
+
+      updateTodoCount();
+    });
   }
 
 
-  /* =========================================
-  🎨 تغییر رنگ
-  ========================================= */
+  /* =========================
+     💡 جمله امروز
+  ========================= */
 
-  const colorButtons =
-    document.querySelectorAll(
-      "[data-color]"
-    );
-
-
-  colorButtons.forEach(
-    function (button) {
-
-      button.addEventListener(
-        "click",
-        function () {
-
-          const color =
-            button.dataset.color;
-
-
-          if (
-            color &&
-            color !== "default"
-          ) {
-
-            document.documentElement.style
-              .setProperty(
-                "--primary",
-                color
-              );
-
-          }
-
-        }
-      );
-
-    }
-  );
-
-
-  /* =========================================
-  💡 جمله انگیزشی
-  ========================================= */
-
-  const quoteButton =
-    document.getElementById("newQuote");
-
-  const quoteText =
-    document.getElementById("quote");
-
+  const quote = document.getElementById("quote");
+  const newQuote = document.getElementById("newQuote");
 
   const quotes = [
-
     "هر روز یک قدم جلوتر برو 🚀",
-
     "با تمرین، برنامه‌نویسی آسان‌تر می‌شود 💻",
-
     "ایده‌هایت را به کد تبدیل کن ✨",
-
-    "هیچ برنامه‌نویسی از روز اول حرفه‌ای نبوده است 🔥",
-
+    "اشتباه کردن بخشی از یادگیری است 💚",
     "یادگیری را ادامه بده 👑",
-
-    "اشتباه کردن بخشی از یادگیری است 💚"
-
+    "هیچ‌کس از روز اول حرفه‌ای نبوده است 🔥"
   ];
 
+  if (newQuote && quote) {
 
-  if (
-    quoteButton &&
-    quoteText
-  ) {
+    newQuote.addEventListener("click", function () {
 
-    quoteButton.addEventListener(
-      "click",
-      function () {
+      const random =
+        Math.floor(Math.random() * quotes.length);
 
-        const randomIndex =
-          Math.floor(
-            Math.random() *
-            quotes.length
-          );
-
-
-        quoteText.textContent =
-          quotes[randomIndex];
-
-      }
-    );
-
+      quote.textContent = quotes[random];
+    });
   }
 
 
-  /* =========================================
-  💬 پیام شخصی
-  ========================================= */
+  /* =========================
+     💬 پیام شخصی
+  ========================= */
 
-  const messageInput =
-    document.getElementById("message");
+  const message = document.getElementById("message");
+  const showMessage = document.getElementById("showMessage");
+  const customMessage = document.getElementById("customMessage");
 
-  const showMessageButton =
-    document.getElementById("showMessage");
+  if (message && showMessage && customMessage) {
 
-  const customMessage =
-    document.getElementById("customMessage");
+    showMessage.addEventListener("click", function () {
 
+      const text = message.value.trim();
 
-  if (
-    messageInput &&
-    showMessageButton &&
-    customMessage
-  ) {
-
-    showMessageButton.addEventListener(
-      "click",
-      function () {
-
-        const text =
-          messageInput.value.trim();
-
-
-        if (!text) {
-
-          customMessage.textContent =
-            "لطفاً اول یک پیام بنویس.";
-
-          return;
-
-        }
-
-
+      if (!text) {
         customMessage.textContent =
-          "💚 پیام تو: " + text;
-
+          "لطفاً اول یک پیام بنویس.";
+        return;
       }
-    );
 
+      customMessage.textContent =
+        "💚 پیام تو: " + text;
+    });
   }
 
 
-  /* =========================================
-  ⬆️ دکمه رفتن به بالا
-  ========================================= */
+  /* =========================
+     ⬆️ رفتن به بالا
+  ========================= */
 
-  const topButton =
-    document.getElementById("topButton");
-
+  const topButton = document.getElementById("topButton");
 
   if (topButton) {
 
-    window.addEventListener(
-      "scroll",
-      function () {
+    window.addEventListener("scroll", function () {
 
-        if (window.scrollY > 400) {
-
-          topButton.classList.add("show");
-
-        } else {
-
-          topButton.classList.remove("show");
-
-        }
-
+      if (window.scrollY > 400) {
+        topButton.classList.add("show");
+      } else {
+        topButton.classList.remove("show");
       }
-    );
 
+    });
 
-    topButton.addEventListener(
-      "click",
-      function () {
+    topButton.addEventListener("click", function () {
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-      }
-    );
-
+    });
   }
 
 
-  /* =========================================
-  🤖 دستیار سلطان وب
-  ========================================= */
+  /* =========================
+     🤖 دستیار سلطان وب
+  ========================= */
 
   const chatToggle =
     document.getElementById("chat-toggle");
@@ -563,70 +302,86 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("chat-messages");
 
 
-  /* -----------------------------------------
-  🚫 هنگام ورود بسته باشد
-  ----------------------------------------- */
+  /* هنگام ورود بسته باشد */
 
   if (chatWindow) {
-
     chatWindow.hidden = true;
-
   }
 
 
-  /* -----------------------------------------
-  ➕ اضافه کردن پیام
-  ----------------------------------------- */
+  /* =========================
+     💬 اضافه کردن پیام
+  ========================= */
 
-  function addChatMessage(
-    text,
-    type
-  ) {
+  function addChatMessage(text, type) {
 
-    if (!chatMessages) {
-      return;
-    }
-
+    if (!chatMessages) return;
 
     const message =
       document.createElement("div");
 
-
-    if (type === "user") {
-
-      message.className =
-        "user-message";
-
-    } else {
-
-      message.className =
-        "bot-message";
-
-    }
-
+    message.className =
+      type === "user"
+        ? "user-message"
+        : "bot-message";
 
     message.textContent = text;
 
-
-    chatMessages.appendChild(
-      message
-    );
-
+    chatMessages.appendChild(message);
 
     chatMessages.scrollTop =
       chatMessages.scrollHeight;
-
   }
 
 
-  /* -----------------------------------------
-  🤖 باز کردن دستیار
-  ----------------------------------------- */
+  /* =========================
+     ⌨️ در حال تایپ
+  ========================= */
 
-  if (
-    chatToggle &&
-    chatWindow
-  ) {
+  function showTyping() {
+
+    if (!chatMessages) return;
+
+    const oldTyping =
+      document.getElementById("typing-message");
+
+    if (oldTyping) {
+      oldTyping.remove();
+    }
+
+    const typing =
+      document.createElement("div");
+
+    typing.id = "typing-message";
+    typing.className =
+      "bot-message typing-message";
+
+    typing.textContent =
+      "🤖 در حال تایپ...";
+
+    chatMessages.appendChild(typing);
+
+    chatMessages.scrollTop =
+      chatMessages.scrollHeight;
+  }
+
+
+  function removeTyping() {
+
+    const typing =
+      document.getElementById("typing-message");
+
+    if (typing) {
+      typing.remove();
+    }
+  }
+
+
+  /* =========================
+     🤖 باز کردن دستیار
+  ========================= */
+
+  if (chatToggle && chatWindow) {
 
     chatToggle.addEventListener(
       "click",
@@ -634,34 +389,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         chatWindow.hidden = false;
 
-
         if (chatInput) {
-
-          setTimeout(
-            function () {
-
-              chatInput.focus();
-
-            },
-            100
-          );
-
+          setTimeout(function () {
+            chatInput.focus();
+          }, 100);
         }
 
       }
     );
-
   }
 
 
-  /* -----------------------------------------
-  ❌ بستن دستیار
-  ----------------------------------------- */
+  /* =========================
+     ❌ بستن دستیار
+  ========================= */
 
-  if (
-    chatClose &&
-    chatWindow
-  ) {
+  if (chatClose && chatWindow) {
 
     chatClose.addEventListener(
       "click",
@@ -671,47 +414,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
       }
     );
-
   }
 
 
-  /* -----------------------------------------
-  🤖 پاسخ دستیار
-  ----------------------------------------- */
+  /* =========================
+     🧠 پاسخ‌های دستیار
+  ========================= */
 
-  function getBotAnswer(
-    message
-  ) {
+  function getBotAnswer(message) {
 
     const text =
-      message.toLowerCase();
+      message.toLowerCase().trim();
 
 
     if (
       text.includes("سلام") ||
       text.includes("hello")
     ) {
-
-      return "سلام 👋 خوش اومدی به سلطان وب! 👑";
-
+      return "سلام 👋 به سلطان وب خوش اومدی! 👑";
     }
 
 
-    if (
-      text.includes("html")
-    ) {
-
-      return "HTML ساختار اصلی صفحات وب را می‌سازد. 🧱";
-
+    if (text.includes("html")) {
+      return "HTML ساختار اصلی صفحات وب را می‌سازد. 🌐";
     }
 
 
-    if (
-      text.includes("css")
-    ) {
-
+    if (text.includes("css")) {
       return "CSS برای طراحی و زیباسازی سایت استفاده می‌شود. 🎨";
-
     }
 
 
@@ -720,80 +450,91 @@ document.addEventListener("DOMContentLoaded", function () {
       text.includes("جاوا") ||
       text.includes("جاوا اسکریپت")
     ) {
-
       return "JavaScript باعث می‌شود سایت تعاملی و پویا شود. ⚡";
-
     }
 
 
     if (
-      text.includes("مهارت")
+      text.includes("مهارت") ||
+      text.includes("مهارت‌ها")
     ) {
-
       return "مهارت‌های فعلی سلطان وب شامل HTML، CSS و JavaScript است. 💻";
-
     }
 
 
     if (
-      text.includes("پروژه")
+      text.includes("پروژه") ||
+      text.includes("پروژه‌ها")
     ) {
-
-      return "برای دیدن پروژه‌ها روی بخش «پروژه‌ها» در منوی بالای سایت بزن. 🚀";
-
+      return "برای دیدن پروژه‌ها روی بخش «پروژه‌ها» در منوی سایت بزن. 🚀";
     }
 
 
     if (
-      text.includes("تماس")
+      text.includes("تماس") ||
+      text.includes("ارتباط")
     ) {
-
-      return "برای ارتباط با متین وارد بخش «تماس» شو. 📩";
-
+      return "برای ارتباط با متین وارد صفحه «تماس» شو. 📩";
     }
 
 
     if (
-      text.includes("سایت") ||
-      text.includes("وب")
+      text.includes("سلطان وب") ||
+      text.includes("سایت")
     ) {
-
-      return "سلطان وب یک سایت تمرینی برای یادگیری و ساخت پروژه‌های وب است. 👑💻";
-
+      return "سلطان وب یک سایت شخصی و تمرینی برای یادگیری برنامه‌نویسی است. 👑💻";
     }
 
 
     if (
-      text.includes("کمک")
+      text.includes("کمک") ||
+      text.includes("راهنمایی")
     ) {
-
-      return "حتماً! درباره HTML، CSS، JavaScript یا طراحی سایت ازم بپرس. 🚀";
-
+      return "حتماً! درباره HTML، CSS، JavaScript یا طراحی سایت ازم سؤال کن. 🚀";
     }
 
 
-    if (
-      text.includes("متین")
-    ) {
-
-      return "متین، ادامه بده! داری قدم‌به‌قدم حرفه‌ای‌تر می‌شی. 🔥";
-
+    if (text.includes("متین")) {
+      return "متین، ادامه بده! 🔥 داری سایتت رو قدم‌به‌قدم حرفه‌ای‌تر می‌کنی.";
     }
 
 
-    return "جالب بود! 🤖 فعلاً پاسخ این سؤال رو بلد نیستم. درباره HTML، CSS، JavaScript یا طراحی سایت بپرس.";
+    return "جالب بود 🤖 هنوز جواب این سؤال رو یاد نگرفتم. درباره HTML، CSS، JavaScript یا سلطان وب ازم بپرس.";
   }
 
 
-  /* -----------------------------------------
-  📩 ارسال پیام
-  ----------------------------------------- */
+  /* =========================
+     📤 ارسال پیام اصلی
+  ========================= */
 
-  if (
-    chatForm &&
-    chatInput &&
-    chatMessages
-  ) {
+  function sendChatMessage(text) {
+
+    if (!text || !chatMessages) {
+      return;
+    }
+
+    addChatMessage(text, "user");
+
+    showTyping();
+
+    setTimeout(function () {
+
+      removeTyping();
+
+      const answer =
+        getBotAnswer(text);
+
+      addChatMessage(answer, "bot");
+
+    }, 900);
+  }
+
+
+  /* =========================
+     📩 فرم چت
+  ========================= */
+
+  if (chatForm && chatInput) {
 
     chatForm.addEventListener(
       "submit",
@@ -801,112 +542,83 @@ document.addEventListener("DOMContentLoaded", function () {
 
         event.preventDefault();
 
-
-        const message =
+        const text =
           chatInput.value.trim();
 
+        if (!text) {
+          return;
+        }
 
-        if (!message) {
+        chatInput.value = "";
+
+        sendChatMessage(text);
+
+      }
+    );
+  }
+
+
+  /* =========================
+     ⚡ دکمه‌های آماده چت
+  ========================= */
+
+  const chatButtons =
+    document.querySelectorAll(
+      ".chat-questions button, .chat-suggestions button"
+    );
+
+
+  chatButtons.forEach(function (button) {
+
+    button.addEventListener(
+      "click",
+      function () {
+
+        const question =
+          button.dataset.question ||
+          button.textContent.trim();
+
+        if (!question) {
           return;
         }
 
 
-        addChatMessage(
-          message,
-          "user"
-        );
+        /* اگر بسته بود بازش کن */
+
+        if (chatWindow) {
+          chatWindow.hidden = false;
+        }
 
 
-        chatInput.value = "";
+        /* سؤال را داخل کادر قرار بده */
+
+        if (chatInput) {
+          chatInput.value = question;
+        }
 
 
-        setTimeout(
-          function () {
+        /*
+          بعد از قرار دادن سؤال،
+          همان پیام را ارسال کن
+        */
 
-            const answer =
-              getBotAnswer(message);
+        sendChatMessage(question);
 
 
-            addChatMessage(
-              answer,
-              "bot"
-            );
+        /* کادر را خالی کن */
 
-          },
-          500
-        );
+        if (chatInput) {
+          chatInput.value = "";
+        }
 
       }
     );
 
-  }
+  });
 
-
-  /* -----------------------------------------
-  ⚡ دکمه‌های پیشنهاد چت
-  ----------------------------------------- */
-
-  const suggestions =
-    document.querySelectorAll(
-      ".chat-suggestions button"
-    );
-
-
-  suggestions.forEach(
-    function (button) {
-
-      button.addEventListener(
-        "click",
-        function () {
-
-          const question =
-            button.textContent.trim();
-
-
-          if (!question) {
-            return;
-          }
-
-
-          if (chatWindow) {
-
-            chatWindow.hidden =
-              false;
-
-          }
-
-
-          addChatMessage(
-            question,
-            "user"
-          );
-
-
-          setTimeout(
-            function () {
-
-              addChatMessage(
-                getBotAnswer(question),
-                "bot"
-              );
-
-            },
-            500
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-  /* =========================================
-  ✅ آماده
-  ========================================= */
 
   console.log(
-    "SULTAN WEB READY! 👑"
+    "👑 SULTAN WEB READY!"
   );
 
 });
