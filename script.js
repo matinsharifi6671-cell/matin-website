@@ -1,38 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* =========================
-     🌙 حالت شب / روز
-  ========================= */
-
-  const themeButton = document.getElementById("themeButton");
-
-  if (themeButton) {
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-      themeButton.textContent = "☀️ حالت روز";
-    }
-
-    themeButton.addEventListener("click", function () {
-      document.body.classList.toggle("dark");
-
-      if (document.body.classList.contains("dark")) {
-        localStorage.setItem("theme", "dark");
-        themeButton.textContent = "☀️ حالت روز";
-      } else {
-        localStorage.setItem("theme", "light");
-        themeButton.textContent = "🌙 حالت شب";
-      }
-    });
-  }
-
-
-  /* =========================
-     🕐 ساعت و تاریخ
-  ========================= */
+  // =========================
+  // ساعت
+  // =========================
 
   function updateClock() {
+
     const clock = document.getElementById("clock");
     const date = document.getElementById("date");
 
@@ -55,113 +28,69 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(updateClock, 1000);
 
 
-  /* =========================
-     🔢 شمارنده
-  ========================= */
-
-  const counter = document.getElementById("counter");
-  const increase = document.getElementById("increase");
-  const decrease = document.getElementById("decrease");
-  const reset = document.getElementById("reset");
-
-  if (counter) {
-    let count = Number(counter.textContent) || 0;
-
-    if (increase) {
-      increase.addEventListener("click", function () {
-        count++;
-        counter.textContent = count;
-      });
-    }
-
-    if (decrease) {
-      decrease.addEventListener("click", function () {
-        count--;
-        counter.textContent = count;
-      });
-    }
-
-    if (reset) {
-      reset.addEventListener("click", function () {
-        count = 0;
-        counter.textContent = count;
-      });
-    }
-  }
-
-
-  /* =========================
-     ❤️ رأی دادن
-  ========================= */
-
-  const like = document.getElementById("like");
-  const dislike = document.getElementById("dislike");
-  const resetVotes = document.getElementById("resetVotes");
-  const votes = document.getElementById("votes");
-  const voteMessage = document.getElementById("voteMessage");
-
-  let likes = 0;
-  let dislikes = 0;
-
-  function updateVotes() {
-    if (votes) {
-      votes.textContent =
-        "👍 " + likes + " | 👎 " + dislikes;
-    }
-  }
-
-  if (like) {
-    like.addEventListener("click", function () {
-      likes++;
-      updateVotes();
-
-      if (voteMessage) {
-        voteMessage.textContent = "ممنون از نظرت! ❤️";
-      }
-    });
-  }
-
-  if (dislike) {
-    dislike.addEventListener("click", function () {
-      dislikes++;
-      updateVotes();
-
-      if (voteMessage) {
-        voteMessage.textContent = "ممنون که نظرت رو گفتی! 👍";
-      }
-    });
-  }
-
-  if (resetVotes) {
-    resetVotes.addEventListener("click", function () {
-      likes = 0;
-      dislikes = 0;
-      updateVotes();
-
-      if (voteMessage) {
-        voteMessage.textContent = "";
-      }
-    });
-  }
-
-
-  /* =========================
-     📝 فهرست کارها
-  ========================= */
+  // =========================
+  // فهرست کارها
+  // =========================
 
   const todoForm = document.getElementById("todoForm");
   const todoInput = document.getElementById("todoInput");
   const todoList = document.getElementById("todoList");
   const todoInfo = document.getElementById("todoInfo");
 
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
   function updateTodoCount() {
-    if (todoInfo && todoList) {
+
+    if (todoInfo) {
       todoInfo.textContent =
-        "تعداد کارها: " + todoList.children.length;
+        "تعداد کارها: " + todos.length;
     }
   }
 
+  function saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+
+  function renderTodos() {
+
+    if (!todoList) return;
+
+    todoList.innerHTML = "";
+
+    todos.forEach(function (todo, index) {
+
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.textContent = todo;
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.textContent = "حذف";
+
+      button.addEventListener("click", function () {
+
+        todos.splice(index, 1);
+
+        saveTodos();
+        renderTodos();
+
+      });
+
+      li.appendChild(span);
+      li.appendChild(button);
+
+      todoList.appendChild(li);
+
+    });
+
+    updateTodoCount();
+  }
+
   if (todoForm && todoInput && todoList) {
+
+    renderTodos();
 
     todoForm.addEventListener("submit", function (event) {
 
@@ -171,34 +100,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!text) return;
 
-      const li = document.createElement("li");
+      todos.push(text);
 
-      const span = document.createElement("span");
-      span.textContent = text;
-
-      const button = document.createElement("button");
-      button.type = "button";
-      button.textContent = "حذف";
-
-      button.addEventListener("click", function () {
-        li.remove();
-        updateTodoCount();
-      });
-
-      li.appendChild(span);
-      li.appendChild(button);
-      todoList.appendChild(li);
+      saveTodos();
+      renderTodos();
 
       todoInput.value = "";
+      todoInput.focus();
 
-      updateTodoCount();
     });
   }
 
 
-  /* =========================
-     💡 جمله امروز
-  ========================= */
+  // =========================
+  // جمله‌های انگیزشی
+  // =========================
 
   const quote = document.getElementById("quote");
   const newQuote = document.getElementById("newQuote");
@@ -220,13 +136,14 @@ document.addEventListener("DOMContentLoaded", function () {
         Math.floor(Math.random() * quotes.length);
 
       quote.textContent = quotes[random];
+
     });
   }
 
 
-  /* =========================
-     💬 پیام شخصی
-  ========================= */
+  // =========================
+  // پیام شخصی
+  // =========================
 
   const message = document.getElementById("message");
   const showMessage = document.getElementById("showMessage");
@@ -239,31 +156,114 @@ document.addEventListener("DOMContentLoaded", function () {
       const text = message.value.trim();
 
       if (!text) {
+
         customMessage.textContent =
           "لطفاً اول یک پیام بنویس.";
+
         return;
       }
 
       customMessage.textContent =
         "💚 پیام تو: " + text;
+
     });
   }
 
 
-  /* =========================
-     ⬆️ رفتن به بالا
-  ========================= */
+  // =========================
+  // رنگ سایت
+  // =========================
 
-  const topButton = document.getElementById("topButton");
+  const colorButtons =
+    document.querySelectorAll(".color-button");
+
+  colorButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+      const color = button.dataset.color;
+
+      if (color === "blue") {
+
+        document.documentElement.style.setProperty(
+          "--primary",
+          "#3b82f6"
+        );
+
+        document.documentElement.style.setProperty(
+          "--primary-dark",
+          "#2563eb"
+        );
+
+        document.documentElement.style.setProperty(
+          "--secondary",
+          "#60a5fa"
+        );
+
+      }
+
+      else if (color === "pink") {
+
+        document.documentElement.style.setProperty(
+          "--primary",
+          "#ec4899"
+        );
+
+        document.documentElement.style.setProperty(
+          "--primary-dark",
+          "#db2777"
+        );
+
+        document.documentElement.style.setProperty(
+          "--secondary",
+          "#f472b6"
+        );
+
+      }
+
+      else {
+
+        document.documentElement.style.setProperty(
+          "--primary",
+          "#22c55e"
+        );
+
+        document.documentElement.style.setProperty(
+          "--primary-dark",
+          "#16a34a"
+        );
+
+        document.documentElement.style.setProperty(
+          "--secondary",
+          "#00ff88"
+        );
+
+      }
+
+    });
+
+  });
+
+
+  // =========================
+  // دکمه رفتن به بالا
+  // =========================
+
+  const topButton =
+    document.getElementById("topButton");
 
   if (topButton) {
 
     window.addEventListener("scroll", function () {
 
       if (window.scrollY > 400) {
+
         topButton.classList.add("show");
+
       } else {
+
         topButton.classList.remove("show");
+
       }
 
     });
@@ -276,12 +276,39 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
     });
+
   }
 
 
-  /* =========================
-     🤖 دستیار سلطان وب
-  ========================= */
+  // =========================
+  // فرم تماس
+  // =========================
+
+  const contactForm =
+    document.getElementById("contactForm");
+
+  const contactResult =
+    document.getElementById("contactResult");
+
+  if (contactForm && contactResult) {
+
+    contactForm.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      contactResult.textContent =
+        "✅ پیام شما آماده ارسال است!";
+
+      contactForm.reset();
+
+    });
+
+  }
+
+
+  // =========================
+  // ربات
+  // =========================
 
   const chatToggle =
     document.getElementById("chat-toggle");
@@ -302,16 +329,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("chat-messages");
 
 
-  /* هنگام ورود بسته باشد */
-
   if (chatWindow) {
     chatWindow.hidden = true;
   }
 
-
-  /* =========================
-     💬 اضافه کردن پیام
-  ========================= */
 
   function addChatMessage(text, type) {
 
@@ -334,25 +355,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================
-     ⌨️ در حال تایپ
-  ========================= */
-
   function showTyping() {
 
     if (!chatMessages) return;
-
-    const oldTyping =
-      document.getElementById("typing-message");
-
-    if (oldTyping) {
-      oldTyping.remove();
-    }
 
     const typing =
       document.createElement("div");
 
     typing.id = "typing-message";
+
     typing.className =
       "bot-message typing-message";
 
@@ -377,49 +388,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================
-     🤖 باز کردن دستیار
-  ========================= */
-
   if (chatToggle && chatWindow) {
 
-    chatToggle.addEventListener(
-      "click",
-      function () {
+    chatToggle.addEventListener("click", function () {
 
-        chatWindow.hidden = false;
+      chatWindow.hidden = false;
 
-        if (chatInput) {
-          setTimeout(function () {
-            chatInput.focus();
-          }, 100);
-        }
-
+      if (chatInput) {
+        setTimeout(function () {
+          chatInput.focus();
+        }, 100);
       }
-    );
+
+    });
   }
 
-
-  /* =========================
-     ❌ بستن دستیار
-  ========================= */
 
   if (chatClose && chatWindow) {
 
-    chatClose.addEventListener(
-      "click",
-      function () {
+    chatClose.addEventListener("click", function () {
 
-        chatWindow.hidden = true;
+      chatWindow.hidden = true;
 
-      }
-    );
+    });
   }
 
-
-  /* =========================
-     🧠 پاسخ‌های دستیار
-  ========================= */
 
   function getBotAnswer(message) {
 
@@ -466,7 +459,7 @@ document.addEventListener("DOMContentLoaded", function () {
       text.includes("پروژه") ||
       text.includes("پروژه‌ها")
     ) {
-      return "برای دیدن پروژه‌ها روی بخش «پروژه‌ها» در منوی سایت بزن. 🚀";
+      return "برای دیدن پروژه‌ها وارد صفحه «پروژه‌ها» شو. 🚀";
     }
 
 
@@ -500,18 +493,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     return "جالب بود 🤖 هنوز جواب این سؤال رو یاد نگرفتم. درباره HTML، CSS، JavaScript یا سلطان وب ازم بپرس.";
+
   }
 
 
-  /* =========================
-     📤 ارسال پیام اصلی
-  ========================= */
-
   function sendChatMessage(text) {
 
-    if (!text || !chatMessages) {
-      return;
-    }
+    if (!text || !chatMessages) return;
 
     addChatMessage(text, "user");
 
@@ -530,37 +518,24 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================
-     📩 فرم چت
-  ========================= */
-
   if (chatForm && chatInput) {
 
-    chatForm.addEventListener(
-      "submit",
-      function (event) {
+    chatForm.addEventListener("submit", function (event) {
 
-        event.preventDefault();
+      event.preventDefault();
 
-        const text =
-          chatInput.value.trim();
+      const text =
+        chatInput.value.trim();
 
-        if (!text) {
-          return;
-        }
+      if (!text) return;
 
-        chatInput.value = "";
+      chatInput.value = "";
 
-        sendChatMessage(text);
+      sendChatMessage(text);
 
-      }
-    );
+    });
   }
 
-
-  /* =========================
-     ⚡ دکمه‌های آماده چت
-  ========================= */
 
   const chatButtons =
     document.querySelectorAll(
@@ -570,55 +545,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
   chatButtons.forEach(function (button) {
 
-    button.addEventListener(
-      "click",
-      function () {
+    button.addEventListener("click", function () {
 
-        const question =
-          button.dataset.question ||
-          button.textContent.trim();
+      const question =
+        button.dataset.question ||
+        button.textContent.trim();
 
-        if (!question) {
-          return;
-        }
+      if (!question) return;
 
-
-        /* اگر بسته بود بازش کن */
-
-        if (chatWindow) {
-          chatWindow.hidden = false;
-        }
-
-
-        /* سؤال را داخل کادر قرار بده */
-
-        if (chatInput) {
-          chatInput.value = question;
-        }
-
-
-        /*
-          بعد از قرار دادن سؤال،
-          همان پیام را ارسال کن
-        */
-
-        sendChatMessage(question);
-
-
-        /* کادر را خالی کن */
-
-        if (chatInput) {
-          chatInput.value = "";
-        }
-
+      if (chatWindow) {
+        chatWindow.hidden = false;
       }
-    );
+
+      sendChatMessage(question);
+
+    });
 
   });
 
 
-  console.log(
-    "👑 SULTAN WEB READY!"
-  );
+  console.log("👑 SULTAN WEB READY!");
 
 });
