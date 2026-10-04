@@ -66,6 +66,7 @@ header {
   z-index: 1000;
 
   background: rgba(2, 8, 7, 0.95);
+
   border-bottom: 1px solid var(--border);
 
   backdrop-filter: blur(12px);
@@ -81,6 +82,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 20px;
 }
 
@@ -93,6 +95,7 @@ header {
   gap: 10px;
 
   color: var(--secondary);
+
   font-size: 22px;
   font-weight: bold;
 
@@ -102,7 +105,9 @@ header {
 .logo img {
   width: 55px;
   height: 55px;
+
   object-fit: cover;
+
   border-radius: 14px;
 }
 
@@ -112,12 +117,15 @@ header {
 nav {
   display: flex;
   align-items: center;
+
   gap: 22px;
 }
 
 nav a {
   color: #ddd;
+
   transition: 0.3s;
+
   position: relative;
 }
 
@@ -127,6 +135,7 @@ nav a:hover {
 
 nav a::after {
   content: "";
+
   position: absolute;
 
   right: 0;
@@ -136,6 +145,7 @@ nav a::after {
   height: 2px;
 
   background: var(--secondary);
+
   transition: 0.3s;
 }
 
@@ -151,6 +161,7 @@ nav a:hover::after {
 .container {
   width: 90%;
   max-width: 1200px;
+
   margin: auto;
 }
 
@@ -168,9 +179,11 @@ nav a:hover::after {
   margin: 35px auto;
 
   display: grid;
+
   grid-template-columns: 1.2fr 0.8fr;
 
   align-items: center;
+
   gap: 35px;
 
   padding: 35px;
@@ -183,11 +196,11 @@ nav a:hover::after {
     );
 
   border: 1px solid var(--border);
+
   border-radius: 25px;
 
   box-shadow: var(--shadow);
 }
-
 
 .hero-content {
   text-align: right;
@@ -195,12 +208,15 @@ nav a:hover::after {
 
 .hero small {
   color: var(--secondary);
+
   letter-spacing: 2px;
+
   font-weight: bold;
 }
 
 .hero h1 {
   font-size: clamp(32px, 5vw, 60px);
+
   color: var(--secondary);
 
   margin: 12px 0;
@@ -212,19 +228,24 @@ nav a:hover::after {
 
 .hero h2 {
   font-size: 24px;
+
   margin-bottom: 15px;
 }
 
 .hero p {
   color: var(--muted);
+
   max-width: 600px;
 }
 
 
-/* عکس اصلی */
+/* ==================================================
+   HERO IMAGE
+   ================================================== */
 
 .hero-image {
   display: flex;
+
   justify-content: center;
   align-items: center;
 }
@@ -232,10 +253,14 @@ nav a:hover::after {
 .hero-image img,
 .hero img {
   width: 100%;
-  max-width: 400px;
+
+  max-width: 300px;
+
   height: auto;
 
   display: block;
+
+  margin: 0 auto;
 
   border-radius: 20px;
 
@@ -258,6 +283,7 @@ nav a:hover::after {
   border-radius: 10px;
 
   background: var(--primary);
+
   color: #001b0d;
 
   font-weight: bold;
@@ -287,11 +313,13 @@ nav a:hover::after {
 
 .quick-info {
   width: 90%;
+
   max-width: 1200px;
 
   margin: 30px auto;
 
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
 
   gap: 20px;
@@ -321,6 +349,7 @@ nav a:hover::after {
 
 .quick-card h3 {
   color: var(--secondary);
+
   margin-bottom: 8px;
 }
 
@@ -335,6 +364,7 @@ nav a:hover::after {
 
 section {
   width: 90%;
+
   max-width: 1200px;
 
   margin: 60px auto;
@@ -401,7 +431,7 @@ section {
 
 
 /* ==================================================
-   CLOCK + DATE
+   CLOCK
    ================================================== */
 
 .clock {
@@ -441,6 +471,7 @@ section {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 20px;
@@ -470,7 +501,7 @@ section {
 
 
 /* ==================================================
-   TODO LIST
+   TODO
    ================================================== */
 
 .todo {
@@ -540,6 +571,7 @@ section {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
   gap: 10px;
@@ -604,21 +636,25 @@ section {
 
 .colors button[data-color="default"] {
   background: #22c55e;
+
   color: #001b0d;
 }
 
 .colors button[data-color="blue"] {
   background: #3b82f6;
+
   color: white;
 }
 
 .colors button[data-color="pink"] {
   background: #ec4899;
+
   color: white;
 }
 
 .colors button[data-color="green"] {
   background: #00ff88;
+
   color: #001b0d;
 }
 
@@ -864,6 +900,7 @@ section {
   bottom: 90px;
 
   width: 350px;
+
   max-width: calc(100% - 40px);
 
   background: #06100b;
@@ -888,6 +925,7 @@ section {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
   padding: 15px;
@@ -1029,7 +1067,6 @@ footer strong {
 
 /* ==================================================
    📱 MOBILE
-   همه چیز زیر هم
    ================================================== */
 
 @media (max-width: 768px) {
@@ -1038,7 +1075,9 @@ footer strong {
     overflow-x: hidden;
   }
 
+
   /* هدر */
+
   header {
     position: relative;
 
@@ -1083,12 +1122,14 @@ footer strong {
 
 
   /* کانتینر */
+
   .container {
     width: 92%;
   }
 
 
   /* خانه */
+
   .hero {
     width: 92%;
 
@@ -1096,7 +1137,7 @@ footer strong {
 
     flex-direction: column;
 
-    gap: 25px;
+    gap: 20px;
 
     padding: 20px;
 
@@ -1119,19 +1160,31 @@ footer strong {
     width: 100%;
 
     order: 2;
+
+    display: flex;
+
+    justify-content: center;
   }
+
+
+  /* 👑 عکس سلطان وب */
 
   .hero img,
   .hero-image img {
-    width: 100%;
+    width: 70%;
 
-    max-width: 100%;
+    max-width: 260px;
 
     height: auto;
+
+    margin: 0 auto;
+
+    display: block;
   }
 
 
   /* اطلاعات سریع */
+
   .quick-info {
     width: 92%;
 
@@ -1147,7 +1200,8 @@ footer strong {
   }
 
 
-  /* همه کارت‌ها زیر هم */
+  /* کارت‌ها */
+
   .cards {
     display: flex;
 
@@ -1164,6 +1218,7 @@ footer strong {
 
 
   /* بخش‌ها */
+
   section {
     width: 92%;
 
@@ -1176,6 +1231,7 @@ footer strong {
 
 
   /* ساعت */
+
   .clock {
     width: 100%;
   }
@@ -1186,6 +1242,7 @@ footer strong {
 
 
   /* شمارنده */
+
   .visit-counter {
     width: 100%;
 
@@ -1198,6 +1255,7 @@ footer strong {
 
 
   /* لیست کارها */
+
   .todo {
     width: 100%;
   }
@@ -1217,6 +1275,7 @@ footer strong {
 
 
   /* رنگ‌ها */
+
   .colors {
     display: flex;
 
@@ -1233,6 +1292,7 @@ footer strong {
 
 
   /* نقل قول */
+
   .quote {
     width: 100%;
 
@@ -1241,12 +1301,14 @@ footer strong {
 
 
   /* پیام */
+
   .message-box {
     width: 100%;
   }
 
 
   /* CTA */
+
   .cta {
     display: flex;
 
@@ -1265,6 +1327,7 @@ footer strong {
 
 
   /* فرم تماس */
+
   .contact-form {
     width: 100%;
 
@@ -1273,8 +1336,10 @@ footer strong {
 
 
   /* چت */
+
   #chat-window {
     right: 10px;
+
     left: 10px;
 
     bottom: 85px;
@@ -1286,16 +1351,19 @@ footer strong {
 
   #chat-toggle {
     right: 15px;
+
     bottom: 15px;
   }
 
   #topBtn {
     left: 15px;
+
     bottom: 15px;
   }
 
 
   /* فوتر */
+
   footer {
     width: 100%;
 
@@ -1330,4 +1398,12 @@ footer strong {
     width: 100%;
   }
 
+  /* عکس در گوشی‌های کوچک‌تر */
+
+  .hero img,
+  .hero-image img {
+    width: 65%;
+
+    max-width: 220px;
+  }
 }
