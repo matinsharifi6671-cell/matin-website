@@ -1,569 +1,727 @@
-document.addEventListener("DOMContentLoaded", function () {
+// ========================================
+// 👑 SULTAN WEB
+// ========================================
 
-  // =========================
-  // ساعت
-  // =========================
 
-  function updateClock() {
-
-    const clock = document.getElementById("clock");
-    const date = document.getElementById("date");
+// ساعت و تاریخ
+function updateClock() {
 
     const now = new Date();
 
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+
+    const clock = document.getElementById("clock");
+
     if (clock) {
-      clock.textContent = now.toLocaleTimeString("fa-IR");
+        clock.textContent =
+            `${hours}:${minutes}:${seconds}`;
     }
+
+
+    const date = document.getElementById("date");
 
     if (date) {
-      date.textContent = now.toLocaleDateString("fa-IR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      });
+
+        date.textContent =
+            now.toLocaleDateString("fa-IR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                weekday: "long"
+            });
+
     }
-  }
 
-  updateClock();
-  setInterval(updateClock, 1000);
+}
 
 
-  // =========================
-  // فهرست کارها
-  // =========================
+updateClock();
 
-  const todoForm = document.getElementById("todoForm");
-  const todoInput = document.getElementById("todoInput");
-  const todoList = document.getElementById("todoList");
-  const todoInfo = document.getElementById("todoInfo");
+setInterval(updateClock, 1000);
 
-  let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
-  function updateTodoCount() {
 
-    if (todoInfo) {
-      todoInfo.textContent =
-        "تعداد کارها: " + todos.length;
+// ========================================
+// 👁️ شمارنده بازدید
+// ========================================
+
+let visits = localStorage.getItem("visits");
+
+
+if (visits === null) {
+
+    visits = 0;
+
+}
+
+
+visits = Number(visits) + 1;
+
+
+localStorage.setItem("visits", visits);
+
+
+const visitCount =
+    document.getElementById("visitCount");
+
+
+if (visitCount) {
+
+    visitCount.textContent = visits;
+
+}
+
+
+
+// ========================================
+// 📝 TODO LIST
+// ========================================
+
+const todoForm =
+    document.getElementById("todoForm");
+
+const todoInput =
+    document.getElementById("todoInput");
+
+const todoList =
+    document.getElementById("todoList");
+
+const todoInfo =
+    document.getElementById("todoInfo");
+
+
+let todos =
+    JSON.parse(localStorage.getItem("todos")) || [];
+
+
+
+function saveTodos() {
+
+    localStorage.setItem(
+        "todos",
+        JSON.stringify(todos)
+    );
+
+}
+
+
+
+function renderTodos() {
+
+    if (!todoList) {
+        return;
     }
-  }
 
-  function saveTodos() {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }
-
-  function renderTodos() {
-
-    if (!todoList) return;
 
     todoList.innerHTML = "";
 
-    todos.forEach(function (todo, index) {
 
-      const li = document.createElement("li");
+    if (todos.length === 0) {
 
-      const span = document.createElement("span");
-      span.textContent = todo;
-
-      const button = document.createElement("button");
-
-      button.type = "button";
-      button.textContent = "حذف";
-
-      button.addEventListener("click", function () {
-
-        todos.splice(index, 1);
-
-        saveTodos();
-        renderTodos();
-
-      });
-
-      li.appendChild(span);
-      li.appendChild(button);
-
-      todoList.appendChild(li);
-
-    });
-
-    updateTodoCount();
-  }
-
-  if (todoForm && todoInput && todoList) {
-
-    renderTodos();
-
-    todoForm.addEventListener("submit", function (event) {
-
-      event.preventDefault();
-
-      const text = todoInput.value.trim();
-
-      if (!text) return;
-
-      todos.push(text);
-
-      saveTodos();
-      renderTodos();
-
-      todoInput.value = "";
-      todoInput.focus();
-
-    });
-  }
-
-
-  // =========================
-  // جمله‌های انگیزشی
-  // =========================
-
-  const quote = document.getElementById("quote");
-  const newQuote = document.getElementById("newQuote");
-
-  const quotes = [
-    "هر روز یک قدم جلوتر برو 🚀",
-    "با تمرین، برنامه‌نویسی آسان‌تر می‌شود 💻",
-    "ایده‌هایت را به کد تبدیل کن ✨",
-    "اشتباه کردن بخشی از یادگیری است 💚",
-    "یادگیری را ادامه بده 👑",
-    "هیچ‌کس از روز اول حرفه‌ای نبوده است 🔥"
-  ];
-
-  if (newQuote && quote) {
-
-    newQuote.addEventListener("click", function () {
-
-      const random =
-        Math.floor(Math.random() * quotes.length);
-
-      quote.textContent = quotes[random];
-
-    });
-  }
-
-
-  // =========================
-  // پیام شخصی
-  // =========================
-
-  const message = document.getElementById("message");
-  const showMessage = document.getElementById("showMessage");
-  const customMessage = document.getElementById("customMessage");
-
-  if (message && showMessage && customMessage) {
-
-    showMessage.addEventListener("click", function () {
-
-      const text = message.value.trim();
-
-      if (!text) {
-
-        customMessage.textContent =
-          "لطفاً اول یک پیام بنویس.";
+        if (todoInfo) {
+            todoInfo.textContent =
+                "هنوز کاری اضافه نکرده‌ای.";
+        }
 
         return;
-      }
 
-      customMessage.textContent =
-        "💚 پیام تو: " + text;
-
-    });
-  }
+    }
 
 
-  // =========================
-  // رنگ سایت
-  // =========================
+    if (todoInfo) {
 
-  const colorButtons =
-    document.querySelectorAll(".color-button");
+        todoInfo.textContent =
+            `تعداد کارها: ${todos.length}`;
 
-  colorButtons.forEach(function (button) {
+    }
 
-    button.addEventListener("click", function () {
 
-      const color = button.dataset.color;
+    todos.forEach(function(todo, index) {
 
-      if (color === "blue") {
+        const li =
+            document.createElement("li");
 
-        document.documentElement.style.setProperty(
-          "--primary",
-          "#3b82f6"
+
+        const span =
+            document.createElement("span");
+
+
+        span.textContent = todo;
+
+
+        const deleteButton =
+            document.createElement("button");
+
+
+        deleteButton.textContent = "حذف";
+
+
+        deleteButton.addEventListener(
+            "click",
+            function() {
+
+                todos.splice(index, 1);
+
+                saveTodos();
+
+                renderTodos();
+
+            }
         );
 
-        document.documentElement.style.setProperty(
-          "--primary-dark",
-          "#2563eb"
-        );
 
-        document.documentElement.style.setProperty(
-          "--secondary",
-          "#60a5fa"
-        );
+        li.appendChild(span);
 
-      }
+        li.appendChild(deleteButton);
 
-      else if (color === "pink") {
-
-        document.documentElement.style.setProperty(
-          "--primary",
-          "#ec4899"
-        );
-
-        document.documentElement.style.setProperty(
-          "--primary-dark",
-          "#db2777"
-        );
-
-        document.documentElement.style.setProperty(
-          "--secondary",
-          "#f472b6"
-        );
-
-      }
-
-      else {
-
-        document.documentElement.style.setProperty(
-          "--primary",
-          "#22c55e"
-        );
-
-        document.documentElement.style.setProperty(
-          "--primary-dark",
-          "#16a34a"
-        );
-
-        document.documentElement.style.setProperty(
-          "--secondary",
-          "#00ff88"
-        );
-
-      }
+        todoList.appendChild(li);
 
     });
 
-  });
+}
 
 
-  // =========================
-  // دکمه رفتن به بالا
-  // =========================
 
-  const topButton =
+if (todoForm) {
+
+    todoForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const value =
+                todoInput.value.trim();
+
+
+            if (value === "") {
+                return;
+            }
+
+
+            todos.push(value);
+
+
+            saveTodos();
+
+            renderTodos();
+
+
+            todoInput.value = "";
+
+        }
+    );
+
+}
+
+
+renderTodos();
+
+
+
+// ========================================
+// 💡 جملات انگیزشی
+// ========================================
+
+const quotes = [
+
+    "هیچ‌وقت برای شروع دیر نیست! 🚀",
+
+    "هر روز یک قدم به هدفت نزدیک‌تر شو. 💚",
+
+    "با تمرین، برنامه‌نویسی آسان‌تر می‌شود. 💻",
+
+    "اشتباه کردن بخشی از یادگیری است. 🔥",
+
+    "ایده‌هایت را به پروژه تبدیل کن. 👑"
+
+];
+
+
+const quoteText =
+    document.getElementById("quoteText");
+
+
+const quoteButton =
+    document.getElementById("quoteButton");
+
+
+if (quoteButton) {
+
+    quoteButton.addEventListener(
+        "click",
+        function() {
+
+            const randomIndex =
+                Math.floor(
+                    Math.random() * quotes.length
+                );
+
+
+            if (quoteText) {
+
+                quoteText.textContent =
+                    quotes[randomIndex];
+
+            }
+
+        }
+    );
+
+}
+
+
+
+// ========================================
+// 💬 پیام سفارشی
+// ========================================
+
+const customMessage =
+    document.getElementById("customMessage");
+
+const messageButton =
+    document.getElementById("messageButton");
+
+const messageResult =
+    document.getElementById("messageResult");
+
+
+if (messageButton) {
+
+    messageButton.addEventListener(
+        "click",
+        function() {
+
+            const message =
+                customMessage.value.trim();
+
+
+            if (message === "") {
+
+                messageResult.textContent =
+                    "لطفاً یک پیام بنویس.";
+
+                return;
+
+            }
+
+
+            messageResult.textContent =
+                `💚 پیام شما: ${message}`;
+
+        }
+    );
+
+}
+
+
+
+// ========================================
+// 🎨 تغییر رنگ
+// ========================================
+
+const colorButtons =
+    document.querySelectorAll(".color-btn");
+
+
+colorButtons.forEach(function(button) {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            const color =
+                button.dataset.color;
+
+
+            if (color === "blue") {
+
+                document.documentElement.style.setProperty(
+                    "--primary",
+                    "#3b82f6"
+                );
+
+                document.documentElement.style.setProperty(
+                    "--primary-dark",
+                    "#2563eb"
+                );
+
+                document.documentElement.style.setProperty(
+                    "--secondary",
+                    "#60a5fa"
+                );
+
+            }
+
+
+            else if (color === "pink") {
+
+                document.documentElement.style.setProperty(
+                    "--primary",
+                    "#ec4899"
+                );
+
+                document.documentElement.style.setProperty(
+                    "--primary-dark",
+                    "#db2777"
+                );
+
+                document.documentElement.style.setProperty(
+                    "--secondary",
+                    "#f472b6"
+                );
+
+            }
+
+
+            else {
+
+                document.documentElement.style.setProperty(
+                    "--primary",
+                    "#22c55e"
+                );
+
+                document.documentElement.style.setProperty(
+                    "--primary-dark",
+                    "#16a34a"
+                );
+
+                document.documentElement.style.setProperty(
+                    "--secondary",
+                    "#00ff88"
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+
+// ========================================
+// ⬆️ دکمه بالا
+// ========================================
+
+const topButton =
     document.getElementById("topButton");
 
-  if (topButton) {
 
-    window.addEventListener("scroll", function () {
+window.addEventListener(
+    "scroll",
+    function() {
 
-      if (window.scrollY > 400) {
-
-        topButton.classList.add("show");
-
-      } else {
-
-        topButton.classList.remove("show");
-
-      }
-
-    });
-
-    topButton.addEventListener("click", function () {
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    });
-
-  }
+        if (!topButton) {
+            return;
+        }
 
 
-  // =========================
-  // فرم تماس
-  // =========================
+        if (window.scrollY > 400) {
 
-  const contactForm =
-    document.getElementById("contactForm");
+            topButton.classList.add("show");
 
-  const contactResult =
-    document.getElementById("contactResult");
+        }
 
-  if (contactForm && contactResult) {
+        else {
 
-    contactForm.addEventListener("submit", function (event) {
+            topButton.classList.remove("show");
 
-      event.preventDefault();
+        }
 
-      contactResult.textContent =
-        "✅ پیام شما آماده ارسال است!";
-
-      contactForm.reset();
-
-    });
-
-  }
+    }
+);
 
 
-  // =========================
-  // ربات
-  // =========================
+if (topButton) {
 
-  const chatToggle =
+    topButton.addEventListener(
+        "click",
+        function() {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+}
+
+
+
+// ========================================
+// 🤖 CHATBOT
+// ========================================
+
+const chatToggle =
     document.getElementById("chat-toggle");
 
-  const chatWindow =
+const chatWindow =
     document.getElementById("chat-window");
 
-  const chatClose =
+const chatClose =
     document.getElementById("chat-close");
 
-  const chatForm =
+const chatForm =
     document.getElementById("chat-form");
 
-  const chatInput =
+const chatInput =
     document.getElementById("chat-input");
 
-  const chatMessages =
+const chatMessages =
     document.getElementById("chat-messages");
 
 
-  if (chatWindow) {
-    chatWindow.hidden = true;
-  }
+
+function addChatMessage(
+    message,
+    type
+) {
+
+    const div =
+        document.createElement("div");
 
 
-  function addChatMessage(text, type) {
+    div.className =
+        type === "user"
+            ? "user-message"
+            : "bot-message";
 
-    if (!chatMessages) return;
 
-    const message =
-      document.createElement("div");
+    div.textContent = message;
 
-    message.className =
-      type === "user"
-        ? "user-message"
-        : "bot-message";
 
-    message.textContent = text;
+    chatMessages.appendChild(div);
 
-    chatMessages.appendChild(message);
 
     chatMessages.scrollTop =
-      chatMessages.scrollHeight;
-  }
+        chatMessages.scrollHeight;
+
+}
 
 
-  function showTyping() {
 
-    if (!chatMessages) return;
-
-    const typing =
-      document.createElement("div");
-
-    typing.id = "typing-message";
-
-    typing.className =
-      "bot-message typing-message";
-
-    typing.textContent =
-      "🤖 در حال تایپ...";
-
-    chatMessages.appendChild(typing);
-
-    chatMessages.scrollTop =
-      chatMessages.scrollHeight;
-  }
-
-
-  function removeTyping() {
-
-    const typing =
-      document.getElementById("typing-message");
-
-    if (typing) {
-      typing.remove();
-    }
-  }
-
-
-  if (chatToggle && chatWindow) {
-
-    chatToggle.addEventListener("click", function () {
-
-      chatWindow.hidden = false;
-
-      if (chatInput) {
-        setTimeout(function () {
-          chatInput.focus();
-        }, 100);
-      }
-
-    });
-  }
-
-
-  if (chatClose && chatWindow) {
-
-    chatClose.addEventListener("click", function () {
-
-      chatWindow.hidden = true;
-
-    });
-  }
-
-
-  function getBotAnswer(message) {
+function getBotResponse(message) {
 
     const text =
-      message.toLowerCase().trim();
+        message.toLowerCase();
 
 
     if (
-      text.includes("سلام") ||
-      text.includes("hello")
+        text.includes("سلام") ||
+        text.includes("hello")
     ) {
-      return "سلام 👋 به سلطان وب خوش اومدی! 👑";
+
+        return "سلام 👋 خوش آمدی!";
+
     }
 
 
     if (text.includes("html")) {
-      return "HTML ساختار اصلی صفحات وب را می‌سازد. 🌐";
+
+        return "HTML ساختار اصلی صفحه وب را می‌سازد. 🌐";
+
     }
 
 
     if (text.includes("css")) {
-      return "CSS برای طراحی و زیباسازی سایت استفاده می‌شود. 🎨";
+
+        return "CSS ظاهر و طراحی سایت را کنترل می‌کند. 🎨";
+
     }
 
 
     if (
-      text.includes("javascript") ||
-      text.includes("جاوا") ||
-      text.includes("جاوا اسکریپت")
+        text.includes("javascript") ||
+        text.includes("جاوا")
     ) {
-      return "JavaScript باعث می‌شود سایت تعاملی و پویا شود. ⚡";
+
+        return "JavaScript باعث می‌شود سایت تعاملی و پویا شود. ⚡";
+
     }
 
 
     if (
-      text.includes("مهارت") ||
-      text.includes("مهارت‌ها")
+        text.includes("مهارت") ||
+        text.includes("skill")
     ) {
-      return "مهارت‌های فعلی سلطان وب شامل HTML، CSS و JavaScript است. 💻";
+
+        return "HTML، CSS و JavaScript از مهارت‌های این سایت هستند. 💻";
+
     }
 
 
     if (
-      text.includes("پروژه") ||
-      text.includes("پروژه‌ها")
+        text.includes("پروژه") ||
+        text.includes("project")
     ) {
-      return "برای دیدن پروژه‌ها وارد صفحه «پروژه‌ها» شو. 🚀";
+
+        return "می‌توانی پروژه‌ها را در صفحه «پروژه‌ها» ببینی. 🚀";
+
     }
 
 
     if (
-      text.includes("تماس") ||
-      text.includes("ارتباط")
+        text.includes("تماس") ||
+        text.includes("contact")
     ) {
-      return "برای ارتباط با متین وارد صفحه «تماس» شو. 📩";
+
+        return "برای ارتباط می‌توانی وارد صفحه تماس شوی. 📩";
+
     }
 
 
     if (
-      text.includes("سلطان وب") ||
-      text.includes("سایت")
+        text.includes("سلطان وب") ||
+        text.includes("سایت")
     ) {
-      return "سلطان وب یک سایت شخصی و تمرینی برای یادگیری برنامه‌نویسی است. 👑💻";
+
+        return "سلطان وب یک سایت شخصی برای نمایش مهارت‌ها و پروژه‌هاست. 👑";
+
     }
 
 
     if (
-      text.includes("کمک") ||
-      text.includes("راهنمایی")
+        text.includes("کمک") ||
+        text.includes("help")
     ) {
-      return "حتماً! درباره HTML، CSS، JavaScript یا طراحی سایت ازم سؤال کن. 🚀";
+
+        return "درباره HTML، CSS، JavaScript یا پروژه‌ها از من سؤال کن. 🤖";
+
     }
 
 
     if (text.includes("متین")) {
-      return "متین، ادامه بده! 🔥 داری سایتت رو قدم‌به‌قدم حرفه‌ای‌تر می‌کنی.";
+
+        return "متین، امیدوارم از ساخت سایت لذت ببری! 👑💚";
+
     }
 
 
-    return "جالب بود 🤖 هنوز جواب این سؤال رو یاد نگرفتم. درباره HTML، CSS، JavaScript یا سلطان وب ازم بپرس.";
+    return "این سؤال را هنوز یاد نگرفته‌ام 😄 درباره HTML، CSS، JavaScript یا پروژه‌ها سؤال کن.";
 
-  }
-
-
-  function sendChatMessage(text) {
-
-    if (!text || !chatMessages) return;
-
-    addChatMessage(text, "user");
-
-    showTyping();
-
-    setTimeout(function () {
-
-      removeTyping();
-
-      const answer =
-        getBotAnswer(text);
-
-      addChatMessage(answer, "bot");
-
-    }, 900);
-  }
+}
 
 
-  if (chatForm && chatInput) {
 
-    chatForm.addEventListener("submit", function (event) {
+function sendChatMessage(message) {
 
-      event.preventDefault();
-
-      const text =
-        chatInput.value.trim();
-
-      if (!text) return;
-
-      chatInput.value = "";
-
-      sendChatMessage(text);
-
-    });
-  }
+    const text =
+        message.trim();
 
 
-  const chatButtons =
-    document.querySelectorAll(
-      ".chat-questions button, .chat-suggestions button"
+    if (text === "") {
+        return;
+    }
+
+
+    addChatMessage(
+        text,
+        "user"
     );
 
 
-  chatButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-      const question =
-        button.dataset.question ||
-        button.textContent.trim();
-
-      if (!question) return;
-
-      if (chatWindow) {
-        chatWindow.hidden = false;
-      }
-
-      sendChatMessage(question);
-
-    });
-
-  });
+    chatInput.value = "";
 
 
-  console.log("👑 SULTAN WEB READY!");
+    setTimeout(
+        function() {
+
+            const response =
+                getBotResponse(text);
+
+
+            addChatMessage(
+                response,
+                "bot"
+            );
+
+        },
+        900
+    );
+
+}
+
+
+
+if (chatToggle) {
+
+    chatToggle.addEventListener(
+        "click",
+        function() {
+
+            chatWindow.hidden =
+                !chatWindow.hidden;
+
+        }
+    );
+
+}
+
+
+
+if (chatClose) {
+
+    chatClose.addEventListener(
+        "click",
+        function() {
+
+            chatWindow.hidden = true;
+
+        }
+    );
+
+}
+
+
+
+if (chatForm) {
+
+    chatForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            sendChatMessage(
+                chatInput.value
+            );
+
+        }
+    );
+
+}
+
+
+
+const chatQuestions =
+    document.querySelectorAll(
+        ".chat-questions button"
+    );
+
+
+chatQuestions.forEach(function(button) {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            sendChatMessage(
+                button.textContent
+            );
+
+        }
+    );
 
 });
+
+
+
+console.log(
+    "👑 SULTAN WEB READY!"
+);
