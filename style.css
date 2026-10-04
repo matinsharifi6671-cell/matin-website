@@ -1,1008 +1,1333 @@
-/* ========================================
+/* ==================================================
    👑 SULTAN WEB
    BLACK + NEON GREEN
-======================================== */
+   ================================================== */
 
 :root {
+  --primary: #22c55e;
+  --primary-dark: #16a34a;
+  --secondary: #00ff88;
+  --accent: #4ade80;
 
-    --primary: #22c55e;
+  --bg: #020807;
+  --bg2: #06120d;
+  --card: #07130e;
 
-    --primary-dark: #16a34a;
+  --text: #ffffff;
+  --muted: #a7b8ae;
 
-    --secondary: #00ff88;
-
-    --accent: #4ade80;
-
-    --bg: #050505;
-
-    --bg-light: #0d0d0d;
-
-    --card: #111111;
-
-    --text: #ffffff;
-
-    --text-muted: #a3a3a3;
-
-    --border: rgba(34, 197, 94, 0.25);
-
-    --shadow:
-        0 10px 40px rgba(0, 0, 0, 0.5);
-
+  --border: rgba(34, 197, 94, 0.25);
+  --shadow: 0 0 25px rgba(0, 255, 136, 0.12);
 }
 
 
-/* ========================================
+/* ==================================================
    RESET
-======================================== */
+   ================================================== */
 
 * {
-
-    box-sizing: border-box;
-
-    margin: 0;
-
-    padding: 0;
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 html {
-
-    scroll-behavior: smooth;
-
+  scroll-behavior: smooth;
 }
-
 
 body {
-
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
-
-    background: var(--bg);
-
-    color: var(--text);
-
-    line-height: 1.8;
-
-    overflow-x: hidden;
-
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  line-height: 1.8;
+  overflow-x: hidden;
 }
-
 
 a {
-
-    text-decoration: none;
-
-    color: inherit;
-
+  color: inherit;
+  text-decoration: none;
 }
-
 
 button,
-input {
-
-    font-family: inherit;
-
+input,
+textarea {
+  font-family: inherit;
 }
 
 
-button {
-
-    cursor: pointer;
-
-}
-
-
-.container {
-
-    width: min(
-        1100px,
-        92%
-    );
-
-    margin-left: auto;
-
-    margin-right: auto;
-
-}
-
-
-
-/* ========================================
+/* ==================================================
    HEADER
-======================================== */
+   ================================================== */
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
-    position: sticky;
+  background: rgba(2, 8, 7, 0.95);
+  border-bottom: 1px solid var(--border);
 
-    top: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-    z-index: 1000;
+  padding: 14px 5%;
+}
 
-    background:
-        rgba(5, 5, 5, 0.95);
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
 
-    border-bottom:
-        1px solid var(--border);
-
-    backdrop-filter:
-        blur(10px);
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 
-.nav-container {
-
-    min-height: 75px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-}
-
+/* لوگو */
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-    color: var(--secondary);
+  color: var(--secondary);
+  font-size: 22px;
+  font-weight: bold;
 
-    font-size: 1.4rem;
-
-    font-weight: bold;
-
-    white-space: nowrap;
-
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
 }
 
+.logo img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+
+/* منو */
 
 nav {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 22px;
-
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }
-
 
 nav a {
-
-    color: #ddd;
-
-    transition: 0.3s;
-
+  color: #ddd;
+  transition: 0.3s;
+  position: relative;
 }
-
 
 nav a:hover {
+  color: var(--secondary);
+}
 
-    color: var(--secondary);
+nav a::after {
+  content: "";
+  position: absolute;
 
+  right: 0;
+  bottom: -6px;
+
+  width: 0;
+  height: 2px;
+
+  background: var(--secondary);
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
 }
 
 
+/* ==================================================
+   CONTAINER
+   ================================================== */
 
-/* ========================================
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+
+/* ==================================================
    HERO
-======================================== */
+   ================================================== */
 
 .hero {
+  min-height: 500px;
 
-    width: min(
-        1100px,
-        92%
+  max-width: 1200px;
+  width: 90%;
+
+  margin: 35px auto;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+
+  align-items: center;
+  gap: 35px;
+
+  padding: 35px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 255, 136, 0.08),
+      transparent 65%
     );
 
-    margin:
-        70px auto;
+  border: 1px solid var(--border);
+  border-radius: 25px;
 
-    min-height: 500px;
-
-    display: grid;
-
-    grid-template-columns:
-        1.2fr
-        0.8fr;
-
-    align-items: center;
-
-    gap: 50px;
-
+  box-shadow: var(--shadow);
 }
 
 
-.hero-text {
-
-    min-width: 0;
-
+.hero-content {
+  text-align: right;
 }
 
-
-.small-title {
-
-    color: var(--secondary);
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
+.hero small {
+  color: var(--secondary);
+  letter-spacing: 2px;
+  font-weight: bold;
 }
-
 
 .hero h1 {
+  font-size: clamp(32px, 5vw, 60px);
+  color: var(--secondary);
 
-    font-size:
-        clamp(
-            2.5rem,
-            7vw,
-            5rem
-        );
+  margin: 12px 0;
 
-    color: var(--primary);
-
-    margin: 10px 0;
-
-    line-height: 1.3;
-
+  text-shadow:
+    0 0 10px rgba(0, 255, 136, 0.4),
+    0 0 30px rgba(0, 255, 136, 0.15);
 }
-
 
 .hero h2 {
-
-    font-size: 1.7rem;
-
-    margin-bottom: 15px;
-
+  font-size: 24px;
+  margin-bottom: 15px;
 }
-
 
 .hero p {
-
-    color: var(--text-muted);
-
+  color: var(--muted);
+  max-width: 600px;
 }
 
 
-.hero-buttons {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 15px;
-
-    margin-top: 25px;
-
-}
-
-
-.btn {
-
-    display: inline-block;
-
-    border: none;
-
-    cursor: pointer;
-
-    padding:
-        11px 22px;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
-
-    color: #000;
-
-    font-weight: bold;
-
-    transition: 0.3s;
-
-}
-
-
-.btn:hover {
-
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 8px 25px
-        rgba(0, 255, 136, 0.25);
-
-}
-
-
-.btn-outline {
-
-    background: transparent;
-
-    color: var(--secondary);
-
-    border:
-        1px solid var(--primary);
-
-}
-
+/* عکس اصلی */
 
 .hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img,
+.hero img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+
+  display: block;
+
+  border-radius: 20px;
+
+  border: 2px solid rgba(0, 255, 136, 0.35);
+
+  box-shadow:
+    0 0 30px rgba(0, 255, 136, 0.15);
+}
+
+
+/* ==================================================
+   BUTTONS
+   ================================================== */
+
+.btn {
+  display: inline-block;
+
+  padding: 12px 22px;
+
+  border-radius: 10px;
+
+  background: var(--primary);
+  color: #001b0d;
+
+  font-weight: bold;
+
+  border: none;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  margin: 5px;
+}
+
+.btn:hover {
+  background: var(--secondary);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 20px rgba(0, 255, 136, 0.35);
+}
+
+
+/* ==================================================
+   QUICK INFO
+   ================================================== */
+
+.quick-info {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 30px auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.quick-card {
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  text-align: center;
+
+  box-shadow: var(--shadow);
+
+  transition: 0.3s;
+}
+
+.quick-card:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--secondary);
+}
+
+.quick-card h3 {
+  color: var(--secondary);
+  margin-bottom: 8px;
+}
+
+.quick-card p {
+  color: var(--muted);
+}
+
+
+/* ==================================================
+   SECTIONS
+   ================================================== */
+
+section {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 60px auto;
+}
+
+.section-title {
+  text-align: center;
+
+  color: var(--secondary);
+
+  font-size: 30px;
+
+  margin-bottom: 30px;
+
+  text-shadow:
+    0 0 12px rgba(0, 255, 136, 0.3);
+}
+
+
+/* ==================================================
+   CARDS
+   ================================================== */
+
+.cards {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+}
+
+.card {
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  transition: 0.3s;
+
+  box-shadow: var(--shadow);
+}
+
+.card:hover {
+  transform: translateY(-7px);
+
+  border-color: var(--secondary);
+
+  box-shadow:
+    0 0 30px rgba(0, 255, 136, 0.15);
+}
+
+.card h3 {
+  color: var(--secondary);
+
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--muted);
+}
+
+
+/* ==================================================
+   CLOCK + DATE
+   ================================================== */
+
+.clock {
+  text-align: center;
+
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  box-shadow: var(--shadow);
+}
+
+#clock {
+  font-size: 35px;
+
+  color: var(--secondary);
+
+  font-weight: bold;
+}
+
+#date {
+  color: var(--muted);
+
+  margin-top: 5px;
+}
+
+
+/* ==================================================
+   VISIT COUNTER
+   ================================================== */
+
+.visit-counter {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  text-align: center;
+}
+
+.visit-icon {
+  font-size: 35px;
+}
+
+#visitCount {
+  color: var(--secondary);
+
+  font-size: 30px;
+
+  font-weight: bold;
+}
+
+
+/* ==================================================
+   TODO LIST
+   ================================================== */
+
+.todo {
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  box-shadow: var(--shadow);
+}
+
+.todo-form {
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.todo-form input {
+  flex: 1;
+
+  padding: 13px 15px;
+
+  background: #020807;
+
+  color: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  outline: none;
+}
+
+.todo-form input:focus {
+  border-color: var(--secondary);
+
+  box-shadow:
+    0 0 10px rgba(0, 255, 136, 0.15);
+}
+
+.todo-form button {
+  padding: 12px 20px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: var(--primary);
+
+  color: #001b0d;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+#todoList {
+  list-style: none;
+}
+
+#todoList li {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 12px;
+
+  margin-bottom: 10px;
+
+  background: #020807;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+}
+
+#todoList button {
+  border: none;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 5px 10px;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+}
+
+#todoInfo {
+  color: var(--muted);
+
+  margin-top: 15px;
+}
+
+
+/* ==================================================
+   COLORS
+   ================================================== */
+
+.colors {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.colors button {
+  border: none;
+
+  padding: 12px 20px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+.colors button[data-color="default"] {
+  background: #22c55e;
+  color: #001b0d;
+}
+
+.colors button[data-color="blue"] {
+  background: #3b82f6;
+  color: white;
+}
+
+.colors button[data-color="pink"] {
+  background: #ec4899;
+  color: white;
+}
+
+.colors button[data-color="green"] {
+  background: #00ff88;
+  color: #001b0d;
+}
+
+
+/* ==================================================
+   QUOTE
+   ================================================== */
+
+.quote {
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34, 197, 94, 0.08),
+      rgba(0, 255, 136, 0.03)
+    );
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 35px;
+}
+
+#quoteText {
+  color: var(--secondary);
+
+  font-size: 22px;
+
+  margin-bottom: 20px;
+}
+
+
+/* ==================================================
+   MESSAGE
+   ================================================== */
+
+.message-box {
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  text-align: center;
+}
+
+.message-box textarea {
+  width: 100%;
+
+  min-height: 130px;
+
+  resize: vertical;
+
+  padding: 15px;
+
+  background: #020807;
+
+  color: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  margin-bottom: 15px;
+}
+
+.message-box textarea:focus {
+  border-color: var(--secondary);
+}
+
+
+/* ==================================================
+   CONTACT FORM
+   ================================================== */
+
+.contact-form {
+  background: var(--card);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  max-width: 700px;
+
+  margin: auto;
+
+  box-shadow: var(--shadow);
+}
+
+.contact-form label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--secondary);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+
+  padding: 13px;
+
+  margin-bottom: 18px;
+
+  background: #020807;
+
+  color: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  outline: none;
+}
+
+.contact-form textarea {
+  min-height: 150px;
+
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--secondary);
+
+  box-shadow:
+    0 0 10px rgba(0, 255, 136, 0.12);
+}
+
+
+/* ==================================================
+   CTA
+   ================================================== */
+
+.cta {
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.1),
+      transparent 70%
+    );
+
+  border: 1px solid var(--border);
+
+  border-radius: 22px;
+
+  padding: 45px 25px;
+}
+
+.cta h2 {
+  color: var(--secondary);
+
+  margin-bottom: 10px;
+}
+
+.cta p {
+  color: var(--muted);
+
+  margin-bottom: 20px;
+}
+
+
+/* ==================================================
+   TOP BUTTON
+   ================================================== */
+
+#topBtn {
+  position: fixed;
+
+  left: 20px;
+  bottom: 20px;
+
+  width: 45px;
+  height: 45px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  color: #001b0d;
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  z-index: 999;
+
+  box-shadow:
+    0 0 15px rgba(0, 255, 136, 0.25);
+}
+
+
+/* ==================================================
+   CHATBOT
+   ================================================== */
+
+#chat-toggle {
+  position: fixed;
+
+  right: 20px;
+  bottom: 20px;
+
+  width: 55px;
+  height: 55px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: var(--secondary);
+
+  color: #001b0d;
+
+  font-size: 25px;
+
+  cursor: pointer;
+
+  z-index: 1000;
+
+  box-shadow:
+    0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+#chat-window {
+  position: fixed;
+
+  right: 20px;
+  bottom: 90px;
+
+  width: 350px;
+  max-width: calc(100% - 40px);
+
+  background: #06100b;
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  z-index: 1000;
+
+  box-shadow:
+    0 0 35px rgba(0, 0, 0, 0.6);
+}
+
+#chat-window[hidden] {
+  display: none;
+}
+
+.chat-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px;
+
+  background: #081a10;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-header strong {
+  color: var(--secondary);
+}
+
+#chat-close {
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+#chat-messages {
+  height: 280px;
+
+  overflow-y: auto;
+
+  padding: 15px;
+}
+
+.chat-message {
+  background: #0a1b11;
+
+  border: 1px solid var(--border);
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  margin-bottom: 10px;
+}
+
+.chat-questions,
+.chat-suggestions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  padding: 10px;
+}
+
+.chat-questions button,
+.chat-suggestions button {
+  border: 1px solid var(--border);
+
+  background: #07130e;
+
+  color: var(--secondary);
+
+  padding: 7px 10px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+#chat-form {
+  display: flex;
+
+  gap: 7px;
+
+  padding: 10px;
+
+  border-top: 1px solid var(--border);
+}
+
+#chat-input {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 10px;
+
+  background: #020807;
+
+  color: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  outline: none;
+}
+
+#chat-form button {
+  border: none;
+
+  background: var(--primary);
+
+  color: #001b0d;
+
+  padding: 0 15px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+
+/* ==================================================
+   FOOTER
+   ================================================== */
+
+footer {
+  margin-top: 80px;
+
+  padding: 30px 20px;
+
+  text-align: center;
+
+  background: #010504;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+}
+
+footer strong {
+  color: var(--secondary);
+}
+
+
+/* ==================================================
+   📱 MOBILE
+   همه چیز زیر هم
+   ================================================== */
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* هدر */
+  header {
+    position: relative;
+
+    padding: 15px 12px;
+  }
+
+  .header-inner {
+    display: flex;
+
+    flex-direction: column;
 
     width: 100%;
 
+    gap: 15px;
+  }
+
+  .logo {
+    justify-content: center;
+
     text-align: center;
+  }
 
-    min-width: 0;
+  nav {
+    display: flex;
 
-}
+    flex-direction: column;
 
+    width: 100%;
 
-.hero-image img {
+    gap: 8px;
 
+    text-align: center;
+  }
+
+  nav a {
     display: block;
 
     width: 100%;
 
-    max-width: 400px;
+    padding: 8px;
+  }
 
-    height: auto;
 
-    margin:
-        0 auto;
+  /* کانتینر */
+  .container {
+    width: 92%;
+  }
 
-    border-radius: 25px;
 
-    border:
-        3px solid var(--primary);
-
-    box-shadow:
-        0 0 40px
-        rgba(0, 255, 136, 0.15);
-
-}
-
-
-
-/* ========================================
-   QUICK INFO
-======================================== */
-
-.quick-info {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-
-    margin-bottom: 80px;
-
-}
-
-
-.info-card {
-
-    background: var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 18px;
-
-    padding: 25px;
-
-    text-align: center;
-
-}
-
-
-.info-card span {
-
-    font-size: 2rem;
-
-}
-
-
-.info-card h3 {
-
-    margin: 10px 0;
-
-    color: var(--secondary);
-
-}
-
-
-.info-card p {
-
-    color: var(--text-muted);
-
-}
-
-
-
-/* ========================================
-   CLOCK
-======================================== */
-
-.clock-section {
-
-    text-align: center;
-
-    padding: 50px 20px;
-
-    background: var(--bg-light);
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 20px;
-
-    margin-bottom: 70px;
-
-}
-
-
-.clock-section h2 {
-
-    color: var(--secondary);
-
-}
-
-
-#clock {
-
-    font-size:
-        clamp(
-            2rem,
-            8vw,
-            4rem
-        );
-
-    font-weight: bold;
-
-    color: var(--primary);
-
-    margin: 10px 0;
-
-}
-
-
-#date {
-
-    color: var(--text-muted);
-
-}
-
-
-
-/* ========================================
-   👁️ VISIT COUNTER
-======================================== */
-
-.visit-counter {
+  /* خانه */
+  .hero {
+    width: 92%;
 
     display: flex;
 
-    align-items: center;
-
-    justify-content: center;
+    flex-direction: column;
 
     gap: 25px;
 
-    text-align: center;
+    padding: 20px;
 
-    margin-bottom: 80px;
+    margin: 20px auto;
 
-    padding: 30px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0b0b0b,
-            #101a14
-        );
-
-    border:
-        1px solid var(--primary);
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 0 30px
-        rgba(34, 197, 94, 0.08);
-
-}
-
-
-.visit-icon {
-
-    width: 75px;
-
-    height: 75px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    background:
-        rgba(34, 197, 94, 0.1);
-
-    font-size: 2rem;
-
-}
-
-
-.visit-counter h2 {
-
-    color: var(--secondary);
-
-}
-
-
-.visit-counter p {
-
-    color: var(--text-muted);
-
-}
-
-
-#visitCount {
-
-    display: block;
-
-    font-size: 2.8rem;
-
-    color: var(--primary);
-
-    font-weight: bold;
-
-}
-
-
-
-/* ========================================
-   SECTION TITLE
-======================================== */
-
-.section-title {
+    min-height: auto;
 
     text-align: center;
+  }
 
-    margin-bottom: 35px;
-
-}
-
-
-.section-title p {
-
-    color: var(--secondary);
-
-    font-size: 0.85rem;
-
-    letter-spacing: 3px;
-
-}
-
-
-.section-title h2 {
-
-    font-size: 2rem;
-
-}
-
-
-
-/* ========================================
-   CARDS
-======================================== */
-
-.cards {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-
-    margin-bottom: 80px;
-
-}
-
-
-.card {
-
-    background: var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 18px;
-
-    padding: 30px;
-
-    transition: 0.3s;
-
-}
-
-
-.card:hover {
-
-    transform:
-        translateY(-7px);
-
-    border-color:
-        var(--primary);
-
-}
-
-
-.card-icon {
-
-    font-size: 2.5rem;
-
-}
-
-
-.card h3 {
-
-    color: var(--secondary);
-
-    margin: 10px 0;
-
-}
-
-
-.card p {
-
-    color: var(--text-muted);
-
-}
-
-
-
-/* ========================================
-   TODO
-======================================== */
-
-.todo-section {
-
-    margin-bottom: 80px;
-
-}
-
-
-.todo-form {
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-bottom: 20px;
-
-}
-
-
-.todo-form input {
-
-    flex: 1;
-
-    min-width: 0;
-
-}
-
-
-input {
-
+  .hero-content {
     width: 100%;
 
-    padding:
-        13px 15px;
-
-    border-radius: 10px;
-
-    border:
-        1px solid var(--border);
-
-    background: #0b0b0b;
-
-    color: white;
-
-    outline: none;
-
-}
-
-
-input:focus {
-
-    border-color:
-        var(--primary);
-
-}
-
-
-#todoList {
-
-    list-style: none;
-
-    display: grid;
-
-    gap: 10px;
-
-}
-
-
-#todoList li {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 12px 15px;
-
-    background: var(--card);
-
-    border-radius: 10px;
-
-    border:
-        1px solid var(--border);
-
-}
-
-
-#todoList button {
-
-    border: none;
-
-    background: #dc2626;
-
-    color: white;
-
-    padding:
-        5px 10px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-}
-
-
-#todoInfo {
-
-    color: var(--text-muted);
-
-    margin-top: 10px;
-
-}
-
-
-
-/* ========================================
-   COLORS
-======================================== */
-
-.color-section {
-
-    margin-bottom: 80px;
-
-}
-
-
-.color-buttons {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 15px;
-
-    flex-wrap: wrap;
-
-}
-
-
-.color-btn {
-
-    border: none;
-
-    padding:
-        12px 25px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    color: white;
-
-    font-weight: bold;
-
-}
-
-
-.color-btn.green {
-
-    background: #16a34a;
-
-}
-
-
-.color-btn.blue {
-
-    background: #2563eb;
-
-}
-
-
-.color-btn.pink {
-
-    background: #db2777;
-
-}
-
-
-
-/* ========================================
-   QUOTE
-======================================== */
-
-.quote-section {
-
-    margin-bottom: 80px;
-
-}
-
-
-.quote-box {
-
     text-align: center;
 
-    background: var(--card);
+    order: 1;
+  }
 
-    border:
-        1px solid var(--border);
+  .hero-image {
+    width: 100%;
 
-    border-radius: 20px;
+    order: 2;
+  }
 
-    padding: 35px;
+  .hero img,
+  .hero-image img {
+    width: 100%;
 
-}
+    max-width: 100%;
 
-
-#quoteText {
-
-    color: var(--secondary);
-
-    font-size: 1.3rem;
-
-    margin-bottom: 20px;
-
-}
+    height: auto;
+  }
 
 
-
-/* ========================================
-   MESSAGE
-======================================== */
-
-.message-section {
-
-    margin-bottom: 80px;
-
-}
-
-
-.message-box {
-
-    max-width: 650px;
-
-    margin: auto;
+  /* اطلاعات سریع */
+  .quick-info {
+    width: 92%;
 
     display: flex;
 
     flex-direction: column;
 
     gap: 15px;
+  }
 
+  .quick-card {
+    width: 100%;
+  }
+
+
+  /* همه کارت‌ها زیر هم */
+  .cards {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 15px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+
+  /* بخش‌ها */
+  section {
+    width: 92%;
+
+    margin: 40px auto;
+  }
+
+  .section-title {
+    font-size: 25px;
+  }
+
+
+  /* ساعت */
+  .clock {
+    width: 100%;
+  }
+
+  #clock {
+    font-size: 28px;
+  }
+
+
+  /* شمارنده */
+  .visit-counter {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+
+  /* لیست کارها */
+  .todo {
+    width: 100%;
+  }
+
+  .todo-form {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+  .todo-form input,
+  .todo-form button {
+    width: 100%;
+  }
+
+
+  /* رنگ‌ها */
+  .colors {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 10px;
+  }
+
+  .colors button {
+    width: 100%;
+  }
+
+
+  /* نقل قول */
+  .quote {
+    width: 100%;
+
+    padding: 25px 15px;
+  }
+
+
+  /* پیام */
+  .message-box {
+    width: 100%;
+  }
+
+
+  /* CTA */
+  .cta {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 100%;
+  }
+
+  .cta .btn {
+    width: 100%;
+
+    max-width: 300px;
+  }
+
+
+  /* فرم تماس */
+  .contact-form {
+    width: 100%;
+
+    padding: 20px;
+  }
+
+
+  /* چت */
+  #chat-window {
+    right: 10px;
+    left: 10px;
+
+    bottom: 85px;
+
+    width: auto;
+
+    max-width: none;
+  }
+
+  #chat-toggle {
+    right: 15px;
+    bottom: 15px;
+  }
+
+  #topBtn {
+    left: 15px;
+    bottom: 15px;
+  }
+
+
+  /* فوتر */
+  footer {
+    width: 100%;
+
+    padding: 25px 15px;
+  }
 }
 
 
-#messageResult {
+/* ==================================================
+   📱 موبایل خیلی کوچک
+   ================================================== */
 
-    color: var(--secondary);
+@media (max-width: 400px) {
 
-    text-align: center;
+  .hero h1 {
+    font-size: 32px;
+  }
 
-}
+  .hero h2 {
+    font-size: 20px;
+  }
 
+  .section-title {
+    font-size: 22px;
+  }
 
+  #clock {
+    font-size: 24px;
+  }
 
-/* ========================================
-   CTA
-======================================== */
-
-.cta {
-
-    text-align: center;
-
-    padding: 60px 20px;
-
-    margin-bottom: 80px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0c1a12,
-            #07110c
-        );
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 25px;
+  .btn {
+    width: 100%;
+  }
 
 }
-
-
-.cta h2 {
-
-    color: var(--secondary);
-
-    margin-bottom: 10px;
-
-}
-
-
-.cta p {
-
-    color: var(--text-muted);
-
-    margin-bottom: 20px;
-
-}
-
-
-
-/* ========================================
-   TOP BUTTON
-======================================== */
-
-#topButton {
-
-    position: fixed;
-
-    bottom: 25px;
-
-    left: 25px;
-
-    width: 45px;
-
-    height: 45px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: var(--primary
