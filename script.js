@@ -3,33 +3,53 @@
 // ========================================
 
 
-// ساعت و تاریخ
+// ========================================
+// 🕐 ساعت و تاریخ
+// ========================================
+
 function updateClock() {
 
     const now = new Date();
 
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const hours =
+        String(now.getHours()).padStart(2, "0");
 
-    const clock = document.getElementById("clock");
+    const minutes =
+        String(now.getMinutes()).padStart(2, "0");
+
+    const seconds =
+        String(now.getSeconds()).padStart(2, "0");
+
+
+    const clock =
+        document.getElementById("clock");
+
 
     if (clock) {
+
         clock.textContent =
             `${hours}:${minutes}:${seconds}`;
+
     }
 
 
-    const date = document.getElementById("date");
+    const date =
+        document.getElementById("date");
+
 
     if (date) {
 
         date.textContent =
             now.toLocaleDateString("fa-IR", {
+
                 year: "numeric",
+
                 month: "long",
+
                 day: "numeric",
+
                 weekday: "long"
+
             });
 
     }
@@ -42,12 +62,12 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-
 // ========================================
 // 👁️ شمارنده بازدید
 // ========================================
 
-let visits = localStorage.getItem("visits");
+let visits =
+    localStorage.getItem("visits");
 
 
 if (visits === null) {
@@ -57,10 +77,14 @@ if (visits === null) {
 }
 
 
-visits = Number(visits) + 1;
+visits =
+    Number(visits) + 1;
 
 
-localStorage.setItem("visits", visits);
+localStorage.setItem(
+    "visits",
+    visits
+);
 
 
 const visitCount =
@@ -69,10 +93,10 @@ const visitCount =
 
 if (visitCount) {
 
-    visitCount.textContent = visits;
+    visitCount.textContent =
+        visits;
 
 }
-
 
 
 // ========================================
@@ -82,19 +106,23 @@ if (visitCount) {
 const todoForm =
     document.getElementById("todoForm");
 
+
 const todoInput =
     document.getElementById("todoInput");
 
+
 const todoList =
     document.getElementById("todoList");
+
 
 const todoInfo =
     document.getElementById("todoInfo");
 
 
 let todos =
-    JSON.parse(localStorage.getItem("todos")) || [];
-
+    JSON.parse(
+        localStorage.getItem("todos")
+    ) || [];
 
 
 function saveTodos() {
@@ -107,11 +135,12 @@ function saveTodos() {
 }
 
 
-
 function renderTodos() {
 
     if (!todoList) {
+
         return;
+
     }
 
 
@@ -121,8 +150,10 @@ function renderTodos() {
     if (todos.length === 0) {
 
         if (todoInfo) {
+
             todoInfo.textContent =
                 "هنوز کاری اضافه نکرده‌ای.";
+
         }
 
         return;
@@ -138,50 +169,53 @@ function renderTodos() {
     }
 
 
-    todos.forEach(function(todo, index) {
+    todos.forEach(
+        function(todo, index) {
 
-        const li =
-            document.createElement("li");
-
-
-        const span =
-            document.createElement("span");
+            const li =
+                document.createElement("li");
 
 
-        span.textContent = todo;
+            const span =
+                document.createElement("span");
 
 
-        const deleteButton =
-            document.createElement("button");
+            span.textContent =
+                todo;
 
 
-        deleteButton.textContent = "حذف";
+            const deleteButton =
+                document.createElement("button");
 
 
-        deleteButton.addEventListener(
-            "click",
-            function() {
-
-                todos.splice(index, 1);
-
-                saveTodos();
-
-                renderTodos();
-
-            }
-        );
+            deleteButton.textContent =
+                "حذف";
 
 
-        li.appendChild(span);
+            deleteButton.addEventListener(
+                "click",
+                function() {
 
-        li.appendChild(deleteButton);
+                    todos.splice(index, 1);
 
-        todoList.appendChild(li);
+                    saveTodos();
 
-    });
+                    renderTodos();
+
+                }
+            );
+
+
+            li.appendChild(span);
+
+            li.appendChild(deleteButton);
+
+            todoList.appendChild(li);
+
+        }
+    );
 
 }
-
 
 
 if (todoForm) {
@@ -198,7 +232,9 @@ if (todoForm) {
 
 
             if (value === "") {
+
                 return;
+
             }
 
 
@@ -221,9 +257,8 @@ if (todoForm) {
 renderTodos();
 
 
-
 // ========================================
-// 💡 جملات انگیزشی
+// 💡 جمله انگیزشی
 // ========================================
 
 const quotes = [
@@ -236,57 +271,71 @@ const quotes = [
 
     "اشتباه کردن بخشی از یادگیری است. 🔥",
 
-    "ایده‌هایت را به پروژه تبدیل کن. 👑"
+    "ایده‌هایت را به پروژه تبدیل کن. 👑",
+
+    "اگر ادامه بدهی، بالاخره موفق می‌شوی! ⭐",
+
+    "هر خط کدی که می‌نویسی، یک قدم به حرفه‌ای شدن نزدیک‌ترت می‌کند. 💻"
 
 ];
 
 
 const quoteText =
-    document.getElementById("quoteText");
+    document.getElementById("quote");
 
 
 const quoteButton =
-    document.getElementById("quoteButton");
+    document.getElementById("newQuote");
+
+
+function showRandomQuote() {
+
+    if (!quoteText) {
+
+        return;
+
+    }
+
+
+    const randomIndex =
+        Math.floor(
+            Math.random() * quotes.length
+        );
+
+
+    quoteText.textContent =
+        quotes[randomIndex];
+
+}
+
+
+showRandomQuote();
 
 
 if (quoteButton) {
 
     quoteButton.addEventListener(
         "click",
-        function() {
-
-            const randomIndex =
-                Math.floor(
-                    Math.random() * quotes.length
-                );
-
-
-            if (quoteText) {
-
-                quoteText.textContent =
-                    quotes[randomIndex];
-
-            }
-
-        }
+        showRandomQuote
     );
 
 }
-
 
 
 // ========================================
 // 💬 پیام سفارشی
 // ========================================
 
-const customMessage =
-    document.getElementById("customMessage");
+const messageInput =
+    document.getElementById("message");
+
 
 const messageButton =
-    document.getElementById("messageButton");
+    document.getElementById("showMessage");
+
 
 const messageResult =
-    document.getElementById("messageResult");
+    document.getElementById("customMessage");
 
 
 if (messageButton) {
@@ -296,21 +345,31 @@ if (messageButton) {
         function() {
 
             const message =
-                customMessage.value.trim();
+                messageInput
+                    ? messageInput.value.trim()
+                    : "";
 
 
             if (message === "") {
 
-                messageResult.textContent =
-                    "لطفاً یک پیام بنویس.";
+                if (messageResult) {
+
+                    messageResult.textContent =
+                        "لطفاً یک پیام بنویس.";
+
+                }
 
                 return;
 
             }
 
 
-            messageResult.textContent =
-                `💚 پیام شما: ${message}`;
+            if (messageResult) {
+
+                messageResult.textContent =
+                    `💚 پیام شما: ${message}`;
+
+            }
 
         }
     );
@@ -318,89 +377,161 @@ if (messageButton) {
 }
 
 
-
 // ========================================
-// 🎨 تغییر رنگ
+// 🎨 تغییر رنگ سایت
 // ========================================
 
 const colorButtons =
-    document.querySelectorAll(".color-btn");
-
-
-colorButtons.forEach(function(button) {
-
-    button.addEventListener(
-        "click",
-        function() {
-
-            const color =
-                button.dataset.color;
-
-
-            if (color === "blue") {
-
-                document.documentElement.style.setProperty(
-                    "--primary",
-                    "#3b82f6"
-                );
-
-                document.documentElement.style.setProperty(
-                    "--primary-dark",
-                    "#2563eb"
-                );
-
-                document.documentElement.style.setProperty(
-                    "--secondary",
-                    "#60a5fa"
-                );
-
-            }
-
-
-            else if (color === "pink") {
-
-                document.documentElement.style.setProperty(
-                    "--primary",
-                    "#ec4899"
-                );
-
-                document.documentElement.style.setProperty(
-                    "--primary-dark",
-                    "#db2777"
-                );
-
-                document.documentElement.style.setProperty(
-                    "--secondary",
-                    "#f472b6"
-                );
-
-            }
-
-
-            else {
-
-                document.documentElement.style.setProperty(
-                    "--primary",
-                    "#22c55e"
-                );
-
-                document.documentElement.style.setProperty(
-                    "--primary-dark",
-                    "#16a34a"
-                );
-
-                document.documentElement.style.setProperty(
-                    "--secondary",
-                    "#00ff88"
-                );
-
-            }
-
-        }
+    document.querySelectorAll(
+        ".color-button"
     );
 
-});
 
+const colorThemes = {
+
+    green: {
+
+        primary: "#22c55e",
+
+        primaryDark: "#16a34a",
+
+        secondary: "#00ff88",
+
+        accent: "#4ade80"
+
+    },
+
+
+    blue: {
+
+        primary: "#3b82f6",
+
+        primaryDark: "#2563eb",
+
+        secondary: "#60a5fa",
+
+        accent: "#93c5fd"
+
+    },
+
+
+    pink: {
+
+        primary: "#ec4899",
+
+        primaryDark: "#db2777",
+
+        secondary: "#f472b6",
+
+        accent: "#f9a8d4"
+
+    },
+
+
+    purple: {
+
+        primary: "#a855f7",
+
+        primaryDark: "#9333ea",
+
+        secondary: "#c084fc",
+
+        accent: "#d8b4fe"
+
+    }
+
+};
+
+
+function applyColorTheme(themeName) {
+
+    const theme =
+        colorThemes[themeName];
+
+
+    if (!theme) {
+
+        return;
+
+    }
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--primary",
+            theme.primary
+        );
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--primary-dark",
+            theme.primaryDark
+        );
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--secondary",
+            theme.secondary
+        );
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--accent",
+            theme.accent
+        );
+
+
+    localStorage.setItem(
+        "siteColor",
+        themeName
+    );
+
+}
+
+
+colorButtons.forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const color =
+                    button.dataset.color;
+
+
+                if (colorThemes[color]) {
+
+                    applyColorTheme(color);
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+const savedColor =
+    localStorage.getItem("siteColor");
+
+
+if (
+    savedColor &&
+    colorThemes[savedColor]
+) {
+
+    applyColorTheme(savedColor);
+
+}
 
 
 // ========================================
@@ -416,7 +547,9 @@ window.addEventListener(
     function() {
 
         if (!topButton) {
+
             return;
+
         }
 
 
@@ -443,8 +576,11 @@ if (topButton) {
         function() {
 
             window.scrollTo({
+
                 top: 0,
+
                 behavior: "smooth"
+
             });
 
         }
@@ -453,35 +589,67 @@ if (topButton) {
 }
 
 
-
 // ========================================
 // 🤖 CHATBOT
 // ========================================
 
 const chatToggle =
-    document.getElementById("chat-toggle");
+    document.getElementById(
+        "chat-toggle"
+    );
+
 
 const chatWindow =
-    document.getElementById("chat-window");
+    document.getElementById(
+        "chat-window"
+    );
+
 
 const chatClose =
-    document.getElementById("chat-close");
+    document.getElementById(
+        "chat-close"
+    );
+
 
 const chatForm =
-    document.getElementById("chat-form");
+    document.getElementById(
+        "chat-form"
+    );
+
 
 const chatInput =
-    document.getElementById("chat-input");
+    document.getElementById(
+        "chat-input"
+    );
+
 
 const chatMessages =
-    document.getElementById("chat-messages");
+    document.getElementById(
+        "chat-messages"
+    );
 
+
+// مهم:
+// ربات هنگام ورود سایت بسته باشد
+
+if (chatWindow) {
+
+    chatWindow.hidden = true;
+
+}
 
 
 function addChatMessage(
     message,
     type
 ) {
+
+    if (!chatMessages) {
+
+        return;
+
+    }
+
 
     const div =
         document.createElement("div");
@@ -493,7 +661,8 @@ function addChatMessage(
             : "bot-message";
 
 
-    div.textContent = message;
+    div.textContent =
+        message;
 
 
     chatMessages.appendChild(div);
@@ -503,7 +672,6 @@ function addChatMessage(
         chatMessages.scrollHeight;
 
 }
-
 
 
 function getBotResponse(message) {
@@ -608,7 +776,6 @@ function getBotResponse(message) {
 }
 
 
-
 function sendChatMessage(message) {
 
     const text =
@@ -616,7 +783,9 @@ function sendChatMessage(message) {
 
 
     if (text === "") {
+
         return;
+
     }
 
 
@@ -626,7 +795,11 @@ function sendChatMessage(message) {
     );
 
 
-    chatInput.value = "";
+    if (chatInput) {
+
+        chatInput.value = "";
+
+    }
 
 
     setTimeout(
@@ -642,18 +815,26 @@ function sendChatMessage(message) {
             );
 
         },
-        900
+        700
     );
 
 }
 
 
+// باز کردن ربات
 
 if (chatToggle) {
 
     chatToggle.addEventListener(
         "click",
         function() {
+
+            if (!chatWindow) {
+
+                return;
+
+            }
+
 
             chatWindow.hidden =
                 !chatWindow.hidden;
@@ -664,6 +845,7 @@ if (chatToggle) {
 }
 
 
+// بستن ربات
 
 if (chatClose) {
 
@@ -671,7 +853,12 @@ if (chatClose) {
         "click",
         function() {
 
-            chatWindow.hidden = true;
+            if (chatWindow) {
+
+                chatWindow.hidden =
+                    true;
+
+            }
 
         }
     );
@@ -679,6 +866,7 @@ if (chatClose) {
 }
 
 
+// ارسال پیام
 
 if (chatForm) {
 
@@ -688,9 +876,14 @@ if (chatForm) {
 
             event.preventDefault();
 
-            sendChatMessage(
-                chatInput.value
-            );
+
+            if (chatInput) {
+
+                sendChatMessage(
+                    chatInput.value
+                );
+
+            }
 
         }
     );
@@ -698,6 +891,7 @@ if (chatForm) {
 }
 
 
+// سوال‌های آماده
 
 const chatQuestions =
     document.querySelectorAll(
@@ -705,22 +899,27 @@ const chatQuestions =
     );
 
 
-chatQuestions.forEach(function(button) {
+chatQuestions.forEach(
+    function(button) {
 
-    button.addEventListener(
-        "click",
-        function() {
+        button.addEventListener(
+            "click",
+            function() {
 
-            sendChatMessage(
-                button.textContent
-            );
+                sendChatMessage(
+                    button.textContent
+                );
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 
+// ========================================
+// 👑 پایان
+// ========================================
 
 console.log(
     "👑 SULTAN WEB READY!"
