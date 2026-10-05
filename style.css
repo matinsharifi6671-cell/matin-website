@@ -1330,3 +1330,14 @@ input:focus {
     }
 
 }
+.main-logo {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.main-logo img {
+  width: 450px !important;
+  max-width: 90vw !important;
+  height: auto !important;
+}
