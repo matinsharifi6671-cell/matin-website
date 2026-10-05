@@ -1,869 +1,1332 @@
-/* =========================
-   سلطان وب | STYLE.CSS
-   ========================= */
-
 :root {
-  --primary: #22c55e;
-  --primary-dark: #16a34a;
-  --secondary: #00ff88;
-  --accent: #4ade80;
 
-  --bg: #050807;
-  --bg2: #0b120e;
-  --card: #101a14;
-  --card2: #142019;
+    --primary: #22c55e;
+    --primary-dark: #16a34a;
+    --secondary: #00ff88;
+    --accent: #4ade80;
 
-  --text: #ffffff;
-  --muted: #a7b3aa;
+    --bg: #050807;
+    --bg2: #0b120e;
 
-  --border: rgba(34, 197, 94, 0.25);
-  --shadow: 0 10px 30px rgba(0, 255, 136, 0.08);
+    --card: #101a14;
+    --card2: #142019;
+
+    --text: #eafff2;
+    --muted: #9fb5a6;
+
+    --border: rgba(34, 197, 94, 0.3);
+
+    --shadow:
+        0 10px 30px rgba(0, 255, 136, 0.08);
+
 }
+
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
 }
+
 
 html {
-  scroll-behavior: smooth;
+
+    scroll-behavior: smooth;
+
 }
+
 
 body {
-  font-family: Arial, Tahoma, sans-serif;
-  background:
-    radial-gradient(circle at top, #102518 0%, var(--bg) 45%);
-  color: var(--text);
-  line-height: 1.8;
-  overflow-x: hidden;
+
+    font-family:
+        Arial,
+        Tahoma,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #102518 0%,
+            var(--bg) 55%
+        );
+
+    color: var(--text);
+
+    line-height: 1.8;
+
+    overflow-x: hidden;
+
 }
 
-/* =========================
-   HEADER
-   ========================= */
+
+/* ================= HEADER ================= */
 
 .site-header {
-  width: 100%;
-  min-height: 70px;
-  padding: 12px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
 
-  background: rgba(5, 8, 7, 0.92);
-  border-bottom: 1px solid var(--border);
+    width: 100%;
 
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+    min-height: 70px;
 
-  backdrop-filter: blur(12px);
+    padding: 12px 6%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background:
+        rgba(5, 8, 7, 0.95);
+
+    border-bottom:
+        1px solid var(--border);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    backdrop-filter:
+        blur(12px);
+
 }
+
 
 .logo {
-  color: var(--secondary);
-  text-decoration: none;
-  font-size: 22px;
-  font-weight: bold;
-  white-space: nowrap;
-  text-shadow: 0 0 15px rgba(0, 255, 136, 0.35);
+
+    color: var(--secondary);
+
+    text-decoration: none;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 15px
+        rgba(0, 255, 136, 0.35);
+
 }
+
 
 .nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
 }
+
 
 .nav-menu a {
-  color: var(--text);
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 10px;
-  transition: 0.3s;
+
+    color: #d9ffe7;
+
+    text-decoration: none;
+
+    padding: 8px 12px;
+
+    border-radius: 10px;
+
+    transition: 0.3s;
+
 }
+
 
 .nav-menu a:hover {
-  color: var(--secondary);
-  background: rgba(34, 197, 94, 0.1);
+
+    color: var(--secondary);
+
+    background:
+        rgba(34, 197, 94, 0.1);
+
 }
 
-/* =========================
-   HERO
-   ========================= */
+
+/* ================= HERO ================= */
 
 .hero {
-  width: min(1100px, 92%);
-  margin: 50px auto 25px;
-  padding: 45px 25px;
-  text-align: center;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(34, 197, 94, 0.12),
-      rgba(0, 255, 136, 0.03)
-    );
+    width: min(1100px, 92%);
 
-  border: 1px solid var(--border);
-  border-radius: 25px;
-  box-shadow: var(--shadow);
+    margin: 50px auto 25px;
+
+    padding: 45px 25px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 197, 94, 0.12),
+            rgba(0, 255, 136, 0.03)
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 25px;
+
+    box-shadow: var(--shadow);
+
 }
+
 
 .hero-badge {
-  display: inline-block;
-  padding: 7px 16px;
-  margin-bottom: 15px;
 
-  color: var(--secondary);
-  background: rgba(0, 255, 136, 0.08);
-  border: 1px solid var(--border);
-  border-radius: 30px;
+    display: inline-block;
 
-  font-size: 14px;
+    padding: 7px 16px;
+
+    margin-bottom: 15px;
+
+    color: var(--secondary);
+
+    background:
+        rgba(0, 255, 136, 0.08);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 30px;
+
+    font-size: 14px;
+
 }
+
 
 .hero h1 {
-  font-size: clamp(30px, 6vw, 55px);
-  line-height: 1.3;
-  margin-bottom: 15px;
+
+    font-size:
+        clamp(30px, 6vw, 55px);
+
+    line-height: 1.3;
+
+    margin-bottom: 15px;
+
+    color: var(--primary);
+
+    text-shadow:
+        0 0 12px
+        rgba(34, 197, 94, 0.25);
+
 }
+
 
 .hero h1 span {
-  display: block;
-  color: var(--secondary);
-  text-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+
+    display: block;
+
+    color: var(--secondary);
+
 }
+
 
 .hero p {
-  max-width: 750px;
-  margin: 0 auto 25px;
-  color: var(--muted);
-  font-size: 17px;
+
+    max-width: 750px;
+
+    margin: 0 auto 25px;
+
+    color: var(--muted);
+
+    font-size: 17px;
+
 }
 
-/* =========================
-   BUTTONS
-   ========================= */
+
+/* ================= BUTTONS ================= */
 
 .hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
 }
+
 
 .btn {
-  display: inline-block;
-  padding: 11px 20px;
 
-  border-radius: 12px;
-  text-decoration: none;
+    display: inline-block;
 
-  font-weight: bold;
-  transition: 0.3s;
+    padding: 11px 20px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+    cursor: pointer;
+
 }
+
 
 .btn-primary {
-  color: #001b0c;
-  background: var(--secondary);
+
+    color: #001b0c;
+
+    background:
+        var(--secondary);
+
+    border: none;
+
 }
+
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.25);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 255, 136, 0.25);
+
 }
+
 
 .btn-secondary {
-  color: var(--text);
-  border: 1px solid var(--border);
-  background: rgba(34, 197, 94, 0.08);
+
+    color: var(--text);
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(34, 197, 94, 0.08);
+
 }
+
 
 .btn-secondary:hover {
-  color: var(--secondary);
-  border-color: var(--secondary);
-  transform: translateY(-3px);
+
+    color: var(--secondary);
+
+    border-color:
+        var(--secondary);
+
 }
 
-/* =========================
-   LOGO IMAGE
-   ========================= */
 
-/*
-   مهم:
-   عکس تو داخل .main-logo است،
-   نه داخل .hero
-*/
+/* ================= IMAGE ================= */
 
 .main-logo {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  margin: 30px auto;
-  padding: 10px;
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 30px auto;
+
+    padding: 10px;
+
 }
+
 
 .main-logo img {
-  width: 260px;
-  max-width: 70%;
-  height: auto;
 
-  display: block;
-  margin: 0 auto;
+    width: 340px;
 
-  border-radius: 20px;
+    max-width: 80%;
 
-  border: 1px solid var(--border);
+    height: auto;
 
-  box-shadow:
-    0 0 25px rgba(0, 255, 136, 0.12);
+    display: block;
+
+    margin: 0 auto;
+
+    border-radius: 20px;
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        0 0 30px
+        rgba(0, 255, 136, 0.15);
+
 }
 
-/* =========================
-   CONTAINER
-   ========================= */
+
+/* ================= CONTAINER ================= */
 
 .container {
-  width: min(1100px, 92%);
-  margin: 40px auto;
+
+    width: min(1100px, 92%);
+
+    margin: 40px auto;
+
 }
+
 
 .section-title {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 25px;
+
+    text-align: center;
+
+    font-size: 28px;
+
+    margin-bottom: 25px;
+
+    color: var(--primary);
+
+    text-shadow:
+        0 0 12px
+        rgba(34, 197, 94, 0.25);
+
 }
+
 
 .section-title::after {
-  content: "";
-  display: block;
 
-  width: 60px;
-  height: 3px;
+    content: "";
 
-  margin: 10px auto;
+    display: block;
 
-  background: var(--secondary);
-  border-radius: 10px;
+    width: 60px;
+
+    height: 3px;
+
+    margin: 10px auto;
+
+    background:
+        var(--secondary);
+
+    border-radius: 10px;
+
 }
 
-/* =========================
-   QUICK INFO
-   ========================= */
+
+/* ================= INFO ================= */
 
 .quick-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
 }
+
 
 .info-box {
-  padding: 25px;
-  text-align: center;
 
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+    padding: 25px;
 
-  box-shadow: var(--shadow);
-  transition: 0.3s;
+    text-align: center;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        var(--shadow);
+
+    transition: 0.3s;
+
 }
+
 
 .info-box:hover {
-  transform: translateY(-5px);
-  border-color: var(--secondary);
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--secondary);
+
 }
+
 
 .info-box h3 {
-  color: var(--secondary);
-  margin-bottom: 8px;
+
+    color:
+        var(--secondary);
+
+    margin-bottom: 8px;
+
 }
+
 
 .info-box p {
-  color: var(--muted);
+
+    color:
+        var(--muted);
+
 }
 
-/* =========================
-   CARDS
-   ========================= */
+
+/* ================= CARDS ================= */
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
 }
+
 
 .card {
-  padding: 25px;
 
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+    padding: 25px;
 
-  box-shadow: var(--shadow);
-  transition: 0.3s;
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        var(--shadow);
+
+    transition: 0.3s;
+
 }
+
 
 .card:hover {
-  transform: translateY(-5px);
-  border-color: var(--secondary);
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--secondary);
+
 }
+
 
 .card.center {
-  text-align: center;
+
+    text-align: center;
+
 }
+
 
 .card h3 {
-  margin-bottom: 10px;
+
+    color:
+        var(--accent);
+
+    margin-bottom: 10px;
+
 }
+
 
 .card p {
-  color: var(--muted);
+
+    color:
+        var(--muted);
+
 }
 
-/* =========================
-   EMOJI
-   ========================= */
+
+/* ================= EMOJI ================= */
 
 .emoji {
-  font-size: 45px;
-  margin-bottom: 10px;
+
+    font-size: 45px;
+
+    margin-bottom: 10px;
+
 }
 
-/* =========================
-   SKILL BAR
-   ========================= */
+
+/* ================= SKILL ================= */
 
 .skill-bar {
-  width: 100%;
-  height: 9px;
 
-  margin-top: 15px;
+    width: 100%;
 
-  background: #1b2820;
-  border-radius: 20px;
+    height: 9px;
 
-  overflow: hidden;
+    margin-top: 15px;
+
+    background:
+        #1b2820;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
 }
+
 
 .skill-bar span {
-  display: block;
-  height: 100%;
 
-  background: linear-gradient(
-    90deg,
-    var(--primary),
-    var(--secondary)
-  );
+    display: block;
 
-  border-radius: 20px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    border-radius: 20px;
+
 }
 
-/* =========================
-   TODO
-   ========================= */
+
+/* ================= INPUT ================= */
+
+input {
+
+    color:
+        var(--text);
+
+    background:
+        #0a100d;
+
+    border:
+        1px solid var(--border);
+
+    outline: none;
+
+}
+
+
+input:focus {
+
+    border-color:
+        var(--secondary);
+
+    box-shadow:
+        0 0 10px
+        rgba(0, 255, 136, 0.08);
+
+}
+
+
+/* ================= TODO ================= */
 
 .todo-form {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
 }
+
 
 .todo-form input {
-  flex: 1;
+
+    flex: 1;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
 }
+
 
 .todo-list {
-  list-style: none;
+
+    list-style: none;
+
 }
+
 
 .todo-list li {
-  padding: 12px;
 
-  margin-bottom: 8px;
+    display: flex;
 
-  background: var(--card2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    margin-bottom: 8px;
+
+    background:
+        var(--card2);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
 }
+
+
+.todo-list li button {
+
+    padding: 5px 10px;
+
+    color: white;
+
+    background:
+        #dc2626;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+}
+
 
 .todo-info {
-  color: var(--muted);
-  font-size: 14px;
+
+    color:
+        var(--muted);
+
+    font-size: 14px;
+
 }
 
-/* =========================
-   INPUT
-   ========================= */
 
-input,
-textarea {
-  width: 100%;
-
-  padding: 12px 14px;
-
-  color: var(--text);
-  background: #0a100d;
-
-  border: 1px solid var(--border);
-  border-radius: 10px;
-
-  outline: none;
-}
-
-input:focus,
-textarea:focus {
-  border-color: var(--secondary);
-}
-
-/* =========================
-   COLOR BUTTONS
-   ========================= */
+/* ================= COLORS ================= */
 
 .color-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
 }
+
 
 .color-button {
-  width: 45px;
-  height: 45px;
 
-  border: 2px solid white;
-  border-radius: 50%;
+    width: 48px;
 
-  cursor: pointer;
+    height: 48px;
 
-  transition: 0.3s;
+    border:
+        3px solid white;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
 }
+
 
 .color-button:hover {
-  transform: scale(1.1);
+
+    transform:
+        scale(1.15);
+
+    box-shadow:
+        0 0 18px
+        rgba(255, 255, 255, 0.3);
+
 }
 
-/* =========================
-   QUOTE
-   ========================= */
+
+/* ================= QUOTE ================= */
 
 .quote-box {
-  text-align: center;
-  padding: 30px;
 
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
 }
+
 
 #quote {
-  color: var(--muted);
-  font-size: 18px;
-  margin-bottom: 20px;
+
+    color:
+        var(--muted);
+
+    font-size: 18px;
+
+    margin-bottom: 20px;
+
+    min-height: 35px;
+
 }
 
-/* =========================
-   MESSAGE
-   ========================= */
+
+/* ================= MESSAGE ================= */
 
 .custom-message {
-  text-align: center;
+
+    text-align: center;
+
 }
+
 
 .text-input {
-  max-width: 600px;
-  margin: 0 auto 12px;
+
+    width: 100%;
+
+    max-width: 600px;
+
+    padding: 12px 14px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 10px;
+
 }
+
 
 #customMessage {
-  margin-top: 15px;
-  color: var(--secondary);
-  font-weight: bold;
+
+    margin-top: 15px;
+
+    color:
+        var(--secondary);
+
+    font-weight: bold;
+
 }
 
-/* =========================
-   CTA
-   ========================= */
+
+/* ================= CTA ================= */
 
 .cta {
-  width: min(1000px, 92%);
-  margin: 50px auto;
 
-  padding: 40px 25px;
+    width: min(1000px, 92%);
 
-  text-align: center;
+    margin: 50px auto;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(34, 197, 94, 0.16),
-      rgba(0, 255, 136, 0.05)
-    );
+    padding: 40px 25px;
 
-  border: 1px solid var(--border);
-  border-radius: 25px;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 197, 94, 0.16),
+            rgba(0, 255, 136, 0.05)
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 25px;
+
 }
+
 
 .cta h2 {
-  margin-bottom: 10px;
+
+    color:
+        var(--secondary);
+
+    margin-bottom: 10px;
+
 }
+
 
 .cta p {
-  color: var(--muted);
-  margin-bottom: 20px;
+
+    color:
+        var(--muted);
+
+    margin-bottom: 20px;
+
 }
 
-/* =========================
-   TOP BUTTON
-   ========================= */
+
+/* ================= TOP ================= */
 
 .top-button {
-  position: fixed;
 
-  right: 20px;
-  bottom: 20px;
+    position: fixed;
 
-  width: 45px;
-  height: 45px;
+    right: 20px;
 
-  border: none;
-  border-radius: 50%;
+    bottom: 20px;
 
-  background: var(--secondary);
-  color: #001b0c;
+    width: 45px;
 
-  cursor: pointer;
+    height: 45px;
 
-  font-size: 20px;
+    border: none;
 
-  display: none;
+    border-radius: 50%;
 
-  z-index: 900;
+    background:
+        var(--secondary);
+
+    color:
+        #001b0c;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    display: none;
+
+    z-index: 900;
+
 }
+
 
 .top-button.show {
-  display: block;
+
+    display: block;
+
 }
 
-/* =========================
-   CHATBOT
-   ========================= */
+
+/* ================= CHATBOT ================= */
 
 #chatbot {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 1100;
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    z-index: 1100;
+
 }
+
 
 #chat-toggle {
-  width: 55px;
-  height: 55px;
 
-  border: none;
-  border-radius: 50%;
+    width: 55px;
 
-  background: var(--secondary);
-  color: #001b0c;
+    height: 55px;
 
-  cursor: pointer;
+    border: none;
 
-  font-size: 24px;
+    border-radius: 50%;
 
-  box-shadow: 0 5px 25px rgba(0, 255, 136, 0.25);
+    background:
+        var(--secondary);
+
+    color:
+        #001b0c;
+
+    cursor: pointer;
+
+    font-size: 24px;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0, 255, 136, 0.25);
+
 }
+
 
 #chat-window {
-  width: 330px;
-  max-width: calc(100vw - 30px);
 
-  margin-bottom: 10px;
+    width: 330px;
 
-  background: #0b120e;
+    max-width:
+        calc(100vw - 30px);
 
-  border: 1px solid var(--border);
-  border-radius: 18px;
+    margin-bottom: 10px;
 
-  overflow: hidden;
+    background:
+        #0b120e;
 
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.5);
+
 }
+
 
 .chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  padding: 12px 15px;
+    display: flex;
 
-  background: #101a14;
-  border-bottom: 1px solid var(--border);
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 12px 15px;
+
+    background:
+        #101a14;
+
+    border-bottom:
+        1px solid var(--border);
+
 }
+
 
 #chat-close {
-  background: none;
-  border: none;
 
-  color: white;
+    background: none;
 
-  font-size: 22px;
-  cursor: pointer;
+    border: none;
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
 }
+
 
 #chat-messages {
-  height: 260px;
 
-  padding: 15px;
+    height: 260px;
 
-  overflow-y: auto;
+    padding: 15px;
+
+    overflow-y: auto;
+
 }
 
-.chat-questions,
-.chat-suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
 
-  padding: 10px 15px;
+.bot-message,
+.user-message {
+
+    padding: 9px 12px;
+
+    margin-bottom: 8px;
+
+    border-radius: 10px;
+
 }
 
-.chat-questions button,
-.chat-suggestions button {
-  padding: 7px 10px;
 
-  color: white;
-  background: #142019;
+.bot-message {
 
-  border: 1px solid var(--border);
-  border-radius: 8px;
+    background:
+        rgba(34, 197, 94, 0.1);
 
-  cursor: pointer;
+    color:
+        #caffda;
+
 }
 
-.chat-questions button:hover,
-.chat-suggestions button:hover {
-  color: var(--secondary);
-  border-color: var(--secondary);
+
+.user-message {
+
+    background:
+        rgba(0, 255, 136, 0.12);
+
+    color:
+        #eafff2;
+
 }
+
+
+.chat-questions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    padding: 10px 15px;
+
+}
+
+
+.chat-questions button {
+
+    padding: 7px 10px;
+
+    color: white;
+
+    background:
+        #142019;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+
+.chat-questions button:hover {
+
+    color:
+        var(--secondary);
+
+    border-color:
+        var(--secondary);
+
+}
+
 
 #chat-form {
-  display: flex;
-  gap: 7px;
 
-  padding: 10px 15px;
+    display: flex;
 
-  border-top: 1px solid var(--border);
+    gap: 7px;
+
+    padding: 10px 15px;
+
+    border-top:
+        1px solid var(--border);
+
 }
+
 
 #chat-form input {
-  min-width: 0;
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 10px;
+
+    border-radius: 9px;
+
 }
+
 
 #chat-form button {
-  padding: 0 14px;
 
-  border: none;
-  border-radius: 9px;
+    padding: 0 14px;
 
-  background: var(--secondary);
-  color: #001b0c;
+    border: none;
 
-  cursor: pointer;
+    border-radius: 9px;
+
+    background:
+        var(--secondary);
+
+    color:
+        #001b0c;
+
+    cursor: pointer;
+
 }
 
-/* =========================
-   FOOTER
-   ========================= */
+
+/* ================= FOOTER ================= */
 
 .site-footer {
-  margin-top: 60px;
-  padding: 30px 20px;
 
-  text-align: center;
+    margin-top: 60px;
 
-  background: #030504;
+    padding: 30px 20px;
 
-  border-top: 1px solid var(--border);
+    text-align: center;
+
+    background:
+        #030504;
+
+    border-top:
+        1px solid var(--border);
+
 }
+
 
 .site-footer p {
-  color: var(--muted);
+
+    color:
+        #7fa08b;
+
 }
 
-/* =========================
-   MOBILE
-   ========================= */
+
+/* ================= MOBILE ================= */
 
 @media (max-width: 800px) {
 
-  .site-header {
-    flex-direction: column;
-    justify-content: center;
-  }
+    .site-header {
 
-  .nav-menu {
-    justify-content: center;
-  }
+        flex-direction: column;
 
-  .hero {
-    margin-top: 25px;
-    padding: 35px 18px;
-  }
+        justify-content: center;
 
-  .quick-info,
-  .cards {
-    grid-template-columns: 1fr;
-  }
+    }
 
-  .main-logo img {
-    width: 220px;
-    max-width: 65%;
-  }
 
-  .hero h1 {
-    font-size: 32px;
-  }
+    .nav-menu {
 
-  #chat-window {
-    width: 300px;
-  }
+        justify-content: center;
+
+    }
+
+
+    .quick-info,
+    .cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .main-logo img {
+
+        width: 300px;
+
+        max-width: 80%;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    #chat-window {
+
+        width: 300px;
+
+    }
+
 }
+
 
 @media (max-width: 500px) {
 
-  .site-header {
-    padding: 12px 4%;
-  }
+    .site-header {
 
-  .nav-menu {
-    gap: 3px;
-  }
+        padding: 12px 4%;
 
-  .nav-menu a {
-    padding: 6px 8px;
-    font-size: 13px;
-  }
+    }
 
-  .hero {
-    width: 94%;
-  }
 
-  .hero h1 {
-    font-size: 27px;
-  }
+    .nav-menu {
 
-  .hero p {
-    font-size: 15px;
-  }
+        gap: 3px;
 
-  .main-logo img {
-    width: 190px;
-    max-width: 60%;
-  }
+    }
 
-  .container {
-    width: 94%;
-  }
 
-  .card,
-  .info-box {
-    padding: 20px;
-  }
+    .nav-menu a {
 
-  #chatbot {
-    right: 12px;
-    bottom: 12px;
-  }
+        padding: 6px 8px;
 
-  #chat-window {
-    width: calc(100vw - 24px);
-  }
-}
-/* =========================
-   رنگ نوشته‌ها - سلطان وب
-   ========================= */
+        font-size: 13px;
 
-body {
-  color: #eafff2;
-}
+    }
 
-/* عنوان‌های اصلی */
-h1,
-h2,
-h3 {
-  color: #22c55e;
-  text-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
-}
 
-/* متن‌های معمولی */
-p {
-  color: #b8cfc0;
-}
+    .hero {
 
-/* متن مهم */
-.hero h1 span,
-.section-title,
-.info-box h3,
-#customMessage {
-  color: #00ff88;
-}
+        width: 94%;
 
-/* لینک‌ها */
-a {
-  color: #22c55e;
-}
+    }
 
-a:hover {
-  color: #00ff88;
-}
 
-/* متن‌های کم‌رنگ */
-.muted,
-.hero p,
-.card p,
-.info-box p,
-.cta p,
-.todo-info {
-  color: #9fb5a6;
-}
+    .hero h1 {
 
-/* نوشته داخل کارت‌ها */
-.card h3 {
-  color: #4ade80;
-}
+        font-size: 27px;
 
-/* نوشته نوار مهارت */
-.skill-bar {
-  color: #00ff88;
-}
+    }
 
-/* نوشته ساعت */
-#clock,
-#date {
-  color: #00ff88;
-}
 
-/* نوشته نقل قول */
-#quote {
-  color: #b8cfc0;
-}
+    .hero p {
 
-/* متن فوتر */
-.site-footer p {
-  color: #7fa08b;
-}
+        font-size: 15px;
 
-/* متن منوی بالا */
-.nav-menu a {
-  color: #d9ffe7;
-}
+    }
 
-.nav-menu a:hover {
-  color: #00ff88;
+
+    .main-logo img {
+
+        width: 270px;
+
+        max-width: 82%;
+
+    }
+
+
+    .container {
+
+        width: 94%;
+
+    }
+
+
+    .card,
+    .info-box {
+
+        padding: 20px;
+
+    }
+
+
+    .todo-form {
+
+        flex-direction: column;
+
+    }
+
+
+    #chatbot {
+
+        right: 12px;
+
+        bottom: 12px;
+
+    }
+
+
+    #chat-window {
+
+        width:
+            calc(100vw - 24px);
+
+    }
+
 }
